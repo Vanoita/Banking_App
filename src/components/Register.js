@@ -34,7 +34,7 @@ function Register() {
         //     password: password,
         //     occType: occType,
         //     sourceOfIncome: sourceOfIncome,
-        //     srossAnnualIncome: grossAnnualIncome,
+        //     grossAnnualIncome: grossAnnualIncome,
         // }).then((response) => {
         //     alert("User : " + firstName + " " + middleName + " " + lastName + " Added");
         // }).catch(error => {
