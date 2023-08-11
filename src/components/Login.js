@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -48,7 +48,7 @@ function Login() {
                         </div>
                     </div>
                     <div class="col">
-                        <a href="#!">Forgot password?</a>
+                        <Link to="#">Forgot password?</Link>
                     </div>
                 </div>
 
