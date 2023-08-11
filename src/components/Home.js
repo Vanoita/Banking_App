@@ -4,7 +4,7 @@ function Home(){
     const location = useLocation();
     return localStorage.getItem('username') ? (
         <div>
-            <h1>Hello {localStorage.getItem('username')}! Welcome to Online Banking Application</h1>
+            <h1>Hi {localStorage.getItem('username')}! Welcome to Online Banking Application</h1>
         </div>
     ):(
         <Navigate
