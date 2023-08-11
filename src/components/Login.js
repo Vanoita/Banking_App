@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { redirect } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -47,10 +47,10 @@ function Login() {
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-block mb-4" style={{width:"50%"}}>Sign in</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4" style={{width:"50%"}}>Sign in</button>
 
                 <div class="text-center">
-                    <p>Not a member? <a href="#!">Register</a></p>
+                    <p>Not a member? <Link to="/register">Register</Link></p>
                 </div>
             </form>
             </div>
