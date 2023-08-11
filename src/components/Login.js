@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, redirect } from 'react-router-dom';
+import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const {state} = useLocation();
     const baseURL = "http://localhost:9080/checkLogin";
     const submitActionHandler = (event) => {
         event.preventDefault();
@@ -17,10 +19,13 @@ function Login() {
         //     alert("error = " + error);
         // });
 
-        alert(JSON.stringify({ 
-            username: username,
-            password: password
-        }));
+        // alert(JSON.stringify({ 
+        //     username: username,
+        //     password: password
+        // }));
+
+        localStorage.setItem('username', username);
+        if(state.from){ navigate(state.from); } else {navigate('/');}
     };
     return (
         <div className="container d-flex flex-row justify-content-center align-items-center mt-4">
