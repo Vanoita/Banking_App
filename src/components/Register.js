@@ -4,8 +4,8 @@ import '../register.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Register() {
-    const baseURLUser = "http://localhost:9080/saveUser";
-    const baseURLAddress = "http://localhost:9080/saveAddress";
+    const baseURLUser = "http://localhost:8080/saveUser";
+    const baseURLAddress = "http://localhost:8080/saveAddress";
     const [firstName, setFirstName] = useState("");
     const [middleName, setMiddleName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -23,23 +23,23 @@ function Register() {
 
     const submitActionHandler = (event) => {
         event.preventDefault();
-        // axios.post(baseURLUser, {
-        //     userId: "abcd1234",
-        //     firstName: firstName,
-        //     middleName: middleName,
-        //     lastName: lastName,
-        //     mobNo: mobNo,
-        //     fatherName: fathersName,
-        //     email: email,
-        //     password: password,
-        //     occType: occType,
-        //     sourceOfIncome: sourceOfIncome,
-        //     grossAnnualIncome: grossAnnualIncome,
-        // }).then((response) => {
-        //     alert("User : " + firstName + " " + middleName + " " + lastName + " Added");
-        // }).catch(error => {
-        //     alert("error = " + error);
-        // });
+        axios.post(baseURLUser, {
+            userID: "react171",
+            firstName: firstName,
+            middleName: middleName,
+            lastName: lastName,
+            mobNo: mobNo,
+            fatherName: fathersName,
+            email: email,
+            password: password,
+            occType: occType,
+            sourceOfIncome: sourceOfIncome,
+            grossAnnualIncome: grossAnnualIncome,
+        }).then((response) => {
+            alert("User : " + firstName + " " + middleName + " " + lastName + " Added");
+        }).catch(error => {
+            alert("error = " + error);
+        });
 
         // axios.post(baseURLAddress, {
         //     userId: "abcd1234",
@@ -53,17 +53,17 @@ function Register() {
         //     alert("error = " + error);
         // });
 
-        alert(JSON.stringify({ userId: "abcd1234",
-        firstName: firstName,
-        middleName: middleName,
-        lastName: lastName,
-        mobNo: mobNo,
-        fatherName: fathersName,
-        email: email,
-        password: password,
-        occType: occType,
-        sourceOfIncome: sourceOfIncome,
-        srossAnnualIncome: grossAnnualIncome}));
+    //     alert(JSON.stringify({ userId: "abcd1234",
+    //     firstName: firstName,
+    //     middleName: middleName,
+    //     lastName: lastName,
+    //     mobNo: mobNo,
+    //     fatherName: fathersName,
+    //     email: email,
+    //     password: password,
+    //     occType: occType,
+    //     sourceOfIncome: sourceOfIncome,
+    //     srossAnnualIncome: grossAnnualIncome}));
     };
 
     return (
@@ -120,7 +120,7 @@ function Register() {
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <input type="text" value={grossAnnualIncome} onChange={e=>setGrossAnnualIncome(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="number" value={grossAnnualIncome} onChange={e=>setGrossAnnualIncome(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Gross Annual Income</label>
                                                         </div>
                                                     </div>
