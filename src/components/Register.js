@@ -4,11 +4,14 @@ import '../register.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { customAlphabet } from "nanoid";
 
 function Register() {
+    const nanoid = customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 8);
+
     const baseURLUser = "http://localhost:8080/saveUser";
     const baseURLAddress = "http://localhost:8080/saveAddress";
-    const [firstName, setFirstName] = useState("");
+    const [firstName, setFirstName] = useState();
     const [middleName, setMiddleName] = useState("");
     const [lastName, setLastName] = useState("");
     const [fathersName, setFathersName] = useState("");
@@ -26,7 +29,7 @@ function Register() {
     const submitActionHandler = (event) => {
         event.preventDefault();
         axios.post(baseURLUser, {
-            userID: "cffd5678",
+            userID: nanoid(),
             firstName: firstName,
             middleName: middleName,
             lastName: lastName,
