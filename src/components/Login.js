@@ -2,31 +2,32 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { state } = useLocation();
-    const baseURL = "http://localhost:9080/checkLogin";
+    const baseURL = "http://localhost:8080/checkLogin";
     const submitActionHandler = (event) => {
         event.preventDefault();
-        // axios.post(baseURL, {
-        //     userId: username,
-        //     password: password
-        // }).then((response) => {
-        //     alert("User : "+ username + " Logged In.");
-        // }).catch(error => {
-        //     alert("error = " + error);
-        // });
+        axios.post(baseURL, {
+            username: username,
+            password: password
+        }).then((response) => {
+            alert(JSON.stringify(response));
+        }).catch(error => {
+            alert("error = " + error);
+        });
 
         // alert(JSON.stringify({ 
         //     username: username,
         //     password: password
         // }));
 
-        localStorage.setItem('username', username);
-        if (state.from) { navigate(state.from); } else { navigate('/'); }
+        // localStorage.setItem('username', username);
+        // if (state.from) { navigate(state.from); } else { navigate('/'); }
     };
     return (
         <>
