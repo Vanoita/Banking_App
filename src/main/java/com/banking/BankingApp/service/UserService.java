@@ -19,24 +19,23 @@ public class UserService {
 
 	public String validateUser(LoginModel u) {
 		// TODO Auto-generated method stub
-		String result = "";
+		String res = "";
 		User user = null;
 		Optional<User> obj = userRepo.findById(u.getUsername());
 		if(obj.isPresent()) {
 			user=obj.get();
 		}
-		//User user = userRepo.findById(u.getUsername()).get();
 		if(user==null) {
-			result="Invalid User";
+			res = "{'login': false, 'message' = 'Wrong Username!'}";
 		}else {
 			if(u.getPassword().equals(user.getPassword())) {
-				result = "Login Success";
+				User user2 = userRepo.findById(u.getUsername()).get();
+				res = "{'login': true, 'message' = 'Login Successfully!', 'name': "+user2.getFirstName()+" "+user2.getMiddleName()+" "+user2.getLastName()+"}";
 			}else {
-				result= "Login failed";
+				res = "{'login': false, 'message' = 'Incorrect Password!'}";
 			}
 		}
-		
-		return result;
+		return res;
 	}
 
 }
