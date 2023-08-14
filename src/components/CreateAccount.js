@@ -5,11 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Helmet } from "react-helmet";
 import { customAlphabet } from "nanoid";
 
-function Register() {
+function CreateAccount() {
     const nanoid = customAlphabet('1234567890', 12);
+    const userId = 'react170';//localStorage.get('username');
 
-    const baseURLAccount = "http://localhost:8080/createAccount";
-    //const baseURLAddress = "http://localhost:8080/saveAddress";
+
+    const baseURLAccount = "http://localhost:8080/createAccount/"+userId;
     const [firstName, setFirstName] = useState();
     const [middleName, setMiddleName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -30,8 +31,7 @@ function Register() {
     const submitActionHandler = (event) => {
         event.preventDefault();
         axios.post(baseURLAccount, {
-            userId: 'react170',
-            //userId: localStorage.get('username'),
+            userId: 'react170',//userId,
             accNo: nanoid(),
             firstName: firstName,
             middleName: middleName,
@@ -214,7 +214,7 @@ function Register() {
                                                     </div>
 
                                                     <button type="submit" class="btn btn-light btn-lg w-50"
-                                                        data-mdb-ripple-color="dark">Register</button>
+                                                        data-mdb-ripple-color="dark">Create Account</button>
 
                                                 </div>
                                             </div>
@@ -230,4 +230,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default CreateAccount;

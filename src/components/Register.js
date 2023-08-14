@@ -12,7 +12,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const baseURL = "http://localhost:8080/checkRegister";
+    const baseURL = "http://localhost:8080/registerUser";
     const submitActionHandler = (event) => {
         event.preventDefault();
         axios.post(baseURL, {
