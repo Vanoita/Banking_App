@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.BankingApp.model.LoginModel;
-import com.banking.BankingApp.model.User;
+import com.banking.BankingApp.model.RegisterUser;
+import com.banking.BankingApp.model.CreateAccount ;
 import com.banking.BankingApp.service.UserService;
 
 import jakarta.validation.Valid;
@@ -23,11 +24,12 @@ public class UserController {
 		return userService.validateUser(u);
 	}
 	
-	@PostMapping("/saveUser")
-	public User saveUser(@RequestBody @Valid User cust) {
-		User c =userService.saveUser(cust);
+	
+
+	@PostMapping("/registerUser")
+	public RegisterUser registerUser(@RequestBody @Valid RegisterUser cust) {
+		RegisterUser c =userService.registerUser(cust);
 		return c;
 	}
-
 }
 

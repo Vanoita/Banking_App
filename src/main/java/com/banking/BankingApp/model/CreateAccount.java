@@ -1,5 +1,6 @@
 package com.banking.BankingApp.model;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
@@ -16,12 +17,12 @@ import jakarta.validation.constraints.Pattern;
 
 
 @Entity
-public class User {
+public class CreateAccount {
 
 	@Id
 	@NotBlank(message="Please enter your Username.")
 	@Length(min=8,max=8,message="Username should be 8 characters long.")
-	private String userID;
+	private String userId;
 	
 	@NotBlank(message="Please enter your Firstname.")
 	@Length(min=2,max=20)
@@ -58,13 +59,58 @@ public class User {
 	@Length(min=2,max=20)
 	private String sourceOfIncome;
 	
+	//@NotBlank(message="Please enter your date of birth.")	
+	private Date dob;
+	
+	//@NotBlank(message="Please enter your Account Number.")
+	@Length(min=12,max=12)
+	private String accno;
+	
+	
+	private double balance;
+	
+	//@NotBlank(message="Please enter your Aadhar details.")
+	@Length(min=12,max=12)
+	private String aadhar;
+	
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+	public String getAccno() {
+		return accno;
+	}
+	public void setAccno(String accno) {
+		this.accno = accno;
+	}
+	public String getAadhar() {
+		return aadhar;
+	}
+	public void setAadhar(String aadhar) {
+		this.aadhar = aadhar;
+	}
+	public List<Address> getUserAddress() {
+		return userAddress;
+	}
+	public void setUserAddress(List<Address> userAddress) {
+		this.userAddress = userAddress;
+	}
+	public List<Accounts> getUserAccount() {
+		return userAccount;
+	}
+	public void setUserAccount(List<Accounts> userAccount) {
+		this.userAccount = userAccount;
+	}
+
 	@NotNull(message="Please enter your Annual gross income.")
 	private double annualGrossIncome;
-	public String getUserID() {
-		return userID;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
+	public void setUserId(String userID) {
+		this.userId = userID;
 	}
 	public String getFirstName() {
 		return firstName;
