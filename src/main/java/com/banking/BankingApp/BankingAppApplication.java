@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.banking.BankingApp.dao")
 @EntityScan({"com.banking.BankingApp.model"})
 
+//@SpringBootApplication(exclude =  {DataSourceAutoConfiguration.class })
 @SpringBootApplication
 public class BankingAppApplication {
 
