@@ -26,13 +26,13 @@ public class UserService {
 			user=obj.get();
 		}
 		if(user==null) {
-			res = "{'login': false, 'message' = 'Wrong Username!'}";
+			res = "{\"login\": false, \"message\": \"Wrong Username!\"}";
 		}else {
 			if(u.getPassword().equals(user.getPassword())) {
 				User user2 = userRepo.findById(u.getUsername()).get();
-				res = "{'login': true, 'message' = 'Login Successfully!', 'name': "+user2.getFirstName()+" "+user2.getMiddleName()+" "+user2.getLastName()+"}";
+				res = "{\"login\": true, \"message\": \"Login Successfully!\", \"name\": \""+user2.getFirstName()+" "+user2.getMiddleName()+" "+user2.getLastName()+"\"}";
 			}else {
-				res = "{'login': false, 'message' = 'Incorrect Password!'}";
+				res = "{\"login\": false, \"message\": \"Incorrect Password!\"}";
 			}
 		}
 		return res;
