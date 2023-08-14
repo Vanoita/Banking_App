@@ -16,7 +16,8 @@ function Login() {
             username: username,
             password: password
         }).then((response) => {
-            alert(JSON.stringify(response));
+            const res = (response.data);
+            alert(res.name);
         }).catch(error => {
             alert("error = " + error);
         });
