@@ -26,12 +26,10 @@ function CreateAccount() {
     const [state, setState] = useState("");
     const [mobNo, setMobNo] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
     const submitActionHandler = (event) => {
         event.preventDefault();
         axios.post(baseURLAccount, {
-            userId: 'react170',//userId,
             accNo: nanoid(),
             firstName: firstName,
             middleName: middleName,
@@ -41,12 +39,11 @@ function CreateAccount() {
             aadhar: aadhar,
             email: email,
             mobNo: mobNo,
-            password: password,
             occType: occType,
             sourceOfIncome: sourceOfIncome,
             grossAnnualIncome: grossAnnualIncome
         }).then((response) => {
-            alert("User : " + firstName + " " + middleName + " " + lastName + " Added");
+            alert(JSON.stringify(response));
         }).catch(error => {
             alert("error = " + error);
         });
@@ -62,18 +59,6 @@ function CreateAccount() {
         // }).catch(error => {
         //     alert("error = " + error);
         // });
-
-        //     alert(JSON.stringify({ userId: "abcd1234",
-        //     firstName: firstName,
-        //     middleName: middleName,
-        //     lastName: lastName,
-        //     mobNo: mobNo,
-        //     fatherName: fathersName,
-        //     email: email,
-        //     password: password,
-        //     occType: occType,
-        //     sourceOfIncome: sourceOfIncome,
-        //     srossAnnualIncome: grossAnnualIncome}));
     };
 
     return (
@@ -196,12 +181,6 @@ function CreateAccount() {
                                                         <div class="form-outline form-white">
                                                             <input type="text" value={mobNo} onChange={e => setMobNo(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Mobile Number</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <div class="form-outline form-white">
-                                                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} class="form-control form-control-lg" />
-                                                            <label class="form-label">Password</label>
                                                         </div>
                                                     </div>
 

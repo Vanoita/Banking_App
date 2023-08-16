@@ -6,7 +6,7 @@ import axios from 'axios';
 import { customAlphabet } from 'nanoid';
 
 function Register() {
-    const nanoid = customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 12);
+    const nanoid = customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 8);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -22,16 +22,11 @@ function Register() {
             email: email,
             password: password
         }).then((response) => {
-            const res = (response.data);
+            const res = JSON.stringify(response.data);
             alert(res);
         }).catch(error => {
             alert("error = " + error);
         });
-
-        // alert(JSON.stringify({ 
-        //     username: username,
-        //     password: password
-        // }));
 
         // localStorage.setItem('username', username);
         // if (state.from) { navigate(state.from); } else { navigate('/'); }

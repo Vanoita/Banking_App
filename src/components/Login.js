@@ -16,16 +16,15 @@ function Login() {
             username: username,
             password: password
         }).then((response) => {
-            const res = (response.data);
-            alert(res.name);
+            alert(JSON.stringify(response))
+            // const res = JSON.parse(response.data);
+            // if(res.login){
+            //     localStorage.setItem('userId',username);
+            //     navigate('/dashboard');
+            // }
         }).catch(error => {
             alert("error = " + error);
         });
-
-        // alert(JSON.stringify({ 
-        //     username: username,
-        //     password: password
-        // }));
 
         // localStorage.setItem('username', username);
         // if (state.from) { navigate(state.from); } else { navigate('/'); }
