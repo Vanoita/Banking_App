@@ -21,8 +21,8 @@ public class CreateAccount {
 
 	@Id
 	@NotBlank(message="Please enter your Username.")
-	@Length(min=8,max=8,message="Username should be 8 characters long.")
-	private String userId;
+	@Length(min=12,max=12,message="Username should be 8 characters long.")
+	private String accNo;
 	
 	@NotBlank(message="Please enter your Firstname.")
 	@Length(min=2,max=20)
@@ -46,11 +46,6 @@ public class CreateAccount {
 	@Email
 	private String email;
 	
-	@NotBlank(message="Please enter your password.")
-	@Length(min=8,max=20)
-	@Pattern(regexp="^(?=.*[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
-	private String password;
-	
 	@NotBlank(message="Please enter your Occupation type.")
 	@Length(min=1,max=30)
 	private String occType;
@@ -59,19 +54,22 @@ public class CreateAccount {
 	@Length(min=2,max=20)
 	private String sourceOfIncome;
 	
-	//@NotBlank(message="Please enter your date of birth.")	
+	@NotBlank(message="Please enter your date of birth.")	
 	private Date dob;
 	
-	//@NotBlank(message="Please enter your Account Number.")
-	@Length(min=12,max=12)
-	private String accno;
+	@NotBlank(message="Please enter your Account Number.")
+	@Length(min=8,max=8)
+	private String userId;
 	
 	
 	private double balance;
 	
-	//@NotBlank(message="Please enter your Aadhar details.")
+	@NotBlank(message="Please enter your Aadhar details.")
 	@Length(min=12,max=12)
 	private String aadhar;
+	
+	@NotNull(message="Please enter your Annual gross income.")
+	private double annualGrossIncome;
 	
 	public Date getDob() {
 		return dob;
@@ -79,11 +77,11 @@ public class CreateAccount {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public String getAccno() {
-		return accno;
+	public String getAccNo() {
+		return accNo;
 	}
-	public void setAccno(String accno) {
-		this.accno = accno;
+	public void setAccNo(String accNo) {
+		this.accNo = accNo;
 	}
 	public String getAadhar() {
 		return aadhar;
@@ -91,21 +89,8 @@ public class CreateAccount {
 	public void setAadhar(String aadhar) {
 		this.aadhar = aadhar;
 	}
-	public List<Address> getUserAddress() {
-		return userAddress;
-	}
-	public void setUserAddress(List<Address> userAddress) {
-		this.userAddress = userAddress;
-	}
-	public List<Accounts> getUserAccount() {
-		return userAccount;
-	}
-	public void setUserAccount(List<Accounts> userAccount) {
-		this.userAccount = userAccount;
-	}
-
-	@NotNull(message="Please enter your Annual gross income.")
-	private double annualGrossIncome;
+	
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -148,12 +133,6 @@ public class CreateAccount {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public String getOccType() {
 		return occType;
 	}
@@ -173,13 +152,10 @@ public class CreateAccount {
 		this.annualGrossIncome = annualGrossIncome;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="userId")
-	private List<Address> userAddress;
+//	@OneToMany(cascade=CascadeType.ALL)
+//	@JoinColumn(name="accNo")
+//	private List<Address> userAddress;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="userId")
-	private List<Accounts> userAccount;
 	
 	
 	

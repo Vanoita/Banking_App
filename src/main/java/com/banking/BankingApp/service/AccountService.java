@@ -17,7 +17,7 @@ public class AccountService {
 	@Autowired
 	AccountsRepository accRepo;
 	
-	public Accounts createAccount(Accounts account,String userId) {
+	public Accounts createAccount(Accounts account, String userId) {
 		RegisterUser u = userRepo.findById(userId).get();
 		account.setUserId(u.getUserId());
 		return accRepo.save(account);
