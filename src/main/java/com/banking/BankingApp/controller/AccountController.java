@@ -32,6 +32,8 @@ public class AccountController {
 		String remark = t.getRemark();
 		if(remark.equalsIgnoreCase("withdraw"))
 		return accService.withdrawFunds(t);
-		else return accService.addFunds(t);
+		else if(remark.equalsIgnoreCase("deposit")) 
+			return accService.addFunds(t);
+		else return accService.transferFunds(t);
 	}
 }

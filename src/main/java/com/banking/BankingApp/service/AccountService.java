@@ -50,4 +50,23 @@ public class AccountService {
 			result="Transaction Successful";
 		return result;
 	}
+	
+	@Transactional
+	public String transferFunds(Transaction transaction) {
+		String result="Not Transacted";
+		String senderAcc = transaction.getAccNo();
+		String receiverAcc = transaction.getReceiverAccNo();
+		Account account = accRepo.findById(senderAcc).get();		
+		double senderBalance = account.getBalance();
+		double amount = transaction.getAmount();
+		if(senderBalance-amount<1000)
+			result = "Insufficient funds";
+		else {
+			int rowsAffected_1 = accRepo.updateBalance(amount,senderAcc);
+			int rowsAffected_2 = accRepo.updateBalance(-1*amount, receiverAcc);
+			if(rowsAffected_1>0)
+				result="Transaction Successful";
+		}
+		return result;
+	}
 }
