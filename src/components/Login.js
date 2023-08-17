@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 
 function Login() {
-    const [username, setUsername] = useState('');
+    const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -13,7 +13,7 @@ function Login() {
     const submitActionHandler = (event) => {
         event.preventDefault();
         axios.post(baseURL, {
-            username: username,
+            userId: userId,
             password: password
         }).then((response) => {
             alert(JSON.stringify(response))
@@ -39,8 +39,8 @@ function Login() {
                     <form className="p-4" onSubmit={submitActionHandler}>
                         <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "30px" }}>Online Banking Application</h3>
                         <div class="form-outline mb-4">
-                            <input type="text" class="form-control" value={username} onChange={e => setUsername(e.target.value)} />
-                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
+                            <label class="form-label">UserId</label>
                         </div>
                         <div class="form-outline mb-4">
                             <input type="password" class="form-control" value={password} onChange={e => setPassword(e.target.value)} />

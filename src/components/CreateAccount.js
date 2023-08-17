@@ -7,58 +7,41 @@ import { customAlphabet } from "nanoid";
 
 function CreateAccount() {
     const nanoid = customAlphabet('1234567890', 12);
-    const userId = 'react170';//localStorage.get('username');
+    const userId = "DIT7D1U1";//localStorage.get('username');
 
 
-    const baseURLAccount = "http://localhost:8080/createAccount/"+userId;
-    const [firstName, setFirstName] = useState();
-    const [middleName, setMiddleName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [fathersName, setFathersName] = useState("");
+    const baseURLAccount = "http://localhost:8080/createAccount/DIT7D1U1";
+    const [fatherName, setFatherName] = useState("");
     const [aadhar, setAadhar] = useState("");
     const [dob, setDob] = useState(null);
     const [occType, setOccType] = useState("");
     const [sourceOfIncome, setSourceOfIncome] = useState("");
-    const [grossAnnualIncome, setGrossAnnualIncome] = useState(0);
+    const [annualGrossIncome, setAnnualGrossIncome] = useState(0);
     const [address, setAddress] = useState("");
-    const [pinCode, setPinCode] = useState("");
+    const [pincode, setPincode] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [mobNo, setMobNo] = useState("");
-    const [email, setEmail] = useState("");
 
     const submitActionHandler = (event) => {
         event.preventDefault();
         axios.post(baseURLAccount, {
             accNo: nanoid(),
-            firstName: firstName,
-            middleName: middleName,
-            lastName: lastName,
-            fatherName: fathersName,
-            dob: dob,
-            aadhar: aadhar,
-            email: email,
             mobNo: mobNo,
+            fatherName: fatherName,
             occType: occType,
             sourceOfIncome: sourceOfIncome,
-            grossAnnualIncome: grossAnnualIncome
+            annualGrossIncome: annualGrossIncome,
+            aadhar: aadhar,
+            address: address,
+            state: state,
+            city: city,
+            pincode: "pincode"
         }).then((response) => {
             alert(JSON.stringify(response));
         }).catch(error => {
             alert("error = " + error);
         });
-
-        // axios.post(baseURLAddress, {
-        //     userId: "abcd1234",
-        //     address: address,
-        //     pinCode: pinCode,
-        //     city: city,
-        //     state: state
-        // }).then((response) => {
-        //     alert("Address : " + address + " " + city + " " + state + " - "+ pinCode+" Added");
-        // }).catch(error => {
-        //     alert("error = " + error);
-        // });
     };
 
     return (
@@ -78,29 +61,9 @@ function CreateAccount() {
                                                 <div class="p-5">
                                                     <h3 class="fw-normal mb-5" style={{ color: "#4835d4" }}>General Infomation</h3>
 
-                                                    <div class="row">
-                                                        <div class="col-md-4 mb-4 pb-3">
-                                                            <div class="form-outline">
-                                                                <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} class="form-control form-control-lg" />
-                                                                <label class="form-label" >First name</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 mb-4 pb-3">
-                                                            <div class="form-outline">
-                                                                <input type="text" value={middleName} onChange={e => setMiddleName(e.target.value)} class="form-control form-control-lg" />
-                                                                <label class="form-label">Middle name</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 mb-4 pb-3">
-                                                            <div class="form-outline">
-                                                                <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} class="form-control form-control-lg" />
-                                                                <label class="form-label">Last name</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <input type="text" value={fathersName} onChange={e => setFathersName(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" value={fatherName} onChange={e => setFatherName(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Father's Name</label>
                                                         </div>
                                                     </div>
@@ -130,7 +93,7 @@ function CreateAccount() {
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <input type="number" value={grossAnnualIncome} onChange={e => setGrossAnnualIncome(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="number" value={annualGrossIncome} onChange={e => setAnnualGrossIncome(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Gross Annual Income</label>
                                                         </div>
                                                     </div>
@@ -149,7 +112,7 @@ function CreateAccount() {
                                                     <div class="row">
                                                         <div class="col-md-5 mb-4 pb-2">
                                                             <div class="form-outline form-white">
-                                                                <input type="text" value={pinCode} onChange={e => setPinCode(e.target.value)} class="form-control form-control-lg" />
+                                                                <input type="text" value={pincode} onChange={e => setPincode(e.target.value)} class="form-control form-control-lg" />
                                                                 <label class="form-label">PIN Code</label>
                                                             </div>
                                                         </div>
@@ -167,14 +130,6 @@ function CreateAccount() {
                                                         <div class="form-outline form-white">
                                                             <input type="text" value={state} onChange={e => setState(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">State</label>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="mb-4">
-                                                        <div class="form-outline form-white">
-                                                            <input type="text" value={email} onChange={e => setEmail(e.target.value)} class="form-control form-control-lg" />
-                                                            <label class="form-label">Your Email</label>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
