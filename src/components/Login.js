@@ -37,7 +37,7 @@ function Login() {
             <div className="container d-flex flex-row justify-content-center align-items-center mt-4">
                 <div className='card' style={{ width: "100%", maxWidth: "500px" }}>
                     <form className="p-4" onSubmit={submitActionHandler}>
-                        <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "30px" }}>Online Banking Application</h3>
+                        <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "30px" }}>Login</h3>
                         <div class="form-outline mb-4">
                             <input type="text" class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
                             <label class="form-label">UserId</label>

@@ -11,21 +11,29 @@ import {
     Th,
     Td,
     TableCaption,
-    TableContainer, Input
+    TableContainer, Input, Select
 } from "@chakra-ui/react";
 import axios from "axios";
 
 function TransactionHistory() {
     const [tDetails, setTDetails] = useState([
        {
-         id:"",
-        date:""
+         'id':'',
+        'date':'',
+        'accNo':'',
+        'rName':'',
+        'rAccNo':'',
+        'mode':'',
+        'amount':'',
+        'remarks':''
     }
     ]);
     const [accNo, setAccNo] = useState([1, 2, 3, 4]);
     const navigate = useNavigate();
     const baseURL = "http://localhost:8080/checkLogin";
+    const type="";
     const userId = 'react170';//localStorage.get('username');
+    const [selectAccNo,setSelectAccNo]=useState("");
     const [dateFilter, setDateFilter] = useState({
         startDate: null,
         endDate: null
@@ -54,6 +62,7 @@ function TransactionHistory() {
 
     useEffect(() => {
         getDetails();
+        fetchAccNo();
     }, []);
     return (
         <>
@@ -61,8 +70,8 @@ function TransactionHistory() {
                 <title>Transaction History</title>
             </Helmet>
 
-            <h2>Transaction History</h2>
-            <Table>
+            <h2 p={'100 px'}>Transaction History</h2>
+            <Table align="center" maxWidth={'75%'} p={'20 px'}>
                 <Tbody>
                     <Tr>
                         <Th>
@@ -79,6 +88,13 @@ function TransactionHistory() {
                                 size="md"
                                 type="date"
                             />
+                        </Th>
+                        <Th>
+                        <Select placeholder='Select Account Number' value={selectAccNo} onChange={e => setSelectAccNo(e.target.value)}>
+                                    {accNo.map(accNumber => (
+                                        <option>{accNumber}</option>
+                                    ))}
+                                </Select>
                         </Th>
                     </Tr>
                 </Tbody>
@@ -101,14 +117,20 @@ function TransactionHistory() {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {/* /*tDetails.map(() => (
-                            {/* <Tr>
-                                <Td>{id}</Td>
-                                <Td>{date}</Td>
+                    {tDetails.map(details => {
+                            <Tr>
+                                <Td>{details.id}</Td>
+                                <Td>{details.date}</Td>
+                                <Td>{details.accNo}</Td>
+                                    <Td>{details.rName}</Td>
+                                    <Td>{details.rAccNo}</Td>
+                                <Td>{details.mode}</Td>
+                                <Td>{details.amount}</Td>
+                                <Td>{details.remarks}</Td>
                             </Tr>
 
-                        ))*/ }
-                        <Tr>
+                            })}
+                        {/* <Tr>
                             <Td>001</Td>
                             <Td>08/17/2023</Td>
                             <Td>13345</Td>
@@ -128,7 +150,7 @@ function TransactionHistory() {
                             <Td>Fund transfer</Td>
                             <Td isNumeric>14500</Td>
                             <Td>Trial</Td>
-                        </Tr>
+                        </Tr> */}
 
 
                     </Tbody>
