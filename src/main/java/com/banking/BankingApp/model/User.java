@@ -14,7 +14,8 @@ public class User {
 	
 	@Id
 	@NotBlank
-	private String userId;	
+	private String userId;
+	
 	@NotBlank
 	private String firstName;
 	@NotBlank

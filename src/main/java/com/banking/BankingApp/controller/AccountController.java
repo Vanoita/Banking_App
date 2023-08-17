@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.BankingApp.model.Account;
+import com.banking.BankingApp.model.Transaction;
 import com.banking.BankingApp.service.AccountService;
 
 @RestController
@@ -24,5 +25,13 @@ public class AccountController {
 			result="Account created";
 		else result = "Error in Creating Account";
 		return result;
+	}
+	
+	@PostMapping("/transaction")
+	public String transaction(@RequestBody Transaction t) {
+		String remark = t.getRemark();
+		if(remark.equalsIgnoreCase("withdraw"))
+		return accService.withdrawFunds(t);
+		else return accService.addFunds(t);
 	}
 }

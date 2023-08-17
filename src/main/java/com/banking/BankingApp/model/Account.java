@@ -43,7 +43,7 @@ public class Account {
 	//@NotBlank(message="Please enter your date of birth.")	
 	private Date dob;
 	
-	@NotBlank(message="Please enter your Account Number.")
+	//@NotBlank(message="Please enter your Account Number.")
 	@Length(min=8,max=8)
 	private String userId;
 	
@@ -61,6 +61,8 @@ public class Account {
 	private String city;
 	private String state;
 	private String pincode;
+	
+	
 	public String getAddress() {
 		return address;
 	}
