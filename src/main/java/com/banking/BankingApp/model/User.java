@@ -1,11 +1,16 @@
 package com.banking.BankingApp.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class RegisterUser {
+public class User {
 	
 	@Id
 	@NotBlank
@@ -49,6 +54,10 @@ public class RegisterUser {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="userId")
+	private List<Account> acc;
 	
 	
 }

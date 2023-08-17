@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
-@ComponentScan({"com"})
+@ComponentScan({"com.banking.BankingApp"})
 @EnableJpaRepositories(basePackages = "com.banking.BankingApp.dao")
 @EntityScan({"com.banking.BankingApp.model"})
 

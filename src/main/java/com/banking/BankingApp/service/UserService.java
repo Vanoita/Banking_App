@@ -4,22 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import com.banking.BankingApp.dao.RegisterUserRepository;
 import com.banking.BankingApp.dao.UserRepository;
-import com.banking.BankingApp.model.CreateAccount;
 import com.banking.BankingApp.model.LoginModel;
-import com.banking.BankingApp.model.RegisterUser;
+import com.banking.BankingApp.model.User;
 
 
 @Service
 public class UserService {
 	
 	@Autowired
-	RegisterUserRepository registerRepo;
+	UserRepository userRepo;
 	
-	public RegisterUser registerUser(RegisterUser u) {
-		RegisterUser obj = registerRepo.save(u);
-		return obj;
+	public User registerUser(User u) {
+		return userRepo.save(u);
 	}
 	
 	
@@ -27,8 +24,8 @@ public class UserService {
 	public String validateUser(LoginModel u) {
 		// TODO Auto-generated method stub
 		String res = "";
-	 RegisterUser user = null;
-		Optional<RegisterUser> obj = registerRepo.findById(u.getUsername());
+		User user = null;
+		Optional<User> obj = userRepo.findById(u.getUserId());
 		if(obj.isPresent()) {
 			user=obj.get();		
 		}

@@ -1,5 +1,7 @@
 package com.banking.BankingApp.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -7,37 +9,30 @@ import jakarta.persistence.Id;
 public class Transaction {
 	@Id
 	private String refId;
-	private String sender;
-	private String senderName;
-	private String receiver;
+	private String accNo;
+	private String receiverAccNo;
 	private String receiverName;
 	private double amount;
 	private String mode;
 	private String remark;
-	private String time;
+	private Date date;
 	public String getRefId() {
 		return refId;
 	}
 	public void setRefId(String refId) {
 		this.refId = refId;
 	}
-	public String getSender() {
-		return sender;
+	public String getAccNo() {
+		return accNo;
 	}
-	public void setSender(String sender) {
-		this.sender = sender;
+	public void setAccNo(String accNo) {
+		this.accNo = accNo;
 	}
-	public String getSenderName() {
-		return senderName;
+	public String getReceiverAccNo() {
+		return receiverAccNo;
 	}
-	public void setSenderName(String senderName) {
-		this.senderName = senderName;
-	}
-	public String getReceiver() {
-		return receiver;
-	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setReceiverAccNo(String receiverAccNo) {
+		this.receiverAccNo = receiverAccNo;
 	}
 	public String getReceiverName() {
 		return receiverName;
@@ -63,11 +58,10 @@ public class Transaction {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public String getTime() {
-		return time;
+	public Date getDate() {
+		return date;
 	}
-	public void setTime(String time) {
-		this.time = time;
+	public void setDate(Date date) {
+		this.date = date;
 	}
-
 }
