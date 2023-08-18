@@ -16,18 +16,7 @@ import {
 import axios from "axios";
 
 function TransactionHistory() {
-    const [tDetails, setTDetails] = useState([
-       {
-         'id':'',
-        'date':'',
-        'accNo':'',
-        'rName':'',
-        'rAccNo':'',
-        'mode':'',
-        'amount':'',
-        'remarks':''
-    }
-    ]);
+    const [tDetails, setTDetails] = useState([]);
     const [accNo, setAccNo] = useState([1, 2, 3, 4]);
     const navigate = useNavigate();
     const baseURL = "http://localhost:8080/checkLogin";
@@ -44,8 +33,9 @@ function TransactionHistory() {
         axios
             .get(getURL+"/"+userId)
             .then((response) => {
-                alert(response.data);
-                // setTDetails(response.data);
+                
+                setTDetails(response.data);  
+                    
             })
             .catch((error) => {
                 alert("error occured while loading data" + error);
@@ -65,12 +55,12 @@ function TransactionHistory() {
 
     useEffect(() => {
         getDetails();
-        fetchAccNo();
+        //fetchAccNo();
     }, []);
     return (
         <>
             <Helmet>
-                <title>Transaction History</title>
+                <title> Transaction History</title>
             </Helmet>
 
             <h2 p={'100 px'}>Transaction History</h2>
@@ -107,7 +97,7 @@ function TransactionHistory() {
 
             <TableContainer maxWidth={'100%'} align={'center'}>
                 <Table variant="striped" colorScheme="blue">
-                    <Thead>
+                    
                         <Tr>
                             <Th>Transaction ID</Th>
                             <Th>Date</Th>
@@ -117,46 +107,19 @@ function TransactionHistory() {
                             <Th>Transaction Type</Th>
                             <Th isNumeric>Amount</Th>
                             <Th>Remarks</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                    {tDetails.map(details => {
-                            <Tr>
-                                <Td>{details.id}</Td>
-                                <Td>{details.date}</Td>
-                                <Td>{details.accNo}</Td>
-                                    <Td>{details.rName}</Td>
-                                    <Td>{details.rAccNo}</Td>
-                                <Td>{details.mode}</Td>
-                                <Td>{details.amount}</Td>
-                                <Td>{details.remarks}</Td>
-                            </Tr>
-
-                            })}
-                        {/* <Tr>
-                            <Td>001</Td>
-                            <Td>08/17/2023</Td>
-                            <Td>13345</Td>
-                            <Td>Abhinav</Td>
-                            <Td>23457</Td>
-                            <Td>Fund transfer</Td>
-                            <Td isNumeric>2500</Td>
-                            <Td>Course</Td>
-                        </Tr>
-
-                        <Tr>
-                            <Td>002</Td>
-                            <Td>08/17/2023</Td>
-                            <Td>13765</Td>
-                            <Td>Ayush</Td>
-                            <Td>56755</Td>
-                            <Td>Fund transfer</Td>
-                            <Td isNumeric>14500</Td>
-                            <Td>Trial</Td>
-                        </Tr> */}
-
-
-                    </Tbody>
+                        </Tr>                
+                   <Tbody>
+                    {tDetails.map(details=>{
+                            return (
+                                <Tr>
+                                   {Object.values(details).map(val=>{
+                                    return (<Td>{val}</Td>)
+                                   })}
+                                </Tr>
+                            )
+                    })}
+                   </Tbody>
+                    
                 </Table>
             </TableContainer>
         </>

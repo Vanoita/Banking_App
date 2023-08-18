@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -14,9 +14,16 @@ import {
 } from "@chakra-ui/react";
 import { Link} from 'react-router-dom';
 import Login from './Login.js';
+import { useEffect, useState } from "react";
 function Home() {
   const [isLargerThan62] = useMediaQuery("(min-width: 62em)");
-  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+      const token = localStorage.getItem('userId');
+      if(token) {
+        navigate("/dashboard");
+      }
+  })
   return (
     /*localStorage.getItem('username') ? */ <>
       <Flex

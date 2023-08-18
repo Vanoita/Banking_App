@@ -33,7 +33,7 @@ function Transaction() {
     const userId = '12345678';//localStorage.get('username');
     const fetchAccNo = () => {
         axios
-            .get(baseURL, userId)
+            .get(baseURL)
             .then((response) => {
                 setAccNo(response.data);
             })

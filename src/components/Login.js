@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 function Login() {
-    const [userId, setUserId] = useState('');
-    const [password, setPassword] = useState('');
+    const [userId, setUserId] = useState("");
+    const [password, setPassword] = useState("");
+    const [alertMessage, setAlertMessage] = useState("");
     const navigate = useNavigate();
     const { state } = useLocation();
     const baseURL = "http://localhost:8080/checkLogin";
@@ -16,24 +17,31 @@ function Login() {
             userId: userId,
             password: password
         }).then((response) => {
-            alert(JSON.stringify(response))
-            // const res = JSON.parse(response.data);
-            // if(res.login){
-            //     localStorage.setItem('userId',username);
-            //     navigate('/dashboard');
-            // }
+            const res = response.data;
+            if(res.login){
+                localStorage.setItem('userId', userId);
+                if (state && state.from) { navigate(state.from, {state:{message: res.message, type: "success"}}); } 
+                else { navigate('/dashboard',  {state:{message: res.message, type: "success"}}); }
+            }
+            else{
+                setAlertMessage(res.message)
+            }
         }).catch(error => {
             alert("error = " + error);
         });
-
-        // localStorage.setItem('username', username);
-        // if (state.from) { navigate(state.from); } else { navigate('/'); }
     };
+    useEffect(() => {
+        const token = localStorage.getItem('userId');
+        if(token) {
+            navigate("/dashboard", {state:{message: "You're already Login.", type: "warning"}});
+        }
+    })
     return (
         <>
             <Helmet>
                 <title>Login User</title>
             </Helmet>
+            {/* {alertMessage && <div class="alert alert-danger text-center" role="alert">{alertMessage}</div>} */}
             <div className="container d-flex flex-row justify-content-center align-items-center mt-4">
                 <div className='card' style={{ width: "100%", maxWidth: "500px" }}>
                     <form className="p-4" onSubmit={submitActionHandler}>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link,  useNavigate } from 'react-router-dom';
+import { Link,  useLocation,  useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { customAlphabet } from 'nanoid';
+import { useEffect } from 'react';
 
 function Register() {
     const nanoid = customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 8);
@@ -12,6 +12,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { state } = useLocation();
     const baseURL = "http://localhost:8080/registerUser";
     const submitActionHandler = (event) => {
         event.preventDefault();
@@ -22,15 +23,23 @@ function Register() {
             email: email,
             password: password
         }).then((response) => {
-            const res = JSON.stringify(response.data);
-            alert(res);
+            const res = response.data;
+            if(res.userId){
+                localStorage.setItem('userId', res.userId);
+                if (state && state.from) { navigate(state.from,  {state:{message: "You're Registered Successfully!", type: "success"}}); } 
+                else { navigate('/dashboard',  {state:{message: "You're Registered Successfully!", type: "success"}}); }
+            }
+
         }).catch(error => {
             alert("error = " + error);
         });
-
-        // localStorage.setItem('username', username);
-        // if (state.from) { navigate(state.from); } else { navigate('/'); }
     };
+    useEffect(() => {
+        const token = localStorage.getItem('userId');
+        if(token) {
+            navigate("/dashboard", {state:{message: "You're still Login. First Logout and then try to register.", type: "warning"}});
+        }
+    })
     return (
         <>
             <Helmet>
