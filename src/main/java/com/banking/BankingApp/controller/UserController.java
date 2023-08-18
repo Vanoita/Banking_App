@@ -1,6 +1,8 @@
 package com.banking.BankingApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,12 @@ public class UserController {
 	@PostMapping("/registerUser")
 	public User registerUser(@RequestBody @Valid User cust) {
 		return userService.registerUser(cust);
+	}
+	
+	@GetMapping("/fetchUser/{userId}")
+	public User fetchUser(@PathVariable String userId){
+		User obj = userService.fetchUser(userId);
+		return obj;
 	}
 }
 

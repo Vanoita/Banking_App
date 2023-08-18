@@ -40,6 +40,10 @@ public class UserService {
 		}
 		return res;
 	}
+	
+	public User fetchUser(String userId){
+		return userRepo.fetchUser(userId);
+	}
 
 }
 
