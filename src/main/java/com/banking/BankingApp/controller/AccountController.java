@@ -46,4 +46,9 @@ public class AccountController {
 		List<Transaction> obj = accService.getAllTransactions(userId);
 		return obj;
 	}
+	
+	@GetMapping("/fetchAccNo/{userId}")
+	public List<String> fetchAccNo(@PathVariable("userId") String userId) {
+		return accService.fetchAccNo(userId);
+	}
 }
