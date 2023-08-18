@@ -29,11 +29,12 @@ public class AccountController {
 	
 	@PostMapping("/transaction")
 	public String transaction(@RequestBody Transaction t) {
-		String remark = t.getRemark();
+		Transaction trans = accService.createTransaction(t);
+		String remark = trans.getRemark();
 		if(remark.equalsIgnoreCase("withdraw"))
-		return accService.withdrawFunds(t);
+		return accService.withdrawFunds(trans);
 		else if(remark.equalsIgnoreCase("deposit")) 
-			return accService.addFunds(t);
-		else return accService.transferFunds(t);
+			return accService.addFunds(trans);
+		else return accService.transferFunds(trans);
 	}
 }

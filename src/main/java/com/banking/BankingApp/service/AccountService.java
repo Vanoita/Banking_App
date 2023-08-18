@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.banking.BankingApp.dao.AccountRepository;
+import com.banking.BankingApp.dao.TransactionRepository;
 import com.banking.BankingApp.dao.UserRepository;
 import com.banking.BankingApp.model.Account;
 import com.banking.BankingApp.model.Transaction;
@@ -16,11 +17,17 @@ public class AccountService {
 	UserRepository userRepo;
 	@Autowired
 	AccountRepository accRepo;
+	@Autowired
+	TransactionRepository transRepo;
 	
 	public Account createAccount(Account acc, String userId) {
 		User u = userRepo.findById(userId).get();
 		acc.setUserId(u.getUserId());
 		return accRepo.save(acc);
+	}
+	
+	public Transaction createTransaction(Transaction transaction) {
+		return transRepo.save(transaction);
 	}
 	
 	@Transactional
