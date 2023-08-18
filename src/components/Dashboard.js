@@ -35,10 +35,8 @@ function Dashboard(){
     const navigate = useNavigate();
     const {state} = useLocation();
     const location = useLocation();
-    const baseURLAccount = "http://localhost:8080/fetchAllAccount/"+userId;
-    const baseURLUser = "http://localhost:8080/fetchUser/DIT7D1U1"+userId;
 
-    const fetchAllAccount = () => {
+    const fetchAllAccount = (baseURLAccount) => {
         axios
             .get(baseURLAccount)
             .then((response) => {
@@ -48,11 +46,12 @@ function Dashboard(){
                 alert("error occured while loading data" + error);
             });
     };
-    const fetchUser = () => {
+    const fetchUser = (baseURLUser) => {
         axios
             .get(baseURLUser)
             .then((response) => {
                 setUser(response.data);
+                //alert(JSON.stringify(response))
             })
             .catch((error) => {
                 alert("error occured while loading data" + error);
@@ -65,8 +64,10 @@ function Dashboard(){
         }
         else {
             setUserId(token);
-            fetchAllAccount();
-            fetchUser();
+            const baseURLAccount = "http://localhost:8080/fetchAllAccount/"+token;
+            const baseURLUser = "http://localhost:8080/fetchUser/"+token;
+            fetchAllAccount(baseURLAccount);
+            fetchUser(baseURLUser);
         }
 
         if(state && state.message && state.type){
@@ -74,7 +75,7 @@ function Dashboard(){
             setAlertType(state.type);
         }
         
-    })
+    },[])
     return (
         <>
             <Helmet>
@@ -82,9 +83,13 @@ function Dashboard(){
             </Helmet>
             {/* {alertMessage && <div class={`alert alert-${alertType} text-center`} role="alert">{alertMessage}</div>} */}
             <div>
-                <h1>Welcome to Dashboard</h1>
-                <h2>{userId}</h2>
-
+                <h1>{user && `Hi ${user.firstName} ${user.lastName}`}, Welcome to Dashboard</h1>
+                {/* <h2>{accounts[0].accNo}</h2>
+                <div>
+                    {accounts.map(acc=>{
+                        <div>acc.accNo</div>
+                    })}
+                </div> */}
             </div>
         </>
     );
