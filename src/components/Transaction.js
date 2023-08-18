@@ -29,8 +29,8 @@ function Transaction() {
     const [rAcc, setRAcc] = useState("");
     const navigate = useNavigate();
     const baseURL = "http://localhost:8080/fetchAccNo";
-    const basePOST = "";
-    const userId = 'react170';//localStorage.get('username');
+    const basePOST = "http://localhost:8080/transaction";
+    const userId = '12345678';//localStorage.get('username');
     const fetchAccNo = () => {
         axios
             .get(baseURL, userId)
@@ -47,15 +47,14 @@ function Transaction() {
     }, []);
 
     var moment = require('moment')
-    var created = moment().format('YYYY-MM-DD hh:mm:ss')
-
+    var created = moment().format('YYYY-MM-DD hh:mm:ss');
     const transferAmount = () => {
         axios.post(basePOST,
             {
                 refId: nanoid(16),
                 time: created,
                 mode: "Fund Transfer",
-                accNo: tAccNo,
+                accNo: 123456789125,//tAccNo,
                 receiverAccNo: rAcc,
                 receiverName: rName,
                 amount: tAmount,
@@ -80,7 +79,7 @@ function Transaction() {
             {
                 refId: nanoid(16),
                 time: created,
-                mode: "Withdraw",
+                mode: "withdraw",
                 accNo: wAccNo,
                 amount: wAmount,
                 remark: wRemark

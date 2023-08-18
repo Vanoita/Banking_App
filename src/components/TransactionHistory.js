@@ -31,8 +31,10 @@ function TransactionHistory() {
     const [accNo, setAccNo] = useState([1, 2, 3, 4]);
     const navigate = useNavigate();
     const baseURL = "http://localhost:8080/checkLogin";
+    const getURL = "http://localhost:8080/getTransactions";
+    const fetchURL = "http://localhost:8080/fetchAccounts";
     const type="";
-    const userId = 'react170';//localStorage.get('username');
+    const userId = '12345678';//localStorage.get('username');
     const [selectAccNo,setSelectAccNo]=useState("");
     const [dateFilter, setDateFilter] = useState({
         startDate: null,
@@ -40,9 +42,10 @@ function TransactionHistory() {
     })
     const getDetails = () => {
         axios
-            .get(baseURL, userId)
+            .get(getURL+"/"+userId)
             .then((response) => {
-                setTDetails(response.data);
+                alert(response.data);
+                // setTDetails(response.data);
             })
             .catch((error) => {
                 alert("error occured while loading data" + error);
@@ -51,7 +54,7 @@ function TransactionHistory() {
 
     const fetchAccNo = () => {
         axios
-            .get(baseURL, userId)
+            .get(fetchURL, userId)
             .then((response) => {
                 setAccNo(response.data);
             })
