@@ -28,12 +28,12 @@ function Transaction() {
     const [tAmount, setTAmount] = useState("");
     const [rAcc, setRAcc] = useState("");
     const navigate = useNavigate();
-    const baseURL = "http://localhost:8080/fetchAccNo";
+    const baseURL = "http://localhost:8080/fetchAccNo/DIT7D1U1";
     const basePOST = "";
     const userId = 'react170';//localStorage.get('username');
     const fetchAccNo = () => {
         axios
-            .get(baseURL, userId)
+            .get(baseURL)
             .then((response) => {
                 setAccNo(response.data);
             })
