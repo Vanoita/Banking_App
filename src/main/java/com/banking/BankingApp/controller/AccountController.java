@@ -1,7 +1,10 @@
 package com.banking.BankingApp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,11 +33,17 @@ public class AccountController {
 	@PostMapping("/transaction")
 	public String transaction(@RequestBody Transaction t) {
 		Transaction trans = accService.createTransaction(t);
-		String remark = trans.getRemark();
+		String remark = trans.getMode();
 		if(remark.equalsIgnoreCase("withdraw"))
 		return accService.withdrawFunds(trans);
 		else if(remark.equalsIgnoreCase("deposit")) 
 			return accService.addFunds(trans);
 		else return accService.transferFunds(trans);
+	}
+	
+	@GetMapping("/getTransactions/{userId}")
+	public List<Transaction> getTransactions(@PathVariable String userId){
+		List<Transaction> obj = accService.getAllTransactions(userId);
+		return obj;
 	}
 }

@@ -1,5 +1,7 @@
 package com.banking.BankingApp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +60,7 @@ public class AccountService {
 		return result;
 	}
 	
+	
 	@Transactional
 	public String transferFunds(Transaction transaction) {
 		String result="Not Transacted";
@@ -75,5 +78,10 @@ public class AccountService {
 				result="Transaction Successful";
 		}
 		return result;
+	}
+	
+
+	public List<Transaction> getAllTransactions(String userId){
+		return transRepo.findAllTransactions(userId);
 	}
 }

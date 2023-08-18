@@ -10,4 +10,6 @@ public interface AccountRepository extends JpaRepository<Account, String>{
 	@Modifying 
 	@Query("update Account account set account.balance=account.balance-?1 where account.accNo=?2")
 	public int updateBalance(double amount,String accountNo);
+	
+	
 }
