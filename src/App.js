@@ -8,7 +8,7 @@ import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import Transaction from "./components/Transaction.js";
 import TransactionHistory from './components/TransactionHistory';
-import { ChakraProvider, Container} from '@chakra-ui/react';
+import { ChakraProvider} from '@chakra-ui/react';
 import Dashboard from './components/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
 import CreateNewPassword from './components/CreateNewPassword';

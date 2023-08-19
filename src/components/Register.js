@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link,  useLocation,  useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { customAlphabet } from 'nanoid';
@@ -12,7 +12,6 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const { state } = useLocation();
     const baseURL = "http://localhost:8080/registerUser";
     const submitActionHandler = (event) => {
         event.preventDefault();
@@ -26,8 +25,7 @@ function Register() {
             const res = response.data;
             if(res.userId){
                 localStorage.setItem('userId', res.userId);
-                if (state && state.from) { navigate(state.from,  {state:{message: "You're Registered Successfully!", type: "success"}}); } 
-                else { navigate('/dashboard',  {state:{message: "You're Registered Successfully!", type: "success"}}); }
+                navigate("/dashboard",  {state:{message: "You're Registered Successfully!", type: "success"}});
             }
 
         }).catch(error => {
@@ -39,7 +37,7 @@ function Register() {
         if(token) {
             navigate("/dashboard", {state:{message: "You're still Login. First Logout and then try to register.", type: "warning"}});
         }
-    })
+    },[navigate])
     return (
         <>
             <Helmet>
@@ -52,23 +50,23 @@ function Register() {
                         <div class="row">
                             <div class="col-md-6 mb-4 pb-3">
                                 <div class="form-outline">
-                                    <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} class="form-control form-control-lg" />
+                                    <input type="text" required value={firstName} onChange={e => setFirstName(e.target.value)} class="form-control form-control-lg" />
                                     <label class="form-label" >First name</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4 pb-3">
                                 <div class="form-outline">
-                                    <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} class="form-control form-control-lg" />
+                                    <input type="text" required value={lastName} onChange={e => setLastName(e.target.value)} class="form-control form-control-lg" />
                                     <label class="form-label">Last name</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="text" class="form-control" value={email} onChange={e => setEmail(e.target.value)} />
+                            <input type="text" required class="form-control" value={email} onChange={e => setEmail(e.target.value)} />
                             <label class="form-label">Email</label>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="password" class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
+                            <input type="password" required class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
                             <label class="form-label">Password</label>
                         </div>
                         <div className='d-flex justify-content-center'>
