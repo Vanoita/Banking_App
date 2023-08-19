@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import '../register.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Helmet } from "react-helmet";
 import { customAlphabet } from "nanoid";
+import { useLocation, useNavigate } from "react-router";
 
 function CreateAccount() {
+    const [alertMessage, setAlertMessage] = useState("");
+    const [alertType, setAlertType] = useState("info");
     const nanoid = customAlphabet('1234567890', 12);
-    const userId = "DIT7D1U1";//localStorage.get('username');
-
-
-    const baseURLAccount = "http://localhost:8080/createAccount/DIT7D1U1";
+    const [userId, setUserId] = useState("");
+    const baseURLAccount = "http://localhost:8080/createAccount/"+userId;
     const [fatherName, setFatherName] = useState("");
     const [aadhar, setAadhar] = useState("");
     const [dob, setDob] = useState(null);
@@ -20,8 +21,12 @@ function CreateAccount() {
     const [address, setAddress] = useState("");
     const [pincode, setPincode] = useState("");
     const [city, setCity] = useState("");
-    const [state, setState] = useState("");
+    const [stateName, setStateName] = useState("");
     const [mobNo, setMobNo] = useState("");
+
+    const navigate = useNavigate();
+    const {state} = useLocation();
+    const location = useLocation();
 
     const submitActionHandler = (event) => {
         event.preventDefault();
@@ -34,21 +39,46 @@ function CreateAccount() {
             annualGrossIncome: annualGrossIncome,
             aadhar: aadhar,
             address: address,
-            state: state,
+            state: stateName,
             city: city,
             pincode: "pincode"
         }).then((response) => {
-            alert(JSON.stringify(response));
+            if(response.data) {
+                navigate("/dashboard", {state:{message: response.data, type: "success"}});
+            }
+            else{
+                setAlertMessage("Error while creating Account. Please try again");
+                setAlertType("danger");
+            }
         }).catch(error => {
             alert("error = " + error);
         });
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem('userId');
+        if(!token) {
+            navigate("/login",{state:{from: `${location.pathname}${location.search}`}});
+        }
+        else {
+            setUserId(token);
+        }
+
+        if(state && state.message && state.type){
+            setAlertMessage(state.message);
+            setAlertType(state.type);
+
+            window.history.replaceState({state: null}, document.title);
+        }
+        
+    },[alertMessage,alertType, location.pathname, location.search, state, navigate])
 
     return (
         <div>
             <Helmet>
                 <title>Open a saving account</title>
             </Helmet>
+            {alertMessage && <div class={`alert alert-${alertType} text-center`} role="alert">{alertMessage}</div>}
             <form onSubmit={submitActionHandler}>
                 <section class="h-100 h-custom gradient-custom-2">
                     <div class="container py-3 h-100">
@@ -128,7 +158,7 @@ function CreateAccount() {
 
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
-                                                            <input type="text" value={state} onChange={e => setState(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" value={stateName} onChange={e => setStateName(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">State</label>
                                                         </div>
                                                     </div>
