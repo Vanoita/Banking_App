@@ -1,13 +1,13 @@
 package com.banking.BankingApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-<<<<<<< HEAD
+
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-=======
+
 import org.springframework.web.bind.annotation.GetMapping;
->>>>>>> 950ff7f0e4060c48641dda9ec99bcf21d04a4188
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +35,7 @@ public class UserController {
 		return userService.registerUser(cust);
 	}
 	
-<<<<<<< HEAD
+
 
 	@PostMapping("/checkUserId/{userId}")
 	public boolean checkUserID(@PathVariable String userId) {
@@ -48,16 +48,12 @@ public class UserController {
 			return userService.changePasswordByAccNo(refId,password);
 		else return userService.changePasswordByUserId(refId,password);
 	}
-=======
->>>>>>> 950ff7f0e4060c48641dda9ec99bcf21d04a4188
+
 	@GetMapping("/fetchUser/{userId}")
 	public User fetchUser(@PathVariable String userId){
 		User obj = userService.fetchUser(userId);
 		return obj;
-<<<<<<< HEAD
-
-=======
->>>>>>> 950ff7f0e4060c48641dda9ec99bcf21d04a4188
+	
 	}
 }
 
