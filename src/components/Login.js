@@ -68,10 +68,10 @@ function Login() {
                         </div>
 
                         <div class="text-center mb-4">
-                            <Link to="#">Forgot Password?</Link>
+                            <Link to="/forgotPassword">Forgot Password?</Link>
                         </div>
                         <div class="text-center mb-4">
-                            <Link to="#">Forgot Username?</Link>
+                            <Link to="/forgotUsername">Forgot Username?</Link>
                         </div>
                         <div class="text-center mb-4">
                             <p>Not a member? <Link to="/register">Register</Link></p>

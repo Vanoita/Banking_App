@@ -5,21 +5,21 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function ForgotPassword() {
+function ForgotUsername() {
     const navigate = useNavigate();
-const [userId,setUserId] = useState("");
+const [accNo,setAccNo] = useState("");
 
     const submitActionHandler = (event)=>{
         event.preventDefault();
-        const baseURL = "http://localhost:8080/checkUserId/"+userId;
-        axios.post(baseURL,{}).then((response)=>{
-            if(response.data) {
-                const URL = "/createNewPassword/"+userId;
-            navigate(URL);
+        const baseURL = "http://localhost:8080/checkAccNo/"+accNo;
+        axios.post(baseURL).then((response)=>{
+            if(response.data)
+            navigate("/createNewPassword/"+accNo);
+            else {
+                document.getElementById("message").innerHTML = "Account Not Found";
             }
-            else alert("false");
         });
-        
+        //navigate("/createNewPassword");
     }
 
   return (
@@ -33,8 +33,8 @@ const [userId,setUserId] = useState("");
                 <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "30px" }}>Reset Password</h3>
                 <div id="message"></div>
                 <div class="form-outline mb-4">
-                    <input type="text" class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
-                    <label class="form-label">Enter UserId</label>
+                    <input type="text" class="form-control" value={accNo} onChange={e => setAccNo(e.target.value)} />
+                    <label class="form-label">Account Number</label>
                 </div>               
                 <div className='d-flex justify-content-center'>
                             <button type="submit" class="btn btn-primary btn-block mb-4" 
@@ -47,4 +47,4 @@ const [userId,setUserId] = useState("");
   )
 }
 
-export default ForgotPassword
+export default ForgotUsername

@@ -12,6 +12,7 @@ import { ChakraProvider, Container} from '@chakra-ui/react';
 import Dashboard from './components/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
 import CreateNewPassword from './components/CreateNewPassword';
+import ForgotUsername from './components/ForgotUsername';
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
             <Route exact path= "/transactionhistory" element={<TransactionHistory/>}/>
             <Route exact path= "/dashboard" element={<Dashboard/>}/>
             <Route exact path="/forgotPassword" element={<ForgotPassword/>} />
-            <Route exact path="/createNewPassword" element={<CreateNewPassword/>} />
+            <Route exact path="/forgotUsername" element={<ForgotUsername/>} />
+            <Route exact path="/createNewPassword/:refId" element={<CreateNewPassword/>} />
           </Routes>
         </BrowserRouter>
     </ChakraProvider>
