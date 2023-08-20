@@ -20,6 +20,9 @@ public interface AccountRepository extends JpaRepository<Account, String>{
 	@Query("SELECT acc from Account acc where acc.userId=?1")
 	public List<Account> fetchAllAccount(String userId);
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 950ff7f0e4060c48641dda9ec99bcf21d04a4188
 	
 }

@@ -53,7 +53,10 @@ public class AccountController {
 		return obj;
 	}
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 950ff7f0e4060c48641dda9ec99bcf21d04a4188
 	@GetMapping("/fetchAllAccount/{userId}")
 	public List<Account> fetchAllAccount(@PathVariable String userId){
 		List<Account> obj = accService.fetchAllAccount(userId);
@@ -65,5 +68,8 @@ public class AccountController {
 	public List<String> fetchAccNo(@PathVariable("userId") String userId) {
 		return accService.fetchAccNo(userId);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 950ff7f0e4060c48641dda9ec99bcf21d04a4188
 }

@@ -46,6 +46,7 @@ public class UserService {
 		return res;
 	}
 	
+<<<<<<< HEAD
 
 	public boolean checkUserId(String userId) {
 		boolean result = false;
@@ -79,6 +80,10 @@ public class UserService {
 	public User fetchUser(String userId){
 		return userRepo.fetchUser(userId);
 
+=======
+	public User fetchUser(String userId){
+		return userRepo.fetchUser(userId);
+>>>>>>> 950ff7f0e4060c48641dda9ec99bcf21d04a4188
 	}
 
 }
