@@ -46,6 +46,7 @@ public class UserService {
 		return res;
 	}
 	
+
 	public boolean checkUserId(String userId) {
 		boolean result = false;
 		Optional<User> u = userRepo.findById(userId);
@@ -73,6 +74,11 @@ public class UserService {
 		if(row>0)
 			result = "Password updated Successfully";
 		return result;
+	}
+
+	public User fetchUser(String userId){
+		return userRepo.fetchUser(userId);
+
 	}
 
 }

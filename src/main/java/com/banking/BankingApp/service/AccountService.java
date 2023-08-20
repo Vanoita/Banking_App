@@ -94,4 +94,13 @@ public class AccountService {
 	public List<Transaction> getAllTransactions(String userId){
 		return transRepo.findAllTransactions(userId);
 	}
+	
+	public List<Account> fetchAllAccount(String userId){
+		return accRepo.fetchAllAccount(userId);
+	}
+	
+	public List<String>fetchAccNo(String userId) {
+		List<String> accountList = accRepo.fetchAccNo(userId);
+		return accountList;
+	}
 }
