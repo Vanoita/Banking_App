@@ -35,23 +35,23 @@ function Login() {
         if(token) {
             navigate("/dashboard", {state:{message: "You're already Login.", type: "warning"}});
         }
-    })
+    },[navigate])
     return (
         <>
             <Helmet>
                 <title>Login User</title>
             </Helmet>
-            {/* {alertMessage && <div class="alert alert-danger text-center" role="alert">{alertMessage}</div>} */}
+            {alertMessage && <div class="alert alert-danger text-center" role="alert">{alertMessage}</div>}
             <div className="container d-flex flex-row justify-content-center align-items-center mt-4">
                 <div className='card' style={{ width: "100%", maxWidth: "500px" }}>
                     <form className="p-4" onSubmit={submitActionHandler}>
                         <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "30px" }}>Login</h3>
                         <div class="form-outline mb-4">
-                            <input type="text" class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
+                            <input type="text" required class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
                             <label class="form-label">UserId</label>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="password" class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
+                            <input type="password" required class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
                             <label class="form-label">Password</label>
                         </div>
                         <div class="row mb-4">
