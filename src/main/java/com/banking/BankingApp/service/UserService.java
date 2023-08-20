@@ -2,8 +2,11 @@ package com.banking.BankingApp.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.banking.BankingApp.dao.AccountRepository;
 import com.banking.BankingApp.dao.UserRepository;
+import com.banking.BankingApp.model.Account;
 import com.banking.BankingApp.model.LoginModel;
 import com.banking.BankingApp.model.User;
 
@@ -13,6 +16,8 @@ public class UserService {
 	
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+	AccountRepository accRepo;
 	
 	public User registerUser(User u) {
 		return userRepo.save(u);
@@ -39,6 +44,35 @@ public class UserService {
 			}
 		}
 		return res;
+	}
+	
+	public boolean checkUserId(String userId) {
+		boolean result = false;
+		Optional<User> u = userRepo.findById(userId);
+		if(u.isPresent())
+			result = true;
+		return result;
+	}
+	
+	
+	@Transactional
+	public String changePasswordByUserId(String userId,String password) {
+		String result = "";
+		int row = userRepo.updatePassword(userId,password);
+		if(row>0)
+			result = "Password updated Successfully";
+		return result;
+	}
+	
+	@Transactional
+	public String changePasswordByAccNo(String accNo,String password) {
+		String result = "";
+		Account acc = accRepo.findById(accNo).get();
+		String userId = acc.getUserId();
+		int row = userRepo.updatePassword(userId,password);
+		if(row>0)
+			result = "Password updated Successfully";
+		return result;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.banking.BankingApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,18 @@ public class UserController {
 	@PostMapping("/registerUser")
 	public User registerUser(@RequestBody @Valid User cust) {
 		return userService.registerUser(cust);
+	}
+	
+	@PostMapping("/checkUserId/{userId}")
+	public boolean checkUserID(@PathVariable String userId) {
+		return userService.checkUserId(userId);
+	}
+	
+	@PostMapping("/createNewPassword/{refId}")
+	public String createNewPassword(@PathVariable String refId,@RequestBody String password) {
+		if(refId.length()==12)
+			return userService.changePasswordByAccNo(refId,password);
+		else return userService.changePasswordByUserId(refId,password);
 	}
 }
 

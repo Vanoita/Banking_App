@@ -19,8 +19,8 @@ import jakarta.validation.constraints.NotNull;
 public class Account {
 
 	@Id
-	@NotBlank(message="Please enter your Username.")
-	@Length(min=12,max=12,message="Username should be 8 characters long.")
+	@NotBlank(message="Please enter your Account Number.")
+	@Length(min=12,max=12,message="Account Number should be 12 characters long.")
 	private String accNo;
 	
 	@NotBlank(message="Please enter your Mobile number.")

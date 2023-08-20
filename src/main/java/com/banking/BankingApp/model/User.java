@@ -2,6 +2,8 @@ package com.banking.BankingApp.model;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,6 +16,7 @@ public class User {
 	
 	@Id
 	@NotBlank
+	
 	private String userId;
 	
 	@NotBlank

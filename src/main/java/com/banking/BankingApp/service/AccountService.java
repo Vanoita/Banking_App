@@ -1,6 +1,7 @@
 package com.banking.BankingApp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,14 @@ public class AccountService {
 	
 	public Transaction createTransaction(Transaction transaction) {
 		return transRepo.save(transaction);
+	}
+	
+	public boolean checkAccNo(String accNo) {
+		boolean result = false;
+		Optional<Account> a = accRepo.findById(accNo);
+		if(a.isPresent())
+			result = true;
+		return result;
 	}
 	
 	@Transactional
@@ -79,6 +88,7 @@ public class AccountService {
 		}
 		return result;
 	}
+	
 	
 
 	public List<Transaction> getAllTransactions(String userId){

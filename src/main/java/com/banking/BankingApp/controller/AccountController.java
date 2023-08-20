@@ -30,6 +30,11 @@ public class AccountController {
 		return result;
 	}
 	
+	@PostMapping("/checkAccNo/{accNo}")
+	public boolean checkAccNo(@PathVariable String accNo) {
+		return accService.checkAccNo(accNo);
+	}
+	
 	@PostMapping("/transaction")
 	public String transaction(@RequestBody Transaction t) {
 		Transaction trans = accService.createTransaction(t);
@@ -46,4 +51,6 @@ public class AccountController {
 		List<Transaction> obj = accService.getAllTransactions(userId);
 		return obj;
 	}
+	
+	
 }
