@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
@@ -46,13 +46,14 @@ function Transaction() {
         fetchAccNo();
     }, []);
 
-    var moment = require('moment')
-    var created = moment().format('DD-MM-YYYY');
+    
     const transferAmount = () => {
+       const currentDate = new Date();
+       const date = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()+1}`;
         axios.post(basePOST,
             {
                 refId: nanoid(16),
-                date: created,
+                date: date,
                 mode: "Fund Transfer",
                 accNo:   tAccNo,
                 receiverAccNo: rAcc,
@@ -62,6 +63,7 @@ function Transaction() {
 
             }).then((response) => {
                 alert(JSON.stringify(response))
+                
                 // const res = JSON.parse(response.data);
                 // if(res.login){
                 //     localStorage.setItem('userId',username);
@@ -75,10 +77,12 @@ function Transaction() {
     }
 
     const withdrawAmount = () => {
+        const currentDate = new Date();
+       const date = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()+1}`;       
         axios.post(basePOST,
             {
                 refId: nanoid(16),
-                time: created,
+                date: date,
                 mode: "withdraw",
                 accNo: wAccNo,
                 amount: wAmount,
