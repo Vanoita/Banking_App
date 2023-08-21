@@ -12,6 +12,7 @@ import Dashboard from './components/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
 import CreateNewPassword from './components/CreateNewPassword';
 import ForgotUsername from './components/ForgotUsername';
+import AdminDashboard from './components/AdminDashboard';
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
             <Route exact path="/forgotPassword" element={<ForgotPassword/>} />
             <Route exact path="/forgotUsername" element={<ForgotUsername/>} />
             <Route exact path="/createNewPassword/:refId" element={<CreateNewPassword/>} />
+            <Route exact path="/adminDashboard" element={<AdminDashboard/>}/>
+            <Route exact path="/dashboard" element={<Dashboard/>}/>
           </Routes>
         </BrowserRouter>
     </ChakraProvider>

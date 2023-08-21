@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, SimpleGrid } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import {
     Card,
@@ -11,11 +11,12 @@ import {
     CardFooter,
     Heading,
     Text,
-    Button,
-    Input,
+    Button,Box,
+    Input,Flex
 } from "@chakra-ui/react";
 import axios from "axios";
 import { nanoid } from "nanoid";
+import Sidebar from "./Sidebar";
 
 function Transaction() {
     const [wRemark, setWRemark] = useState("");
@@ -103,7 +104,9 @@ function Transaction() {
             <Helmet>
                 <title>Transaction</title>
             </Helmet>
-
+            <Flex>
+                <Flex flexDir={"column"} w={"20%"}><Sidebar/></Flex>
+                <Box w={"80%"}>
             <Tabs align="center" isFitted variant="enclosed" p={"20px"}>
                 <TabList mb="1em">
                     <Tab _selected={{ color: "white", bg: "blue.500" }}>Withdrawal</Tab>
@@ -256,6 +259,9 @@ function Transaction() {
                     </TabPanel>
                 </TabPanels>
             </Tabs>
+            </Box>
+            </Flex>
+ 
         </>
     );
 }

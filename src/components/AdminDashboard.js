@@ -3,18 +3,17 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useState } from "react";
 import axios from "axios";
-import Sidebar from "./Sidebar";
-import { Flex, SimpleGrid, VStack, Text, Card,Box,Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td, } from "@chakra-ui/react";
-function Dashboard() {
+import { Flex, SimpleGrid, VStack, Text, Card, Box,Thead,
+    Tbody,
+    Tfoot,
+    Tr,
+    Th,
+    Td,Table,} from "@chakra-ui/react";
+import SidebarAdmin from "./SidebarAdmin";
+function AdminDashboard() {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("info");
-  const [accounts, setAccounts] = useState([1,2,3]);
+  const [accounts, setAccounts] = useState([]);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -22,12 +21,12 @@ function Dashboard() {
   const [tDetails, setTDetails] = useState([]);
   const getURL = "http://localhost:8080/getTransactions";
   const userId = "12345678"; //localStorage.get('username');
-  const [totalBalance, setTotalBalance] = useState(0);
+
 
   //Function to fetch details for transaction details
   const getDetails = () => {
     axios
-      .get(getURL + "/" + userId)
+      .get(getURL)
       .then((response) => {
         setTDetails(response.data);
       })
@@ -41,10 +40,6 @@ function Dashboard() {
     axios
       .get(baseURLAccount)
       .then((response) => {
-        const accountData = response.data.accounts;
-        setTotalBalance(
-          accounts.reduce((total, account) => total + account.balance, 0)
-        );
         setAccounts(response.data);
       })
       .catch((error) => {
@@ -67,16 +62,12 @@ function Dashboard() {
 
   useEffect(() => {
     const token = localStorage.getItem("userId");
-    /*if(!token) {
-            navigate("/login",{state:{from: `${location.pathname}${location.search}`}});
-        }
-        else {*/
-    const baseURLAccount = "http://localhost:8080/fetchAllAccount/" + token;
-    const baseURLUser = "http://localhost:8080/fetchUser/" + token;
+
+    const baseURLAccount = "http://localhost:8080/fetchAllAccount/";
+    const baseURLUser = "http://localhost:8080/fetchUser/";
     fetchAllAccount(baseURLAccount);
     getDetails();
     fetchUser(baseURLUser);
-    //}
 
     if (state && state.message && state.type) {
       setAlertMessage(state.message);
@@ -95,7 +86,7 @@ function Dashboard() {
   return (
     <>
       <Helmet>
-        <title>Dashboard</title>
+        <title>Admin Dashboard</title>
       </Helmet>
       {alertMessage && (
         <div class={`alert alert-${alertType} text-center`} role="alert">
@@ -103,42 +94,38 @@ function Dashboard() {
         </div>
       )}
       <div>
-        {/* <h1>{user && `Hi ${user.firstName} ${user.lastName}`}, Welcome to Dashboard</h1>
-                <div>
-                    {accounts.map(acc=>{
-                    return (
-                        <div>{acc.accNo}</div>
-                    )
-                    })}
-                </div> */}
         <Flex>
-          <Flex w={"20%"}flexDir={"column"}>
-            <Sidebar />
+          <Flex w={"20%"} flexDir={"column"}>
+            <SidebarAdmin/>
           </Flex>
-          <SimpleGrid row={2} w={"75%"} pt={"5%"} pb={"2%"}>
-            <Box>
-                <Card h={"80%"} p={"2.5%"}>
-                  <Text>Account Information</Text>
-                  <Table variant='simple'>
-                    <Thead>
-                      <Tr>
-                        <Th>Account Number</Th>
-                        <Th>Balance</Th>
-                      </Tr>
-                    </Thead>
-                    <Tbody>
-                      {accounts.map((account) => (
-                        <Tr>
-                          <Td>{account.accNo}</Td>
-                          <Td>{account.balance}</Td>
-                        </Tr>
-                      ))}
-                    </Tbody>
-                  </Table>
-                  </Card>
+          <Flex flex="1" p="4" flexDirection="column">
+          {/* First Row */}
+          <SimpleGrid columns={3} spacing="4" w={"100%"} p={"2.5%"}>
+            <Box bg="gray.100">
+              <VStack align="start" p="4">
+                <Text>Total Transactions</Text>
+                <Text>Content for Card 1</Text>
+              </VStack>
             </Box>
-            <Box>
-            <Card h="80%" p={"2.5%"}>
+
+            <Box bg="gray.200" p="4">
+              <VStack align="start">
+                <Text>Avg. Transaction Amount</Text>
+                <Text>Content for Card 2</Text>
+              </VStack>
+            </Box>
+
+            <Box bg="gray.300">
+              <VStack align="start" p="4">
+                <Text>Total No.of Users</Text>
+                <Text>Content for Card 3</Text>
+              </VStack>
+            </Box>
+          </SimpleGrid>
+
+          {/* Second Row */}
+          <Box mt="4">
+          <Card p={"2.5%"} w={"100%"}>
                   <Text >Recent Transaction History</Text>
                   <Table variant='simple'>
                     <Thead>
@@ -161,12 +148,13 @@ function Dashboard() {
                     </Tbody>
                   </Table>
               </Card>
-            </Box>
-          </SimpleGrid>
-          </Flex>
+          </Box>
+        </Flex>
+
+        </Flex>
       </div>
     </>
   );
 }
 
-export default Dashboard;
+export default AdminDashboard;
