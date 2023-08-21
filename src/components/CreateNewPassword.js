@@ -26,7 +26,7 @@ function CreateNewPassword() {
                     <form className="p-4" onSubmit={submitActionHandler}>
                         <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "30px" }}>Create New Password</h3>
                         <div class="form-outline mb-4">
-                            <div id="message">{refId}</div>
+                            <div id="message"></div>
                             <input type="password" class="form-control" value={pass} onChange={e => setPass(e.target.value)} />
                             <label class="form-label">New Password</label>
                         </div>

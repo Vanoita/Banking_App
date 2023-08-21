@@ -17,7 +17,9 @@ const [userId,setUserId] = useState("");
                 const URL = "/createNewPassword/"+userId;
             navigate(URL);
             }
-            else alert("false");
+            else {
+                document.getElementById("message").innerHTML = "User ID not Found";
+            };
         });
         
     }
