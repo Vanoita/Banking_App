@@ -20,7 +20,7 @@ import { nanoid } from "nanoid";
 function Transaction() {
     const [wRemark, setWRemark] = useState("");
     const [tRemark, setTRemark] = useState("");
-    const [accNo, setAccNo] = useState([1, 2, 3, 4]);
+    const [accNo, setAccNo] = useState([]);
     const [wAccNo, setWAccNo] = useState("");
     const [rName, setRName] = useState("");
     const [tAccNo, setTAccNo] = useState("");
@@ -30,10 +30,10 @@ function Transaction() {
     const navigate = useNavigate();
     const baseURL = "http://localhost:8080/fetchAccNo";
     const basePOST = "http://localhost:8080/transaction";
-    const userId = '12345678';//localStorage.get('username');
+    const userId = "12345678"; //localStorage.get('username');
     const fetchAccNo = () => {
         axios
-            .get(baseURL)
+            .get(baseURL+"/"+userId)
             .then((response) => {
                 setAccNo(response.data);
             })
@@ -47,14 +47,14 @@ function Transaction() {
     }, []);
 
     var moment = require('moment')
-    var created = moment().format('YYYY-MM-DD hh:mm:ss');
+    var created = moment().format('DD-MM-YYYY');
     const transferAmount = () => {
         axios.post(basePOST,
             {
                 refId: nanoid(16),
-                time: created,
+                date: created,
                 mode: "Fund Transfer",
-                accNo: 123456789125,//tAccNo,
+                accNo:   tAccNo,
                 receiverAccNo: rAcc,
                 receiverName: rName,
                 amount: tAmount,

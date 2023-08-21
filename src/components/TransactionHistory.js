@@ -17,11 +17,11 @@ import axios from "axios";
 
 function TransactionHistory() {
     const [tDetails, setTDetails] = useState([]);
-    const [accNo, setAccNo] = useState([1, 2, 3, 4]);
+    const [accNo, setAccNo] = useState([]);
     const navigate = useNavigate();
     const baseURL = "http://localhost:8080/checkLogin";
-    const getURL = "http://localhost:8080/getTransactions";
-    const fetchURL = "http://localhost:8080/fetchAccounts";
+    const getURL = "http://localhost:8080/getTransactionsByAccNo";
+    const fetchURL = "http://localhost:8080/fetchAccNo";
     const type="";
     const userId = '12345678';//localStorage.get('username');
     const [selectAccNo,setSelectAccNo]=useState("");
@@ -29,33 +29,34 @@ function TransactionHistory() {
         startDate: null,
         endDate: null
     })
-    const getDetails = () => {
+
+    const getTransactions = e =>{
+        setSelectAccNo(e.target.value);
         axios
-            .get(getURL+"/"+userId)
-            .then((response) => {
-                
-                setTDetails(response.data);  
-                    
-            })
-            .catch((error) => {
-                alert("error occured while loading data" + error);
-            });
-    };
+        .get(getURL+"/"+e.target.value)
+        .then((response) => {                
+            setTDetails(response.data);                 
+        })
+        .catch((error) => {
+            alert("error occured while loading data" + error);
+        });
+    }
+   
 
     const fetchAccNo = () => {
         axios
-            .get(fetchURL, userId)
+            .get(fetchURL +"/"+ userId)
             .then((response) => {
                 setAccNo(response.data);
-            })
+                            })
             .catch((error) => {
                 alert("error occured while loading data" + error);
             });
     };
 
     useEffect(() => {
-        getDetails();
-        //fetchAccNo();
+        fetchAccNo();
+        // getDetails();       
     }, []);
     return (
         <>
@@ -83,7 +84,7 @@ function TransactionHistory() {
                             />
                         </Th>
                         <Th>
-                        <Select placeholder='Select Account Number' value={selectAccNo} onChange={e => setSelectAccNo(e.target.value)}>
+                        <Select placeholder='Select Account Number' value={selectAccNo} onChange={getTransactions}>
                                     {accNo.map(accNumber => (
                                         <option>{accNumber}</option>
                                     ))}
