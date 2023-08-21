@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.BankingApp.model.Account;
 import com.banking.BankingApp.model.Transaction;
-import com.banking.BankingApp.model.User;
 import com.banking.BankingApp.service.AccountService;
 
 @RestController
@@ -65,6 +64,19 @@ public class AccountController {
 		List<Account> obj = accService.fetchAllAccount(userId);
 		return obj;
 	}
+	
+	@GetMapping("/fetchAllAccounts")
+	public List<Account> fetchAllAccount(){
+		List<Account> obj = accService.fetchAllAccount();
+		return obj;
+	}
+	
+	@GetMapping("/getAllTransactions")
+	public List<Transaction> getAllTransactions() {
+		List<Transaction> obj = accService.getAllTransactions();
+		return obj;
+	}
+	
 	
 	
 	@GetMapping("/fetchAccNo/{userId}")

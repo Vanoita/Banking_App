@@ -10,13 +10,31 @@ import jakarta.validation.constraints.NotBlank;
 public class Beneficiary {
 	@Id
 	@NotBlank
-	private String userId;
-	@NotBlank
-	private String name;
-	@NotBlank
 	@Length(min=12,max=12)
 	private String accNo;
+	
+	@NotBlank
+	private String userId;
+	@NotBlank
+	private String firstName;
+	@NotBlank
+	private String lastName;
+	
 	private String nickName;
+	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	
 	public String getUserId() {
 		return userId;
@@ -24,12 +42,7 @@ public class Beneficiary {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 	public String getAccNo() {
 		return accNo;
 	}
