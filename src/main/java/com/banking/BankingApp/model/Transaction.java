@@ -9,13 +9,14 @@ import jakarta.persistence.Id;
 public class Transaction {
 	@Id
 	private String refId;
-	private String accNo;
-	private String receiverAccNo;
-	private String receiverName;
-	private double amount;
-	private String mode;
-	private String remark;
 	private Date date;
+	private String accNo;
+	private String receiverName;
+	private String receiverAccNo;
+	private String mode;
+	private double amount;	
+	private String remark;
+	
 	public String getRefId() {
 		return refId;
 	}

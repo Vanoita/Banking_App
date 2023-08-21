@@ -11,4 +11,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
   {
 	@Query(value="SELECT t FROM Transaction t JOIN Account a ON t.accNo = a.accNo WHERE a.userId=?1")
 	public List<Transaction> findAllTransactions(String userId);
+	
+	@Query(value="SELECT t FROM Transaction t JOIN Account a ON t.accNo = a.accNo WHERE t.accNo=?1 OR t.receiverAccNo=?1")
+	public List<Transaction> findTransactionsByAccNo(String accNo);
+	
+	
 }

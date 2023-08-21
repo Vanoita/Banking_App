@@ -53,7 +53,13 @@ public class AccountController {
 		return obj;
 	}
 	
-
+	@GetMapping("/getTransactionsByAccNo/{accNo}")
+	public List<Transaction> getTransactionsByAccNo(@PathVariable String accNo){
+		List<Transaction> obj = accService.getTransactionsByAccNo(accNo);
+		return obj;
+	}
+	
+	
 	@GetMapping("/fetchAllAccount/{userId}")
 	public List<Account> fetchAllAccount(@PathVariable String userId){
 		List<Account> obj = accService.fetchAllAccount(userId);
