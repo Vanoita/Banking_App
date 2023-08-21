@@ -1,5 +1,6 @@
 package com.banking.BankingApp.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -115,5 +116,10 @@ public class AccountService {
 	public List<String>fetchAccNo(String userId) {
 		List<String> accountList = accRepo.fetchAccNo(userId);
 		return accountList;
+	}
+
+	public List<Transaction> getTransactionsByDate(String accNo,Date startDate, Date endDate) {
+		List<Transaction> transactionList = transRepo.getTransactionsByDate(accNo,startDate,endDate);
+		return transactionList;
 	}
 }

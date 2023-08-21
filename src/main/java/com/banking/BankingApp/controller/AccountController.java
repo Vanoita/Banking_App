@@ -1,5 +1,6 @@
 package com.banking.BankingApp.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.BankingApp.model.Account;
+import com.banking.BankingApp.model.DateFilter;
 import com.banking.BankingApp.model.Transaction;
 import com.banking.BankingApp.service.AccountService;
 
@@ -77,7 +79,11 @@ public class AccountController {
 		return obj;
 	}
 	
-	
+	@GetMapping("/getTransactionsByDate/{accNo}")
+	public List<Transaction> getTransactionsByDate(@RequestBody DateFilter date,@PathVariable String accNo) {
+		List<Transaction> t = accService.getTransactionsByDate(accNo,date.getStartDate(),date.getEndDate());
+		return t;
+	}	
 	
 	@GetMapping("/fetchAccNo/{userId}")
 	public List<String> fetchAccNo(@PathVariable("userId") String userId) {
