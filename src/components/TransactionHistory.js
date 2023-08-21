@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import {
     Table,
@@ -21,25 +21,23 @@ function TransactionHistory() {
     const [accNo, setAccNo] = useState([]);
     const navigate = useNavigate();
     const baseURL = "http://localhost:8080/checkLogin";
-    const getURL = "http://localhost:8080/getTransactionsByAccNo";
+    const getURL = "http://localhost:8080/getTransactionsByDate";
     const fetchURL = "http://localhost:8080/fetchAccNo";
     const type="";
     const userId = '12345678';//localStorage.get('username');
     const [selectAccNo,setSelectAccNo]=useState("");
-    const [dateFilter, setDateFilter] = useState({
-        startDate: null,
-        endDate: null
-    })
+    const [startDate,setStartDate]=useState(new Date());
+    const [endDate,setEndDate]=useState(new Date());
 
-    const getTransactions = e =>{
-        setSelectAccNo(e.target.value);
-        axios
-        .get(getURL+"/"+e.target.value)
+    const getTransactions = e =>{        
+        axios.get(getURL+"/"+selectAccNo,
+        {"startDate": startDate,
+            "endDate":endDate })
         .then((response) => {                
             setTDetails(response.data);                 
         })
         .catch((error) => {
-            alert("error occured while loading data" + error);
+            alert("error occured while loading data:" + error);
         });
     }
    
@@ -56,8 +54,7 @@ function TransactionHistory() {
     };
 
     useEffect(() => {
-        fetchAccNo();
-        // getDetails();       
+        fetchAccNo();              
     }, []);
     return (
         <>
@@ -76,7 +73,10 @@ function TransactionHistory() {
                                 placeholder="Select Start Date"
                                 size="md"
                                 type="date"
+                                value={startDate}
+                                onChange={e => setStartDate(e.target.value )}
                             />
+                            Start Date
                         </Th>
 
                         <Th>
@@ -84,14 +84,20 @@ function TransactionHistory() {
                                 placeholder="Select End Date"
                                 size="md"
                                 type="date"
+                                value={endDate}
+                                onChange={e => setEndDate(e.target.value )}
                             />
+                            End Date
                         </Th>
                         <Th>
-                        <Select placeholder='Select Account Number' value={selectAccNo} onChange={getTransactions}>
+                        <Select placeholder='Select Account Number' value={selectAccNo} onChange={e=>setSelectAccNo(e.target.value)}>
                                     {accNo.map(accNumber => (
                                         <option>{accNumber}</option>
                                     ))}
                                 </Select>
+                        </Th>
+                        <Th>
+                            <button type="button" class="btn btn-primary" onClick={getTransactions}>Search</button>
                         </Th>
                     </Tr>
                 </Tbody>
