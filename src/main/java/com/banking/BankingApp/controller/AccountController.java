@@ -1,5 +1,6 @@
 package com.banking.BankingApp.controller;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -79,9 +80,9 @@ public class AccountController {
 		return obj;
 	}
 	
-	@GetMapping("/getTransactionsByDate/{accNo}")
-	public List<Transaction> getTransactionsByDate(@RequestBody DateFilter date,@PathVariable String accNo) {
-		List<Transaction> t = accService.getTransactionsByDate(accNo,date.getStartDate(),date.getEndDate());
+	@PostMapping("/getTransactionsByDate")
+	public List<Transaction> getTransactionsByDate(@RequestBody DateFilter date) throws ParseException {
+		List<Transaction> t = accService.getTransactionsByDate(date.getAccNo(),date.getStartDate(),date.getEndDate());
 		return t;
 	}	
 	

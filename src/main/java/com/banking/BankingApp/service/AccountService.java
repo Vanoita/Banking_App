@@ -1,5 +1,8 @@
 package com.banking.BankingApp.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -118,8 +121,11 @@ public class AccountService {
 		return accountList;
 	}
 
-	public List<Transaction> getTransactionsByDate(String accNo,Date startDate, Date endDate) {
-		List<Transaction> transactionList = transRepo.getTransactionsByDate(accNo,startDate,endDate);
+	public List<Transaction> getTransactionsByDate(String accNo,String startDate, String endDate) throws ParseException {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date fstartDate = df.parse(startDate);
+		Date fendDate = df.parse(endDate);
+		List<Transaction> transactionList = transRepo.getTransactionsByDate(accNo,fstartDate,fendDate);
 		return transactionList;
 	}
 }

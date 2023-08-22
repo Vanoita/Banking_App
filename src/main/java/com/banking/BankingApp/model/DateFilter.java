@@ -1,25 +1,31 @@
 package com.banking.BankingApp.model;
 
-import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DateFilter {
-	@JsonFormat(pattern="yyyy-MM-dd")
-	Date startDate;
-	@JsonFormat(pattern="yyyy-MM-dd")
-	Date endDate;
-	public Date getStartDate() {
+	private String accNo;
+	private String startDate;
+	private String endDate;
+	
+	
+	public String getAccNo() {
+		return accNo;
+	}
+	public void setAccNo(String accNo) {
+		this.accNo = accNo;
+	}
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
-	}	
+	}
 	
+		
 }
