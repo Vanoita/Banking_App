@@ -19,7 +19,7 @@ import SidebarAdmin from "./SidebarAdmin";
 function AccountAdmin() {
     const [accounts, setAccounts] = useState([]);
     const navigate = useNavigate();
-    const fetchURL = "http://localhost:8080/checkLogin";
+    const fetchURL = "http://localhost:8080/fetchAllAccounts";
     const userId = '12345678';//localStorage.get('username');
 
 
@@ -59,9 +59,10 @@ function AccountAdmin() {
                                 {accounts.map(details => {
                                     return (
                                         <Tr>
-                                            {Object.values(details).map(val => {
-                                                return (<Td>{val}</Td>)
-                                            })}
+                                            <Td>{details.userId}</Td>
+                                            <Td>{details.accNo}</Td>
+                                            <Td>{details.accType}</Td>
+                                            <Td>{details.balance}</Td>
                                             <Td><button>disable</button></Td>
                                         </Tr>
                                     )
