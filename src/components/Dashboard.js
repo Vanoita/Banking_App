@@ -116,7 +116,7 @@ function Dashboard() {
             <Sidebar />
           </Flex>
           <SimpleGrid row={2} w={"75%"} pt={"5%"} pb={"2%"}>
-            <Box>
+            <Flex>
                 <Card h={"80%"} p={"2.5%"}>
                   <Text>Account Information</Text>
                   <Table variant='simple'>
@@ -136,7 +136,7 @@ function Dashboard() {
                     </Tbody>
                   </Table>
                   </Card>
-            </Box>
+            </Flex>
             <Box>
             <Card h="80%" p={"2.5%"}>
                   <Text >Recent Transaction History</Text>

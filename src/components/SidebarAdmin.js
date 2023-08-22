@@ -9,6 +9,12 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import {
+  Icon,
+  Menu,
+  MenuButton,
+  MenuList
+} from '@chakra-ui/react'
+import {
   FiMenu,
   FiHome,
   FiUser,
@@ -16,12 +22,17 @@ import {
   FiDollarSign,
   FiLogOut
 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import {   MdAccountBalanceWallet} from "react-icons/md";
 import NavItem from "../components/NavItem";
 
 export default function SidebarAdmin() {
   const [navSize, changeNavSize] = useState("large");
   const [user, setUser] = useState({});
+  // logout(){
+  //   localStorage.clear();
+  //   window.location.href = '/';
+  // }
   const fetchUser = (baseURLUser) => {
     axios
       .get(baseURLUser)
@@ -82,7 +93,28 @@ export default function SidebarAdmin() {
           to="/accountAll"
         />
         <NavItem navSize={navSize} icon={FiRepeat} title="Transactions" to="/transactionAll" />
-        <NavItem navSize={navSize} icon={FiLogOut} title="Log out"/>
+        <Flex
+            mt={30}
+            flexDir="column"
+            w="100%"
+            alignItems={navSize == "small" ? "center" : "flex-start"}
+        >
+            <Menu placement="right">
+                <Link
+                    p={3}
+                    borderRadius={8}
+                    _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
+                    w={navSize == "large" && "100%"}
+                >
+                    <MenuButton w="100%" onClick={ this.logout()}>
+                        <Flex>
+                            <Icon as={FiLogOut} fontSize="xl" color={"gray.500"} />
+                            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>Log Out</Text>
+                        </Flex>
+                    </MenuButton>
+                </Link>
+            </Menu>
+        </Flex>
       </Flex>
 
       <Flex
