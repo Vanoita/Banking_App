@@ -152,7 +152,7 @@ function Dashboard() {
                     <Tbody>
                       {tDetails.map((transaction) => (
                         <Tr>
-                          <Td>{transaction.id}</Td>
+                          <Td>{transaction.refId}</Td>
                           <Td>{transaction.date}</Td>
                           <Td>{transaction.amount}</Td>
                           <Td>{transaction.remarks}</Td>

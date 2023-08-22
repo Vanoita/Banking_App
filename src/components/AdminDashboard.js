@@ -19,8 +19,9 @@ function AdminDashboard() {
   const { state } = useLocation();
   const location = useLocation();
   const [tDetails, setTDetails] = useState([]);
-  const getURL = "http://localhost:8080/getTransactions";
+  const getURL = "http://localhost:8080/getAllTransactions";
   const userId = "12345678"; //localStorage.get('username');
+  const baseURLAccount = "http://localhost:8080/fetchAllAccount";
 
 
   //Function to fetch details for transaction details
@@ -139,7 +140,7 @@ function AdminDashboard() {
                     <Tbody>
                       {tDetails.map((transaction) => (
                         <Tr>
-                          <Td>{transaction.id}</Td>
+                          <Td>{transaction.refId}</Td>
                           <Td>{transaction.date}</Td>
                           <Td>{transaction.amount}</Td>
                           <Td>{transaction.remarks}</Td>
