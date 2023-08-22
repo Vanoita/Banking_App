@@ -14,6 +14,7 @@ import CreateNewPassword from './components/CreateNewPassword';
 import ForgotUsername from './components/ForgotUsername';
 import UserAdmin from './components/UserAdmin';
 import AdminDashboard from './components/AdminDashboard';
+import AddBeneficiary from './components/AddBeneficiary';
 import AccountAdmin from './components/AccountAdmin';
 import TransactionAdmin from './components/TransactionAdmin'
 
@@ -35,9 +36,6 @@ function App() {
             <Route exact path="/createNewPassword/:refId" element={<CreateNewPassword/>} />
             <Route exact path="/adminDashboard" element={<AdminDashboard/>}/>
             <Route exact path="/dashboard" element={<Dashboard/>}/>
-            <Route exact path="/userAll" element={<UserAdmin/>}/>
-            <Route exact path ="/accountAll" element={<AccountAdmin/>}/>
-            <Route exact path = "/transactionAll" element={<TransactionAdmin/>}/>
           </Routes>
         </BrowserRouter>
     </ChakraProvider>

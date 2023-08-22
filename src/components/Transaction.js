@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, SimpleGrid } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
     Card,
     CardHeader,
@@ -32,6 +34,20 @@ function Transaction() {
     const baseURL = "http://localhost:8080/fetchAccNo";
     const basePOST = "http://localhost:8080/transaction";
     const userId = "12345678"; //localStorage.get('username');
+
+   
+    
+    const successToastMessage = () => {
+        toast.success('Transaction Successful !', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
+    const errorToastMessage = () => {
+        toast.error('Transaction Not Successful !', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
     const fetchAccNo = () => {
         axios
             .get(baseURL+"/"+userId)
@@ -63,15 +79,10 @@ function Transaction() {
                 remark: tRemark
 
             }).then((response) => {
-                alert(JSON.stringify(response))
                 
-                // const res = JSON.parse(response.data);
-                // if(res.login){
-                //     localStorage.setItem('userId',username);
-                //     navigate('/dashboard');
-                // }
-            }).catch(error => {
-                alert("error = " + error);
+                successToastMessage();
+                }).catch(error => {
+                errorToastMessage();
             });
         //alert(tAccNo + rAcc + rName+ tAmount + userId+ tRemark);
 
@@ -90,14 +101,9 @@ function Transaction() {
                 remark: wRemark
 
             }).then((response) => {
-                alert(JSON.stringify(response))
-                // const res = JSON.parse(response.data);
-                // if(res.login){
-                //     localStorage.setItem('userId',username);
-                //     navigate('/dashboard');
-                // }
+               successToastMessage();
             }).catch(error => {
-                alert("error = " + error);
+                errorToastMessage();
             });
         //alert(created + " " + wAccNo + wAmount + userId + wRemark);
     }
@@ -263,6 +269,7 @@ function Transaction() {
                     </TabPanel>
                 </TabPanels>
             </Tabs>
+            <ToastContainer />
             </Box>
             </Flex>
  

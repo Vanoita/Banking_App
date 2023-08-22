@@ -13,7 +13,8 @@ import {
   FiHome,
   FiRepeat,
   FiDollarSign,
-  FiLogOut
+  FiLogOut,
+  FiUserPlus
 } from "react-icons/fi";
 import NavItem from "../components/NavItem";
 
@@ -79,6 +80,13 @@ export default function Sidebar() {
           title="Transaction History"
           to="/transactionhistory"
         />
+        <NavItem
+          navSize={navSize}
+          icon={FiUserPlus}
+          title="Add Beneficiary"
+          to="/addBeneficiary"
+        />
+
         <NavItem navSize={navSize} icon={FiLogOut} title="Log out"/>
       </Flex>
 
@@ -98,7 +106,7 @@ export default function Sidebar() {
             display={navSize == "small" ? "none" : "flex"}
           >
             <Heading as="h3" size="sm">
-              ${user.firstName} ${user.lastName}
+              {user.firstName} {user.lastName}
             </Heading>
             <Text color="gray">User</Text>
           </Flex>

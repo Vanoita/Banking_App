@@ -26,13 +26,17 @@ function TransactionHistory() {
     const type="";
     const userId = '12345678';//localStorage.get('username');
     const [selectAccNo,setSelectAccNo]=useState("");
-    const [startDate,setStartDate]=useState(new Date());
-    const [endDate,setEndDate]=useState(new Date());
+    const [startDate,setStartDate]=useState("");
+    const [endDate,setEndDate]=useState("");
 
-    const getTransactions = e =>{        
-        axios.get(getURL+"/"+selectAccNo,
-        {"startDate": startDate,
-            "endDate":endDate })
+    const getTransactions = e =>{    
+        console.log(startDate,endDate,selectAccNo);    
+        axios.post(getURL,
+        {
+            accNo:selectAccNo,          
+        startDate:startDate,
+        endDate:endDate
+         })
         .then((response) => {                
             setTDetails(response.data);                 
         })
