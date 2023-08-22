@@ -10,10 +10,11 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,
-    TableContainer, Input, Select
+    Flex,Box,
+    TableContainer, Input, Select, Heading
 } from "@chakra-ui/react";
 import axios from "axios";
+import Sidebar from "./Sidebar";
 
 function TransactionHistory() {
     const [tDetails, setTDetails] = useState([]);
@@ -62,9 +63,11 @@ function TransactionHistory() {
             <Helmet>
                 <title> Transaction History</title>
             </Helmet>
-
-            <h2 p={'100 px'}>Transaction History</h2>
-            <Table align="center" maxWidth={'75%'} p={'20 px'}>
+<Flex>
+    <Flex w={"20%"}><Sidebar/></Flex>
+    <Box w={"80%"} p={"2.5%"} align={"center"}>
+            <Heading>Transaction History</Heading>
+            <Table align="center" maxWidth={'75%'}>
                 <Tbody>
                     <Tr>
                         <Th>
@@ -131,6 +134,8 @@ function TransactionHistory() {
                     
                 </Table>
             </TableContainer>
+            </Box>
+            </Flex>
         </>
     );
 }
