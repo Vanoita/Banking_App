@@ -20,7 +20,7 @@ function AccountAdmin() {
     const [tDetails, setTDetails] = useState([]);
     const [accounts, setAccounts] = useState([]);
     const navigate = useNavigate();
-    const fetchURL = "http://localhost:8080/checkLogin";
+    const fetchURL = "http://localhost:8080/getAllTransactions";
     const userId = '12345678';//localStorage.get('username');
 
 
@@ -47,7 +47,7 @@ function AccountAdmin() {
 
     useEffect(() => {
         fetchTransactions();
-        fetchAccounts();
+       fetchAccounts();
     }, []);
     return (
         <>

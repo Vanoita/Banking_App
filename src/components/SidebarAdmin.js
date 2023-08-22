@@ -106,7 +106,7 @@ export default function SidebarAdmin() {
                     _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
                     w={navSize == "large" && "100%"}
                 >
-                    <MenuButton w="100%" onClick={ this.logout()}>
+                    <MenuButton w="100%">
                         <Flex>
                             <Icon as={FiLogOut} fontSize="xl" color={"gray.500"} />
                             <Text ml={5} display={navSize == "small" ? "none" : "flex"}>Log Out</Text>

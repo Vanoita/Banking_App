@@ -25,22 +25,37 @@ import {
     Text,
     Button
 } from "@chakra-ui/react";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function AddBeneficiary(){
 
-    const [name, setName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [account, setAccount] = useState("");
     const [nickName, setNickName] = useState("");
-    //const basePOST = "http://localhost:8080/addBeneficiary";
+    const basePOST = "http://localhost:8080/addBeneficiary";
 
-    const HandleSave = () =>{
-        axios.post("http://localhost:8080/addBeneficiary",
+     
+    const successToastMessage = () => {
+        toast.success('Beneficiary Added Successful !', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
+    const handleSave = (e) =>{
+        axios.post(basePOST,
             {
-                BeneficiaryName: name,
-                BeneficiaryAccountNo: account,
-                NickName: nickName
+                userId: "12345678",
+                firstName: firstName,
+                lastName: lastName,
+                accNo: account,
+                nickName: nickName
             }).then((response) => {
-                alert(JSON.stringify(response))
+                
+                successToastMessage();
                 // const res = JSON.parse(response.data);
                 // if(res.login){
                 //     localStorage.setItem('userId',username);
@@ -67,13 +82,23 @@ function AddBeneficiary(){
                 </CardHeader>
                 <CardBody>
                     <Input
-                        value={name}
+                        value={firstName}
                         placeholder=""
                         size="lg"
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setFirstName(e.target.value)}
                     />
                     <Text mb="18px" align="left">
-                        Enter Beneficiary Name
+                        Enter First Name
+                    </Text>
+
+                    <Input
+                        value={lastName}
+                        placeholder=""
+                        size="lg"
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                    <Text mb="18px" align="left">
+                        Enter Last Name
                     </Text>
 
                     <Input
@@ -111,12 +136,13 @@ function AddBeneficiary(){
                 <CardFooter>
                     <Button
                         colorScheme="blue"
-                        //onClick={() => handleSave()}
+                        onClick={handleSave}
                     >
                         Save Beneficiary
                     </Button>
                 </CardFooter>
             </Card>
+            <ToastContainer/>
         </Flex>
         </>
     );

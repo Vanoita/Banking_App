@@ -19,7 +19,7 @@ import SidebarAdmin from "./SidebarAdmin";
 function UserAdmin() {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
-    const fetchURL = "http://localhost:8080/checkLogin";
+    const fetchURL = "http://localhost:8080/fetchAllUsers";
     const userId = '12345678';//localStorage.get('username');
 
 

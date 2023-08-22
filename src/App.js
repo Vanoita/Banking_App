@@ -35,6 +35,9 @@ function App() {
             <Route exact path="/forgotUsername" element={<ForgotUsername/>} />
             <Route exact path="/createNewPassword/:refId" element={<CreateNewPassword/>} />
             <Route exact path="/adminDashboard" element={<AdminDashboard/>}/>
+            <Route exact path="/userAll" element={<UserAdmin/>}/>
+            <Route exact path="/accountAll" element={<AccountAdmin/>}/>
+            <Route exact path="/transactionAll" element={<TransactionAdmin/>}/>
             <Route exact path="/dashboard" element={<Dashboard/>}/>
           </Routes>
         </BrowserRouter>
