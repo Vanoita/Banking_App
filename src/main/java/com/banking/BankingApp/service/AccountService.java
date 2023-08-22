@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.banking.BankingApp.dao.AccountRepository;
-import com.banking.BankingApp.dao.TransactionRepository;
+
 import com.banking.BankingApp.dao.UserRepository;
 import com.banking.BankingApp.model.Account;
 import com.banking.BankingApp.model.Transaction;
@@ -24,18 +24,12 @@ public class AccountService {
 	UserRepository userRepo;
 	@Autowired
 	AccountRepository accRepo;
-	@Autowired
-	TransactionRepository transRepo;
 	
 	public Account createAccount(Account acc, String userId) {
 		User u = userRepo.findById(userId).get();
 		acc.setUserId(u.getUserId());
 		return accRepo.save(acc);
-	}
-	
-	public Transaction createTransaction(Transaction transaction) {
-		return transRepo.save(transaction);
-	}
+	}	
 	
 	public boolean checkAccNo(String accNo) {
 		boolean result = false;
@@ -71,8 +65,7 @@ public class AccountService {
 		if(rowsAffected>0)
 			result="Transaction Successful";
 		return result;
-	}
-	
+	}	
 	
 	@Transactional
 	public String transferFunds(Transaction transaction) {
@@ -93,21 +86,6 @@ public class AccountService {
 		return result;
 	}
 	
-	
-
-	public List<Transaction> getAllTransactions(String userId){
-		return transRepo.findAllTransactions(userId);
-	}
-	
-	public List<Transaction> getAllTransactions(){
-		return transRepo.findAllTransactions();
-	}
-	
-
-	public List<Transaction> getTransactionsByAccNo(String accNo){
-		return transRepo.findTransactionsByAccNo(accNo);
-	}
-	
 	public List<Account> fetchAllAccount(String userId){
 		return accRepo.fetchAllAccount(userId);
 	}
@@ -119,15 +97,7 @@ public class AccountService {
 	public List<String>fetchAccNo(String userId) {
 		List<String> accountList = accRepo.fetchAccNo(userId);
 		return accountList;
-	}
-
-	public List<Transaction> getTransactionsByDate(String accNo,String startDate, String endDate) throws ParseException {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Date fstartDate = df.parse(startDate);
-		Date fendDate = df.parse(endDate);
-		List<Transaction> transactionList = transRepo.getTransactionsByDate(accNo,fstartDate,fendDate);
-		return transactionList;
-	}
+	}	
 	
 	public String toggleDisable(String accNo) {
 		String result = "not changed";

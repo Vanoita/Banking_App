@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
-
-
-import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,8 +55,13 @@ public class UserController {
 	@GetMapping("/fetchUser/{userId}")
 	public User fetchUser(@PathVariable String userId){
 		User obj = userService.fetchUser(userId);
-		return obj;
+		return obj;	
+	}
 	
+	@GetMapping("/getTotalUsers")
+	public int getTotalUsers() {
+		int res = userService.getTotalUsers();
+		return res;
 	}
 }
 

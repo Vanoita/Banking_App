@@ -1,7 +1,5 @@
 package com.banking.BankingApp.controller;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banking.BankingApp.model.Account;
-import com.banking.BankingApp.model.DateFilter;
+
 import com.banking.BankingApp.model.Transaction;
 import com.banking.BankingApp.service.AccountService;
+import com.banking.BankingApp.service.TransactionService;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -23,6 +22,8 @@ public class AccountController {
 	
 	@Autowired
 	AccountService accService;
+	@Autowired
+	TransactionService transService;
 	@PostMapping("/createAccount/{userId}")
 	public String createAccount(@RequestBody Account account, @PathVariable("userId") String userId) {
 		String result="";
@@ -40,7 +41,7 @@ public class AccountController {
 	
 	@PostMapping("/transaction")
 	public String transaction(@RequestBody Transaction t) {
-		Transaction trans = accService.createTransaction(t);
+		Transaction trans = transService.createTransaction(t);
 		String remark = trans.getMode();
 		if(remark.equalsIgnoreCase("withdraw"))
 		return accService.withdrawFunds(trans);
@@ -48,19 +49,6 @@ public class AccountController {
 			return accService.addFunds(trans);
 		else return accService.transferFunds(trans);
 	}
-	
-	@GetMapping("/getTransactions/{userId}")
-	public List<Transaction> getTransactions(@PathVariable String userId){
-		List<Transaction> obj = accService.getAllTransactions(userId);
-		return obj;
-	}
-	
-	@GetMapping("/getTransactionsByAccNo/{accNo}")
-	public List<Transaction> getTransactionsByAccNo(@PathVariable String accNo){
-		List<Transaction> obj = accService.getTransactionsByAccNo(accNo);
-		return obj;
-	}
-	
 	
 	@GetMapping("/fetchAllAccount/{userId}")
 	public List<Account> fetchAllAccount(@PathVariable String userId){
@@ -72,18 +60,6 @@ public class AccountController {
 	public List<Account> fetchAllAccount(){
 		List<Account> obj = accService.fetchAllAccount();
 		return obj;
-	}
-	
-	@GetMapping("/getAllTransactions")
-	public List<Transaction> getAllTransactions() {
-		List<Transaction> obj = accService.getAllTransactions();
-		return obj;
-	}
-	
-	@PostMapping("/getTransactionsByDate")
-	public List<Transaction> getTransactionsByDate(@RequestBody DateFilter date) throws ParseException {
-		List<Transaction> t = accService.getTransactionsByDate(date.getAccNo(),date.getStartDate(),date.getEndDate());
-		return t;
 	}	
 	
 	@GetMapping("/fetchAccNo/{userId}")

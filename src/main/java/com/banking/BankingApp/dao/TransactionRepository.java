@@ -23,4 +23,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
 	
 	@Query(value="SELECT t FROM Transaction t where t.date >=?2 AND t.date<=?3 AND (t.accNo=?1 OR t.receiverAccNo=?1)")
 	public List<Transaction> getTransactionsByDate(String accNo,Date startDate,Date endDate);
+	
+	@Query(value="SELECT COUNT(t.refId) FROM Transaction t")
+	public int getTotalTransactions();
+	
+	@Query(value="select AVG(t.amount) from Transaction t")
+	public int getAverageTransactionAmount();
 }

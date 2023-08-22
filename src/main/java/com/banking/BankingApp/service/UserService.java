@@ -24,10 +24,8 @@ public class UserService {
 		return userRepo.save(u);
 	}
 	
-	
-
 	public String validateUser(LoginModel u) {
-		// TODO Auto-generated method stub
+		
 		String res = "";
 		User user = null;
 		Optional<User> obj = userRepo.findById(u.getUserId());
@@ -84,6 +82,10 @@ public class UserService {
 	
 	public List<User> fetchAllUsers() {
 		return userRepo.fetchAllUsers();
+	}
+	
+	public int getTotalUsers() {
+		return userRepo.getTotalUsers();
 	}
 
 }
