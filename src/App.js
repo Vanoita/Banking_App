@@ -39,6 +39,7 @@ function App() {
             <Route exact path="/accountAll" element={<AccountAdmin/>}/>
             <Route exact path="/transactionAll" element={<TransactionAdmin/>}/>
             <Route exact path="/dashboard" element={<Dashboard/>}/>
+            <Route exact path="/addBeneficiary" element={<AddBeneficiary/>}/>
           </Routes>
         </BrowserRouter>
     </ChakraProvider>
