@@ -133,7 +133,7 @@ export default function SidebarAdmin() {
             display={navSize == "small" ? "none" : "flex"}
           >
             <Heading as="h3" size="sm">
-              ${user.firstName} ${user.lastName}
+              {user.firstName} {user.lastName}
             </Heading>
             <Text color="gray">Admin</Text>
           </Flex>
