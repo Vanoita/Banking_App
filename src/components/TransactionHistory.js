@@ -31,9 +31,11 @@ function TransactionHistory() {
 
     const getTransactions = e =>{    
         console.log(startDate,endDate,selectAccNo);    
-        axios.get("http://localhost:8080/getTransactionsByDate/123456789123",//getURL+"/"+selectAccNo,
-        {startDate: "2023-05-21",//startDate.toString(),
-            endDate:"2023-08-20" //endDate.toString()
+        axios.post(getURL,
+        {
+            accNo:selectAccNo,          
+        startDate:startDate,
+        endDate:endDate
          })
         .then((response) => {                
             setTDetails(response.data);                 
