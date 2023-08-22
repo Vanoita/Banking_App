@@ -62,6 +62,7 @@ function AccountAdmin() {
                                             {Object.values(details).map(val => {
                                                 return (<Td>{val}</Td>)
                                             })}
+                                            <Td><button>disable</button></Td>
                                         </Tr>
                                     )
                                 })}

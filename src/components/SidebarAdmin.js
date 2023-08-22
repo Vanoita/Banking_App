@@ -84,7 +84,7 @@ export default function SidebarAdmin() {
             else changeNavSize("small");
           }}
         />
-        <NavItem navSize={navSize} icon={FiHome} title="Dashboard" active to="/dashboardAdmin"/>
+        <NavItem navSize={navSize} icon={FiHome} title="Dashboard" active to="/adminDashboard"/>
         <NavItem navSize={navSize} icon={FiUser} title = "Users" to="/UserAll"/>
         <NavItem
           navSize={navSize}
