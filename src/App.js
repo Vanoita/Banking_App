@@ -13,6 +13,7 @@ import ForgotPassword from './components/ForgotPassword';
 import CreateNewPassword from './components/CreateNewPassword';
 import ForgotUsername from './components/ForgotUsername';
 import AdminDashboard from './components/AdminDashboard';
+import AddBeneficiary from './components/AddBeneficiary';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route exact path="/createNewPassword/:refId" element={<CreateNewPassword/>} />
             <Route exact path="/adminDashboard" element={<AdminDashboard/>}/>
             <Route exact path="/dashboard" element={<Dashboard/>}/>
+            <Route exact path="/addBeneficiary" element={<AddBeneficiary/>}/>
           </Routes>
         </BrowserRouter>
     </ChakraProvider>
