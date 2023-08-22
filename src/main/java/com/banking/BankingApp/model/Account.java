@@ -42,7 +42,7 @@ public class Account {
 	//@NotBlank(message="Please enter your date of birth.")	
 	private Date dob;
 	
-	//@NotBlank(message="Please enter your Account Number.")
+	@NotBlank(message="Please enter your Account Number.")
 	@Length(min=8,max=8)
 	private String userId;
 	
@@ -60,8 +60,26 @@ public class Account {
 	private String city;
 	private String state;
 	private String pincode;
+	private String type;
+	private boolean isDisabled = false;
 	
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public boolean isDisabled() {
+		return isDisabled;
+	}
+
+	public void setDisabled(boolean isDisabled) {
+		this.isDisabled = isDisabled;
+	}
+
 	public String getAddress() {
 		return address;
 	}

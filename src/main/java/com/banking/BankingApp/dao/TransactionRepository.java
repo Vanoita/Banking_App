@@ -10,10 +10,11 @@ import com.banking.BankingApp.model.Transaction;
 
 public interface TransactionRepository extends JpaRepository<Transaction, String>
   {
-	@Query(value="SELECT t FROM Transaction t JOIN Account a ON t.accNo = a.accNo WHERE a.userId=?1")
+	@Query(value="SELECT t FROM Transaction t JOIN Account a ON t.accNo = a.accNo WHERE a.userId=?1 ORDER BY "
+			+ "t.date DESC LIMIT 3")
 	public List<Transaction> findAllTransactions(String userId);
 	
-	@Query(value="SELECT t FROM Transaction t")
+	@Query(value="SELECT t FROM Transaction t ORDER BY t.date DESC LIMIT 6")
 	public List<Transaction> findAllTransactions();
 	
 	

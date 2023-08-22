@@ -90,5 +90,12 @@ public class AccountController {
 	public List<String> fetchAccNo(@PathVariable("userId") String userId) {
 		return accService.fetchAccNo(userId);
 	}
+	
+	@GetMapping("/toggleDisable/{accNo}")
+	public String toggleDisable(@PathVariable String accNo) {
+		
+		String result =  accService.toggleDisable(accNo);
+		return result;
+	}
 
 }

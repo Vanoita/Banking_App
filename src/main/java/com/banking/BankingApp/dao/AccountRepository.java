@@ -17,11 +17,13 @@ public interface AccountRepository extends JpaRepository<Account, String>{
 	@Query("SELECT accNo from Account acc where acc.userId=?1")
 	public List<String> fetchAccNo(String userId);
 	
-	@Query("SELECT acc from Account acc where acc.userId=?1")
+	@Query("SELECT acc from Account acc where acc.userId=?1 ")
 	public List<Account> fetchAllAccount(String userId);
 	
 	@Query("SELECT acc from Account acc")
 	public List<Account> fetchAllAccount();
-
 	
+	@Modifying 
+	@Query("update Account account set account.isDisabled = NOT account.isDisabled where account.accNo=?1")
+	public int disableOrEnable(String accNo);
 }

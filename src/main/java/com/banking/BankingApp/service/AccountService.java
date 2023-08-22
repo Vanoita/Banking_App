@@ -128,4 +128,12 @@ public class AccountService {
 		List<Transaction> transactionList = transRepo.getTransactionsByDate(accNo,fstartDate,fendDate);
 		return transactionList;
 	}
+	
+	public String toggleDisable(String accNo) {
+		String result = "not changed";
+		int rows = accRepo.disableOrEnable(accNo);
+		if(rows>0)
+			result = "changed";
+		return result;
+	}
 }
