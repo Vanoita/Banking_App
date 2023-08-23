@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.banking.BankingApp.dao.AccountRepository;
+import com.banking.BankingApp.dao.AdminUserRepository;
 import com.banking.BankingApp.dao.UserRepository;
 import com.banking.BankingApp.model.Account;
+import com.banking.BankingApp.model.AdminUser;
 import com.banking.BankingApp.model.LoginModel;
 import com.banking.BankingApp.model.User;
 
@@ -19,9 +21,15 @@ public class UserService {
 	UserRepository userRepo;
 	@Autowired
 	AccountRepository accRepo;
+	@Autowired
+	AdminUserRepository adminUserRepo;
 	
 	public User registerUser(User u) {
 		return userRepo.save(u);
+	}
+	
+	public AdminUser registerAdminUser(AdminUser u) {
+		return adminUserRepo.save(u);
 	}
 	
 	public String validateUser(LoginModel u) {
@@ -29,6 +37,27 @@ public class UserService {
 		String res = "";
 		User user = null;
 		Optional<User> obj = userRepo.findById(u.getUserId());
+		if(obj.isPresent()) {
+			user=obj.get();		
+		}
+		if(user==null) {
+			res = "{\"login\": false, \"message\": \"Wrong Username!\"}";
+		}else {
+			if(u.getPassword().equals(user.getPassword())) {
+				//CreateAccount user2 = registerRepo.findById(u.getUserId()).get();
+				res = "{\"login\": true, \"message\": \"Login Successfully!\"}";
+			}else {
+				res = "{\"login\": false, \"message\": \"Incorrect Password!\"}";
+			}
+		}
+		return res;
+	}
+	
+public String validateAdminUser(LoginModel u) {
+		
+		String res = "";
+		AdminUser user = null;
+		Optional<AdminUser> obj = adminUserRepo.findById(u.getUserId());
 		if(obj.isPresent()) {
 			user=obj.get();		
 		}

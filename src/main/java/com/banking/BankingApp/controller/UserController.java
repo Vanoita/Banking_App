@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.banking.BankingApp.model.AdminUser;
 import com.banking.BankingApp.model.LoginModel;
 import com.banking.BankingApp.model.User;
 import com.banking.BankingApp.service.UserService;
@@ -22,17 +23,25 @@ import jakarta.validation.Valid;
 public class UserController {
 	@Autowired
 	UserService userService;
-
 	@PostMapping("/checkLogin")
 	public String validateUser(@RequestBody LoginModel u) {
 		return userService.validateUser(u);
 	}
-
+	
+	@PostMapping("/checkAdminLogin")
+	public String validateAdminUser(@RequestBody LoginModel u) {
+		return userService.validateAdminUser(u);
+	}
+	
 	@PostMapping("/registerUser")
 	public User registerUser(@RequestBody @Valid User cust) {
 		return userService.registerUser(cust);
 	}
 	
+	@PostMapping("/register	AdminUser")
+	public AdminUser registerAdminUser(@RequestBody @Valid AdminUser cust) {
+		return userService.registerAdminUser(cust);
+	}
 	@GetMapping("/fetchAllUsers")
 	public List<User> fetchAllUsers() {
 		List<User> obj = userService.fetchAllUsers();
