@@ -67,9 +67,10 @@ function UserAdmin() {
                                 {users.map(details => {
                                     return (
                                         <Tr>
-                                            {Object.values(details).map(val => {
-                                                return (<Td>{val}</Td>)
-                                            })}
+                                            <Td>{details.userId}</Td>
+                                            <Td>{details.firstName}</Td>
+                                            <Td>{details.lastName}</Td>
+                                            <Td>{details.email}</Td>
                                         </Tr>
                                     )
                                 })}

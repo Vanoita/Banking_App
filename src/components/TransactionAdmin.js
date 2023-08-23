@@ -76,11 +76,15 @@ function AccountAdmin() {
                             </Tr>
                             <Tbody>
                                 {tDetails.map(details => {
-                                    return (
+                                    let amount = details.amount;
+                                    if(details.mode==='withdraw')
+                                    amount = -details.amount;
+                                    return (    
                                         <Tr>
-                                            {Object.values(details).map(val => {
-                                                return (<Td>{val}</Td>)
-                                            })}
+                                            <Td>{details.refId}</Td>
+                                            <Td>{details.date}</Td>
+                                            <Td>{amount}</Td>
+                                            <Td>{details.mode}</Td>
                                         </Tr>
                                     )
                                 })}
