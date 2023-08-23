@@ -6,7 +6,7 @@ import {
   Text,
   IconButton,
   Divider,
-  Avatar,
+  Avatar,Menu, MenuButton,Icon,
   Heading,
 } from "@chakra-ui/react";
 import {
@@ -22,6 +22,10 @@ import NavItem from "../components/NavItem";
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const [user, setUser] = useState({});
+  const logout =()=>{
+    localStorage.removeItem('userId');
+    window.location.href="/";
+  };
   const fetchUser = (baseURLUser) => {
     axios
       .get(baseURLUser)
@@ -88,7 +92,28 @@ export default function Sidebar() {
           to="/addBeneficiary"
         />
 
-        <NavItem navSize={navSize} icon={FiLogOut} title="Log out"/>
+        <Flex
+            mt={30}
+            flexDir="column"
+            w="100%"
+            alignItems={navSize == "small" ? "center" : "flex-start"} onClick={logout} 
+        >
+            <Menu placement="right">
+                <Link
+                    p={3}
+                    borderRadius={8}
+                    _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
+                    w={navSize == "large" && "100%"}
+                >
+                    <MenuButton w="100%">
+                        <Flex>
+                            <Icon as={FiLogOut} fontSize="xl" color={"gray.500"} />
+                            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>Log Out</Text>
+                        </Flex>
+                    </MenuButton>
+                </Link>
+            </Menu>
+        </Flex>
       </Flex>
 
       <Flex

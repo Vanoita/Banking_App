@@ -11,8 +11,9 @@ import {
     Th,
     Td,
     Flex, Box,
-    TableContainer, Input, Select, Heading
+    TableContainer, Input, Select, Heading, InputGroup, InputRightElement
 } from "@chakra-ui/react";
+import {FiSearch} from "react-icons/fi";
 import axios from "axios";
 import SidebarAdmin from "./SidebarAdmin";
 
@@ -58,6 +59,12 @@ function AccountAdmin() {
                 <Flex w={"20%"}><SidebarAdmin /></Flex>
                 <Box w={"80%"} p={"2.5%"} align={"center"}>
                     <Heading>Transaction Details</Heading>
+                    <InputGroup w={"50%"} align={"center"}>
+                                <Input placeholder='Search Accounts' />
+                                <InputRightElement>
+                                    <FiSearch />
+                                </InputRightElement>
+                                </InputGroup>  
                     <TableContainer maxWidth={'100%'} align={'center'}>
                         <Table variant="striped" colorScheme="blue">
 
@@ -69,11 +76,15 @@ function AccountAdmin() {
                             </Tr>
                             <Tbody>
                                 {tDetails.map(details => {
-                                    return (
+                                    let amount = details.amount;
+                                    if(details.mode==='withdraw')
+                                    amount = -details.amount;
+                                    return (    
                                         <Tr>
-                                            {Object.values(details).map(val => {
-                                                return (<Td>{val}</Td>)
-                                            })}
+                                            <Td>{details.refId}</Td>
+                                            <Td>{details.date}</Td>
+                                            <Td>{amount}</Td>
+                                            <Td>{details.mode}</Td>
                                         </Tr>
                                     )
                                 })}

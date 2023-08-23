@@ -14,14 +14,14 @@ import { Flex, SimpleGrid, VStack, Text, Card,Box,Table,
 function Dashboard() {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("info");
-  const [accounts, setAccounts] = useState([1,2,3]);
+  const [accounts, setAccounts] = useState([]);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const { state } = useLocation();
   const location = useLocation();
   const [tDetails, setTDetails] = useState([]);
   const getURL = "http://localhost:8080/getTransactions";
-  const userId = "12345678"; //localStorage.get('username');
+  const userId = localStorage.getItem('userId');
   const [totalBalance, setTotalBalance] = useState(0);
 
   //Function to fetch details for transaction details
@@ -92,6 +92,7 @@ function Dashboard() {
     state,
     navigate,
   ]);
+
   return (
     <>
       <Helmet>
@@ -116,8 +117,8 @@ function Dashboard() {
             <Sidebar />
           </Flex>
           <SimpleGrid row={2} w={"75%"} pt={"5%"} pb={"2%"}>
-            <Flex>
-                <Card h={"80%"} p={"2.5%"}>
+            <Box>
+                <Card h={"80%"} p={"2.5%"} overflow={"hidden"}>
                   <Text>Account Information</Text>
                   <Table variant='simple'>
                     <Thead>
@@ -136,11 +137,11 @@ function Dashboard() {
                     </Tbody>
                   </Table>
                   </Card>
-            </Flex>
+        </Box>
             <Box>
-            <Card h="80%" p={"2.5%"}>
+            <Card h="80%" p={"2.5%"} overflow={"hidden"}>
                   <Text >Recent Transaction History</Text>
-                  <Table variant='simple'>
+                  <Table variant='simple' >
                     <Thead>
                       <Tr>
                         <Th>Transaction ID</Th>
