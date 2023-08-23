@@ -55,7 +55,7 @@ export default function SidebarAdmin() {
     fetchUser(baseURLUser);
   }, []);
   const logout =()=>{
-    localStorage.removeItem({user});
+    localStorage.removeItem("userId");
     window.location.href="/";
   };
   return (

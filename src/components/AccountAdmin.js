@@ -77,7 +77,7 @@ function AccountAdmin() {
                                         <Td>{details.accNo}</Td>
                                         <Td>{details.accType}</Td>
                                         <Td>{details.balance}</Td>
-                                        <Td><Button onClick={toggleButton}>{enable ? "Enable" : "Disable" }</Button></Td>
+                                        <Td><Button onClick={toggleButton}>{enable ? "Disable" : "Enable" }</Button></Td>
                                     </Tr>
                                 )
                             })}

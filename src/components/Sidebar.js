@@ -23,7 +23,7 @@ export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const [user, setUser] = useState({});
   const logout =()=>{
-    localStorage.removeItem({user});
+    localStorage.removeItem('userId');
     window.location.href="/";
   };
   const fetchUser = (baseURLUser) => {
