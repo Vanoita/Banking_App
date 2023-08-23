@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import axios from "axios";
 import {
   Flex,
@@ -99,7 +100,9 @@ export default function Sidebar() {
       >
         <Divider display={navSize == "small" ? "none" : "flex"} />
         <Flex mt={4} align="center" alignItems={"center"}>
+          <Link to = "/profile">
           <Avatar size="sm" src="avatar-1.jpg" />
+          </Link>
           <Flex
             flexDir="column"
             ml={4}
@@ -110,6 +113,7 @@ export default function Sidebar() {
             </Heading>
             <Text color="gray">User</Text>
           </Flex>
+          
         </Flex>
       </Flex>
     </Flex>
