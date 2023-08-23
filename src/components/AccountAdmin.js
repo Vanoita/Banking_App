@@ -22,8 +22,9 @@ function AccountAdmin() {
     const [accounts, setAccounts] = useState([]);
     const navigate = useNavigate();
     const fetchURL = "http://localhost:8080/fetchAllAccounts";
+   // const searchURL = "http://localhost:8080/fetchAccountByAccNo";
     const userId = '12345678';//localStorage.get('username');
-    const [enable,setEnable]=useState(true);
+    const [enable,setEnable]=useState();
     const [searchQuery , setSearchQuery]=useState("");
 
 
@@ -37,6 +38,17 @@ function AccountAdmin() {
                 alert("error occured while loading data" + error);
             });
     };
+
+    // const searchAccount= () => {
+    //     axios
+    //         .get(searchURL)
+    //         .then((response) => {
+    //             setAccounts(response.data);
+    //         })
+    //         .catch((error) => {
+    //             alert("error occured while loading data" + error);
+    //         });
+    // }
 
     useEffect(() => {
         fetchAccounts();
