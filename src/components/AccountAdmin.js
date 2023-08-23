@@ -11,8 +11,10 @@ import {
     Th,
     Td,
     Flex, Box,
-    TableContainer, Input, Select, Heading
+    TableContainer, Input, Select, Heading,InputRightElement, InputGroup, Button
+
 } from "@chakra-ui/react";
+import {FiSearch} from "react-icons/fi";
 import axios from "axios";
 import SidebarAdmin from "./SidebarAdmin";
 
@@ -21,6 +23,8 @@ function AccountAdmin() {
     const navigate = useNavigate();
     const fetchURL = "http://localhost:8080/fetchAllAccounts";
     const userId = '12345678';//localStorage.get('username');
+    const [enable,setEnable]=useState(true);
+    const [searchQuery , setSearchQuery]=useState("");
 
 
     const fetchAccounts = () => {
@@ -37,6 +41,9 @@ function AccountAdmin() {
     useEffect(() => {
         fetchAccounts();
     }, []);
+    const toggleButton = () =>{
+        setEnable(!enable);
+    };
     return (
         <>
             <Helmet>
@@ -46,33 +53,40 @@ function AccountAdmin() {
                 <Flex w={"20%"}><SidebarAdmin /></Flex>
                 <Box w={"80%"} p={"2.5%"} align={"center"}>
                     <Heading>Account Details</Heading>
+                    <InputGroup w={"50%"} align={"center"}>
+                                <Input placeholder='Search Accounts' />
+                                <InputRightElement>
+                                    <FiSearch />
+                                </InputRightElement>
+                                </InputGroup>  
                     <TableContainer maxWidth={'100%'} align={'center'}>
                         <Table variant="striped" colorScheme="blue">
+          
+                        <Tr>
+                            <Th>User ID</Th>
+                            <Th>Account No</Th>
+                            <Th>Account Type</Th>
+                            <Th>Balance</Th>
+                            <Th>Enable/Disable</Th>
+                        </Tr>
+                        <Tbody>
+                            {accounts.map(details => {
+                                return (
+                                    <Tr>
+                                        <Td>{details.userId}</Td>
+                                        <Td>{details.accNo}</Td>
+                                        <Td>{details.accType}</Td>
+                                        <Td>{details.balance}</Td>
+                                        <Td><Button onClick={toggleButton}>{enable ? "Enable" : "Disable" }</Button></Td>
+                                    </Tr>
+                                )
+                            })}
+                        </Tbody>
 
-                            <Tr>
-                                <Th>User ID</Th>
-                                <Th>Account No</Th>
-                                <Th>Account Type</Th>
-                                <Th>Balance</Th>
-                            </Tr>
-                            <Tbody>
-                                {accounts.map(details => {
-                                    return (
-                                        <Tr>
-                                            <Td>{details.userId}</Td>
-                                            <Td>{details.accNo}</Td>
-                                            <Td>{details.accType}</Td>
-                                            <Td>{details.balance}</Td>
-                                            <Td><button>disable</button></Td>
-                                        </Tr>
-                                    )
-                                })}
-                            </Tbody>
-
-                        </Table>
-                    </TableContainer>
-                </Box>
-            </Flex>
+                    </Table>
+                </TableContainer>
+            </Box>
+        </Flex >
         </>
     );
 }

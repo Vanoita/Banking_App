@@ -15,8 +15,10 @@ import ForgotUsername from './components/ForgotUsername';
 import UserAdmin from './components/UserAdmin';
 import AdminDashboard from './components/AdminDashboard';
 import AddBeneficiary from './components/AddBeneficiary';
+import LoginAdmin from './components/LoginAdmin';
 import AccountAdmin from './components/AccountAdmin';
-import TransactionAdmin from './components/TransactionAdmin'
+import TransactionAdmin from './components/TransactionAdmin';
+import LoginFormat from './components/LoginFormat';
 
 
 function App() {
@@ -39,6 +41,10 @@ function App() {
             <Route exact path="/accountAll" element={<AccountAdmin/>}/>
             <Route exact path="/transactionAll" element={<TransactionAdmin/>}/>
             <Route exact path="/dashboard" element={<Dashboard/>}/>
+            <Route exact path='/loginFormat' element={<LoginFormat/>}/>
+            <Route exact path='/addBeneficiary' element={<AddBeneficiary/>}/>
+            <Route exact path='/loginAdmin' element={<LoginAdmin/>}/>
+
           </Routes>
         </BrowserRouter>
     </ChakraProvider>

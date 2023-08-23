@@ -5,7 +5,7 @@ import {
   Text,
   IconButton,
   Divider,
-  Avatar,
+  Avatar,Menu, MenuButton,Icon,
   Heading,
 } from "@chakra-ui/react";
 import {
@@ -17,10 +17,15 @@ import {
   FiUserPlus
 } from "react-icons/fi";
 import NavItem from "../components/NavItem";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const [user, setUser] = useState({});
+  const logout =()=>{
+    localStorage.removeItem({user});
+    window.location.href="/";
+  };
   const fetchUser = (baseURLUser) => {
     axios
       .get(baseURLUser)
@@ -87,7 +92,28 @@ export default function Sidebar() {
           to="/addBeneficiary"
         />
 
-        <NavItem navSize={navSize} icon={FiLogOut} title="Log out"/>
+        <Flex
+            mt={30}
+            flexDir="column"
+            w="100%"
+            alignItems={navSize == "small" ? "center" : "flex-start"} onClick={logout} 
+        >
+            <Menu placement="right">
+                <Link
+                    p={3}
+                    borderRadius={8}
+                    _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
+                    w={navSize == "large" && "100%"}
+                >
+                    <MenuButton w="100%">
+                        <Flex>
+                            <Icon as={FiLogOut} fontSize="xl" color={"gray.500"} />
+                            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>Log Out</Text>
+                        </Flex>
+                    </MenuButton>
+                </Link>
+            </Menu>
+        </Flex>
       </Flex>
 
       <Flex
@@ -98,7 +124,8 @@ export default function Sidebar() {
         mb={4}
       >
         <Divider display={navSize == "small" ? "none" : "flex"} />
-        <Flex mt={4} align="center" alignItems={"center"}>
+        <Flex mt={4} align="center" alignItems={"center"}> 
+        
           <Avatar size="sm" src="avatar-1.jpg" />
           <Flex
             flexDir="column"

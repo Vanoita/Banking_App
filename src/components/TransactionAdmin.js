@@ -11,8 +11,9 @@ import {
     Th,
     Td,
     Flex, Box,
-    TableContainer, Input, Select, Heading
+    TableContainer, Input, Select, Heading, InputGroup, InputRightElement
 } from "@chakra-ui/react";
+import {FiSearch} from "react-icons/fi";
 import axios from "axios";
 import SidebarAdmin from "./SidebarAdmin";
 
@@ -58,6 +59,12 @@ function AccountAdmin() {
                 <Flex w={"20%"}><SidebarAdmin /></Flex>
                 <Box w={"80%"} p={"2.5%"} align={"center"}>
                     <Heading>Transaction Details</Heading>
+                    <InputGroup w={"50%"} align={"center"}>
+                                <Input placeholder='Search Accounts' />
+                                <InputRightElement>
+                                    <FiSearch />
+                                </InputRightElement>
+                                </InputGroup>  
                     <TableContainer maxWidth={'100%'} align={'center'}>
                         <Table variant="striped" colorScheme="blue">
 

@@ -6,7 +6,7 @@ import {
   IconButton,
   Divider,
   Avatar,
-  Heading,
+  Heading, useLocalStorage
 } from "@chakra-ui/react";
 import {
   Icon,
@@ -54,6 +54,10 @@ export default function SidebarAdmin() {
 
     fetchUser(baseURLUser);
   }, []);
+  const logout =()=>{
+    localStorage.removeItem({user});
+    window.location.href="/";
+  };
   return (
     <Flex
       pos="sticky"
@@ -97,7 +101,7 @@ export default function SidebarAdmin() {
             mt={30}
             flexDir="column"
             w="100%"
-            alignItems={navSize == "small" ? "center" : "flex-start"}
+            alignItems={navSize == "small" ? "center" : "flex-start"} onClick={logout} 
         >
             <Menu placement="right">
                 <Link
@@ -133,7 +137,7 @@ export default function SidebarAdmin() {
             display={navSize == "small" ? "none" : "flex"}
           >
             <Heading as="h3" size="sm">
-              ${user.firstName} ${user.lastName}
+              {user.firstName} {user.lastName}
             </Heading>
             <Text color="gray">Admin</Text>
           </Flex>

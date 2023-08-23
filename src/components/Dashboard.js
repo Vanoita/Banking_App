@@ -92,6 +92,7 @@ function Dashboard() {
     state,
     navigate,
   ]);
+
   return (
     <>
       <Helmet>
@@ -116,8 +117,8 @@ function Dashboard() {
             <Sidebar />
           </Flex>
           <SimpleGrid row={2} w={"75%"} pt={"5%"} pb={"2%"}>
-            <Flex>
-                <Card h={"80%"} p={"2.5%"}>
+            <Box>
+                <Card h={"80%"} p={"2.5%"} overflow={"hidden"}>
                   <Text>Account Information</Text>
                   <Table variant='simple'>
                     <Thead>
@@ -136,7 +137,7 @@ function Dashboard() {
                     </Tbody>
                   </Table>
                   </Card>
-            </Flex>
+        </Box>
             <Box>
             <Card h="80%" p={"2.5%"}>
                   <Text >Recent Transaction History</Text>
