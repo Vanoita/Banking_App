@@ -99,6 +99,11 @@ public class AccountService {
 		return accountList;
 	}	
 	
+	public String fetchUserId(String accNo) {
+		String userId = accRepo.fetchUserId(accNo);
+		return userId;
+	}
+	
 	public String toggleDisable(String accNo) {
 		String result = "not changed";
 		int rows = accRepo.disableOrEnable(accNo);

@@ -20,6 +20,9 @@ public interface AccountRepository extends JpaRepository<Account, String>{
 	@Query("SELECT acc from Account acc where acc.userId=?1 ")
 	public List<Account> fetchAllAccount(String userId);
 	
+	@Query("Select userId from Account acc where acc.accNo=?1")
+	public String fetchUserId(String accNo);
+	
 	@Query("SELECT acc from Account acc")
 	public List<Account> fetchAllAccount();
 	
