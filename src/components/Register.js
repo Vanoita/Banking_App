@@ -26,7 +26,7 @@ function Register() {
             const res = response.data;
             if (res.userId) {
                 localStorage.setItem('userId', res.userId);
-                navigate("/dashboard", { state: { message: "You're Registered Successfully!", type: "success" } });
+                navigate("/dashboard");
             }
 
         }).catch(error => {
@@ -36,7 +36,7 @@ function Register() {
     useEffect(() => {
         const token = localStorage.getItem('userId');
         if (token) {
-            navigate("/dashboard", { state: { message: "You're still Login. First Logout and then try to register.", type: "warning" } });
+            navigate("/dashboard");
         }
     }, [navigate])
     return (

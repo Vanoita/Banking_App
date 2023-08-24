@@ -12,8 +12,6 @@ import { Flex, SimpleGrid, VStack, Text, Card,Box,Table,
   Th,
   Td, } from "@chakra-ui/react";
 function Dashboard() {
-  const [alertMessage, setAlertMessage] = useState("");
-  const [alertType, setAlertType] = useState("info");
   const [accounts, setAccounts] = useState([]);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
@@ -67,26 +65,13 @@ function Dashboard() {
 
   useEffect(() => {
     const token = localStorage.getItem("userId");
-    /*if(!token) {
-            navigate("/login",{state:{from: `${location.pathname}${location.search}`}});
-        }
-        else {*/
     const baseURLAccount = "http://localhost:8080/fetchAllAccount/" + token;
     const baseURLUser = "http://localhost:8080/fetchUser/" + token;
     fetchAllAccount(baseURLAccount);
     getDetails();
     fetchUser(baseURLUser);
     //}
-
-    if (state && state.message && state.type) {
-      setAlertMessage(state.message);
-      setAlertType(state.type);
-
-      window.history.replaceState({ state: null }, document.title);
-    }
   }, [
-    alertMessage,
-    alertType,
     location.pathname,
     location.search,
     state,
@@ -98,27 +83,14 @@ function Dashboard() {
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
-      {alertMessage && (
-        <div class={`alert alert-${alertType} text-center`} role="alert">
-          {alertMessage}
-        </div>
-      )}
       <div>
-        {/* <h1>{user && `Hi ${user.firstName} ${user.lastName}`}, Welcome to Dashboard</h1>
-                <div>
-                    {accounts.map(acc=>{
-                    return (
-                        <div>{acc.accNo}</div>
-                    )
-                    })}
-                </div> */}
         <Flex>
           <Flex w={"20%"}flexDir={"column"}>
             <Sidebar />
           </Flex>
           <SimpleGrid row={2} w={"75%"} pt={"5%"} pb={"2%"}>
             <Box>
-                <Card h={"80%"} p={"2.5%"} overflow={"hidden"}>
+                <Card h={"80%"} p={"2.5%"} overflow={"scroll"}>
                   <Text>Account Information</Text>
                   <Table variant='simple'>
                     <Thead>
@@ -139,7 +111,7 @@ function Dashboard() {
                   </Card>
         </Box>
             <Box>
-            <Card h="80%" p={"2.5%"} overflow={"hidden"}>
+            <Card h="80%" p={"2%"} overflow={"scroll"}>
                   <Text >Recent Transaction History</Text>
                   <Table variant='simple' >
                     <Thead>
