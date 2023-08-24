@@ -11,7 +11,7 @@ function AdminLogin(){
     const [alertMessage, setAlertMessage] = useState("");
     const navigate = useNavigate();
     const { state } = useLocation();
-    const baseURL = "http://localhost:8080/checkLogin";
+    const baseURL = "http://localhost:8080/checkAdminLogin";
     const submitActionHandler = (event) => {
         event.preventDefault();
         axios.post(baseURL, {

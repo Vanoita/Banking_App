@@ -82,7 +82,7 @@ function AccountAdmin() {
                                     return (    
                                         <Tr>
                                             <Td>{details.refId}</Td>
-                                            <Td>{details.date}</Td>
+                                            <Td>{details.date}</Td>                                            
                                             <Td>{amount}</Td>
                                             <Td>{details.mode}</Td>
                                         </Tr>

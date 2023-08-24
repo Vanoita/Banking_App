@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router";
 import { useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { Flex, SimpleGrid, VStack, Text, Card,Box,Table,
   Thead,
   Tbody,
@@ -23,6 +25,12 @@ function Dashboard() {
   const getURL = "http://localhost:8080/getTransactions";
   const userId = localStorage.getItem('userId');
   const [totalBalance, setTotalBalance] = useState(0);
+
+  const successToastMessage = () => {
+    toast.success('Login Successful !', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
 
   //Function to fetch details for transaction details
   const getDetails = () => {
@@ -66,6 +74,7 @@ function Dashboard() {
   };
 
   useEffect(() => {
+    successToastMessage();
     const token = localStorage.getItem("userId");
     /*if(!token) {
             navigate("/login",{state:{from: `${location.pathname}${location.search}`}});
@@ -164,6 +173,7 @@ function Dashboard() {
               </Card>
             </Box>
           </SimpleGrid>
+          <ToastContainer />
           </Flex>
       </div>
     </>
