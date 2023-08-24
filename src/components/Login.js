@@ -43,25 +43,26 @@ function Login() {
                 <title>Login User</title>
             </Helmet>
             {alertMessage && <div class="alert alert-danger text-center" role="alert">{alertMessage}</div>}
-            <div className="container-fluid vh-100">
+            <div className="container-fluid vh-100" >
                 <div class="row h-100">
-                    <div className="col-5 d-flex justify-content-center align-items-center" style={{backgroundColor: "#F5F5F5"}}>
-                        <div className='my-2' style={{maxWidth: "400px", width: "100%"}}>
+                    <div className="col-5 d-flex justify-content-center align-items-center" style={{ backgroundColor: "#F5F5F5" }}>
+                        <div className='my-2' style={{ maxWidth: "400px", width: "100%" }}>
                             <form className="p-2" onSubmit={submitActionHandler}>
-                                <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "20px" }}><span style={{color: "orange"}}>Online &nbsp;</span><span style={{color: "#6096B4"}}>Banking System</span></h3>
+                                <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "20px" }}><span style={{ color: "orange" }}>Online &nbsp;</span><span style={{ color: "#6096B4" }}>Banking System</span></h3>
                                 <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "20px" }}>Login</h3>
                                 <div class="form-outline mb-4">
-                                    <input type="text" required class="form-control" value={userId} onChange={e => setUserId(e.target.value)}/>
+                                    <input type="text" id='validationCustom01'
+                                        aria-describedby="inputGroupPrepend" required class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
                                     <label class="form-label">UserId</label>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" required class="form-control" value={password} onChange={e => setPassword(e.target.value)}/>
+                                    <input type="password" required class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
                                     <label class="form-label">Password</label>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col d-flex justify-content-center">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" />
+                                            <input class="form-check-input" type="checkbox" value="" required/>
                                             <label class="form-check-label"> Remember me </label>
                                         </div>
                                     </div>
@@ -84,7 +85,7 @@ function Login() {
                         </div>
                     </div>
                     <div className="col-7 overflow-hidden p-0">
-                        <img src={bg1} alt="BG" className="h-100 w-100" style={{transform: "scaleX(-1)"}}/>
+                        <img src={bg1} alt="BG" className="h-100 w-100" style={{ transform: "scaleX(-1)" }} />
                     </div>
                 </div>
             </div>

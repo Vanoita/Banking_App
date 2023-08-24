@@ -35,7 +35,7 @@ const [userId,setUserId] = useState("");
                 <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "30px" }}>Reset Password</h3>
                 <div id="message"></div>
                 <div class="form-outline mb-4">
-                    <input type="text" class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
+                    <input type="text" class="form-control" value={userId} required onChange={e => setUserId(e.target.value)} />
                     <label class="form-label">Enter UserId</label>
                 </div>               
                 <div className='d-flex justify-content-center'>

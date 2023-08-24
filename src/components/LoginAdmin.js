@@ -72,13 +72,10 @@ function LoginAdmin() {
                                 </div>
 
                                 <div class="text-center mb-4">
-                                    <Link to="/forgotPassword">Forgot Password?</Link>
+                                    <Link to="/forgotPasswordAdmin">Forgot Password?</Link>
                                 </div>
                                 <div class="text-center mb-4">
-                                    <Link to="/forgotUsername">Forgot Username?</Link>
-                                </div>
-                                <div class="text-center mb-4">
-                                    <p>Not a member? <Link to="/register">Register</Link></p>
+                                    <Link to="/forgotUsernameAdmin">Forgot Username?</Link>
                                 </div>
                             </form>
                         </div>

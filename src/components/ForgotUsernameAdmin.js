@@ -5,7 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function ForgotUsername() {
+function ForgotUsernameAdmin() {
     const navigate = useNavigate();
 const [accNo,setAccNo] = useState("");
 
@@ -47,4 +47,4 @@ const [accNo,setAccNo] = useState("");
   )
 }
 
-export default ForgotUsername
+export default ForgotUsernameAdmin;

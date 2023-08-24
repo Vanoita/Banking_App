@@ -19,6 +19,8 @@ import LoginAdmin from './components/LoginAdmin';
 import AccountAdmin from './components/AccountAdmin';
 import TransactionAdmin from './components/TransactionAdmin';
 import LoginFormat from './components/LoginFormat';
+import ForgotPasswordAdmin from './components/ForgotPasswordAdmin';
+import ForgotUsernameAdmin from './components/ForgotUsernameAdmin';
 
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
             <Route exact path='/loginFormat' element={<LoginFormat/>}/>
             <Route exact path='/addBeneficiary' element={<AddBeneficiary/>}/>
             <Route exact path='/loginAdmin' element={<LoginAdmin/>}/>
+            <Route exact path = '/forgotPasswordAdmin' element={<ForgotPasswordAdmin/>}/>
+            <Route exact path = '/forgotUsernameAdmin' element={<ForgotUsernameAdmin/>}/>
 
           </Routes>
         </BrowserRouter>
