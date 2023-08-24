@@ -104,6 +104,7 @@ public class AccountService {
 		return userId;
 	}
 	
+	@Transactional
 	public String toggleDisable(String accNo) {
 		String result = "not changed";
 		int rows = accRepo.disableOrEnable(accNo);
