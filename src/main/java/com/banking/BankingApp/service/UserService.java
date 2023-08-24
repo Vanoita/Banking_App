@@ -54,14 +54,17 @@ public class UserService {
 	}
 	
 public String validateAdminUser(LoginModel u) {
-		
+		System.out.println(u.getPassword()+","+u.getUserId());
 		String res = "";
-		AdminUser user = null;
+		AdminUser user=null;
 		Optional<AdminUser> obj = adminUserRepo.findById(u.getUserId());
+
 		if(obj.isPresent()) {
-			user=obj.get();		
+			user=obj.get();	
+			System.out.println("userid found");
 		}
 		if(user==null) {
+			System.out.println("null");
 			res = "{\"login\": false, \"message\": \"Wrong Username!\"}";
 		}else {
 			if(u.getPassword().equals(user.getPassword())) {

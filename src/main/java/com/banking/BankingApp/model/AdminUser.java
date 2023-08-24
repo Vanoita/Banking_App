@@ -1,14 +1,10 @@
 package com.banking.BankingApp.model;
 
-import java.util.List;
 
-import org.hibernate.validator.constraints.Length;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
