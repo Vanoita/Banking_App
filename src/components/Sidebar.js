@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import axios from "axios";
 import {
   Flex,
@@ -17,13 +18,12 @@ import {
   FiUserPlus
 } from "react-icons/fi";
 import NavItem from "../components/NavItem";
-import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const [user, setUser] = useState({});
   const logout =()=>{
-    localStorage.removeItem({user});
+    localStorage.removeItem('userId');
     window.location.href="/";
   };
   const fetchUser = (baseURLUser) => {
@@ -124,9 +124,10 @@ export default function Sidebar() {
         mb={4}
       >
         <Divider display={navSize == "small" ? "none" : "flex"} />
-        <Flex mt={4} align="center" alignItems={"center"}> 
-        
+        <Flex mt={4} align="center" alignItems={"center"}>
+          <Link to = "/profile">
           <Avatar size="sm" src="avatar-1.jpg" />
+          </Link>
           <Flex
             flexDir="column"
             ml={4}
@@ -137,6 +138,7 @@ export default function Sidebar() {
             </Heading>
             <Text color="gray">User</Text>
           </Flex>
+          
         </Flex>
       </Flex>
     </Flex>

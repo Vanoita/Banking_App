@@ -36,7 +36,9 @@ function AddBeneficiary(){
     const [lastName, setLastName] = useState("");
     const [account, setAccount] = useState("");
     const [nickName, setNickName] = useState("");
+    const [reTAccNo, setReTAccNo] = useState("");
     const basePOST = "http://localhost:8080/addBeneficiary";
+    const userId = localStorage.getItem("userId");
 
      
     const successToastMessage = () => {
@@ -45,10 +47,18 @@ function AddBeneficiary(){
         });
     };
 
+    const clearForm = () =>{
+        setFirstName("");
+        setLastName("");
+        setAccount("");
+        setNickName("");
+        setReTAccNo("");
+    }
+
     const handleSave = (e) =>{
         axios.post(basePOST,
             {
-                userId: "12345678",
+                userId: userId,
                 firstName: firstName,
                 lastName: lastName,
                 accNo: account,
@@ -56,11 +66,8 @@ function AddBeneficiary(){
             }).then((response) => {
                 
                 successToastMessage();
-                // const res = JSON.parse(response.data);
-                // if(res.login){
-                //     localStorage.setItem('userId',username);
-                //     navigate('/dashboard');
-                // }
+                
+                clearForm();
             }).catch(error => {
                 alert("error = " + error);
             });
@@ -112,10 +119,10 @@ function AddBeneficiary(){
                     </Text>
 
                     <Input
-                        // value={wAmount}
+                        value={reTAccNo}
                         placeholder=""
                         size="lg"
-                        //onChange={(e) => setWAmount(e.target.value)}
+                        onChange={(e) => setReTAccNo(e.target.value)}
                     />
                     <Text mb="18px" align="left">
                         Re-enter Account No

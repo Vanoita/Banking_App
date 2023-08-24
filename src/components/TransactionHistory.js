@@ -24,7 +24,7 @@ function TransactionHistory() {
     const getURL = "http://localhost:8080/getTransactionsByDate";
     const fetchURL = "http://localhost:8080/fetchAccNo";
     const type="";
-    const userId = '12345678';//localStorage.get('username');
+    const userId = localStorage.getItem('userId');
     const [selectAccNo,setSelectAccNo]=useState("");
     const [startDate,setStartDate]=useState("");
     const [endDate,setEndDate]=useState("");
@@ -123,14 +123,21 @@ function TransactionHistory() {
                             <Th>Remarks</Th>
                         </Tr>                
                    <Tbody>
-                    {tDetails.map(details=>{
-                            return (
-                                <Tr>
-                                   {Object.values(details).map(val=>{
-                                    return (<Td>{val}</Td>)
-                                   })}
-                                </Tr>
-                            )
+                   {tDetails.map(details => {
+                        let amount = details.amount;
+                        if(details.mode==='withdraw' || details.accNo==selectAccNo) amount = -details.amount;
+                        return (    
+                            <Tr>
+                                <Td>{details.refId}</Td>
+                                <Td>{details.date}</Td>
+                                <Td>{details.accNo}</Td>
+                                <Td>{details.receiverName}</Td>
+                                <Td>{details.receiverAccNo}</Td>
+                                <Td>{details.mode}</Td>
+                                <Td>{amount}</Td>
+                                <Td>{details.remark}</Td>
+                            </Tr>
+                        )
                     })}
                    </Tbody>
                     
