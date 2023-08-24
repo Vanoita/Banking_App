@@ -27,6 +27,17 @@ function AccountAdmin() {
     const [enable,setEnable]=useState();
     const [searchQuery , setSearchQuery]=useState("");
 
+    const toggleHandler = (e,accNo) => {
+        console.log("button clicked");
+        axios.get("http://localhost:8080/toggleDisable/"+accNo)
+        .then((response) => {
+        alert("Account is disabled successfully");
+        if(e.target.value === "Enable")
+        e.target.value = "Disable";
+        else e.target.value = "Enable";
+    })
+    }
+    
 
     const fetchAccounts = () => {
         axios
@@ -89,7 +100,7 @@ function AccountAdmin() {
                                         <Td>{details.accNo}</Td>
                                         <Td>{details.accType}</Td>
                                         <Td>{details.balance}</Td>
-                                        <Td><Button>{enable ? "Enable" : "Disable" }</Button></Td>
+                                        <Td><Button onClick={(e)=>toggleHandler(e,details.accNo)}>{details.isDisabled ? "Enable" : "Disable" }</Button></Td>
                                     </Tr>
                                 )
                             })}
