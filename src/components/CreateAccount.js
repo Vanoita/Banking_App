@@ -5,10 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Helmet } from "react-helmet";
 import { customAlphabet } from "nanoid";
 import { useLocation, useNavigate } from "react-router";
+import { Flex, SimpleGrid } from "@chakra-ui/layout";
+import Sidebar from "./Sidebar";
 
 function CreateAccount() {
-    const [alertMessage, setAlertMessage] = useState("");
-    const [alertType, setAlertType] = useState("info");
     const nanoid = customAlphabet('1234567890', 12);
     const [userId, setUserId] = useState("");
     const baseURLAccount = "http://localhost:8080/createAccount/"+userId;
@@ -44,11 +44,7 @@ function CreateAccount() {
             pincode: "pincode"
         }).then((response) => {
             if(response.data) {
-                navigate("/dashboard", {state:{message: response.data, type: "success"}});
-            }
-            else{
-                setAlertMessage("Error while creating Account. Please try again");
-                setAlertType("danger");
+                navigate("/dashboard");
             }
         }).catch(error => {
             alert("error = " + error);
@@ -57,29 +53,22 @@ function CreateAccount() {
 
     useEffect(() => {
         const token = localStorage.getItem('userId');
-        if(!token) {
-            navigate("/login",{state:{from: `${location.pathname}${location.search}`}});
-        }
-        else {
+        if(token) {
             setUserId(token);
         }
-
-        if(state && state.message && state.type){
-            setAlertMessage(state.message);
-            setAlertType(state.type);
-
-            window.history.replaceState({state: null}, document.title);
-        }
-        
-    },[alertMessage,alertType, location.pathname, location.search, state, navigate])
+    },[])
 
     return (
         <div>
             <Helmet>
                 <title>Open a saving account</title>
             </Helmet>
-            {alertMessage && <div class={`alert alert-${alertType} text-center`} role="alert">{alertMessage}</div>}
-            <form onSubmit={submitActionHandler}>
+            <Flex>
+                <Flex w={"20%"}flexDir={"column"}>
+                    <Sidebar />
+                </Flex>
+                <SimpleGrid row={2} w={"75%"} pt={"2%"} pb={"2%"}>
+                <form onSubmit={submitActionHandler}>
                 <section class="h-100 h-custom gradient-custom-2">
                     <div class="container py-3 h-100">
                         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -190,6 +179,8 @@ function CreateAccount() {
                     </div>
                 </section>
             </form>
+                </SimpleGrid>
+            </Flex>
         </div>
     );
 }

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Flex,
   Text,
   IconButton,
   Divider,
-  Avatar,Menu, MenuButton,Icon,
+  Avatar, Menu, MenuButton, Icon,
   Heading,
 } from "@chakra-ui/react";
 import {
@@ -18,13 +18,17 @@ import {
   FiUserPlus
 } from "react-icons/fi";
 import NavItem from "../components/NavItem";
+import {MdAddCard} from "react-icons/md";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const [user, setUser] = useState({});
-  const logout =()=>{
+  const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const logout = () => {
     localStorage.removeItem('userId');
-    window.location.href="/";
+    window.location.href = "/";
   };
   const fetchUser = (baseURLUser) => {
     axios
@@ -39,10 +43,12 @@ export default function Sidebar() {
   };
   useEffect(() => {
     const token = localStorage.getItem("userId");
-    /*if(!token) {
-                navigate("/login",{state:{from: `${location.pathname}${location.search}`}});
-            }
-            else {*/
+    if (token) {
+      setUserId(token);
+    }
+    else{
+      navigate("/login",{state:{from: `${location.pathname}${location.search}`}});
+    }
     const baseURLUser = "http://localhost:8080/fetchUser/" + token;
 
     fetchUser(baseURLUser);
@@ -77,8 +83,9 @@ export default function Sidebar() {
             else changeNavSize("small");
           }}
         />
-        <NavItem navSize={navSize} icon={FiHome} title="Dashboard" active to="/dashboard"/>
+        <NavItem navSize={navSize} icon={FiHome} title="Dashboard" active to="/dashboard" />
         <NavItem navSize={navSize} icon={FiRepeat} title="Transfer" to="/transaction" />
+
         <NavItem
           navSize={navSize}
           icon={FiDollarSign}
@@ -91,28 +98,29 @@ export default function Sidebar() {
           title="Add Beneficiary"
           to="/addBeneficiary"
         />
+        <NavItem navSize={navSize} icon={MdAddCard} title="Create Account" to="/createAccount" />
 
         <Flex
-            mt={30}
-            flexDir="column"
-            w="100%"
-            alignItems={navSize == "small" ? "center" : "flex-start"} onClick={logout} 
+          mt={30}
+          flexDir="column"
+          w="100%"
+          alignItems={navSize == "small" ? "center" : "flex-start"} onClick={logout}
         >
-            <Menu placement="right">
-                <Link
-                    p={3}
-                    borderRadius={8}
-                    _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
-                    w={navSize == "large" && "100%"}
-                >
-                    <MenuButton w="100%">
-                        <Flex>
-                            <Icon as={FiLogOut} fontSize="xl" color={"gray.500"} />
-                            <Text ml={5} display={navSize == "small" ? "none" : "flex"}>Log Out</Text>
-                        </Flex>
-                    </MenuButton>
-                </Link>
-            </Menu>
+          <Menu placement="right">
+            <Link
+              p={3}
+              borderRadius={8}
+              _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
+              w={navSize == "large" && "100%"}
+            >
+              <MenuButton w="100%">
+                <Flex>
+                  <Icon as={FiLogOut} fontSize="xl" color={"gray.500"} />
+                  <Text ml={5} display={navSize == "small" ? "none" : "flex"}>Log Out</Text>
+                </Flex>
+              </MenuButton>
+            </Link>
+          </Menu>
         </Flex>
       </Flex>
 
@@ -125,8 +133,8 @@ export default function Sidebar() {
       >
         <Divider display={navSize == "small" ? "none" : "flex"} />
         <Flex mt={4} align="center" alignItems={"center"}>
-          <Link to = "/profile">
-          <Avatar size="sm" src="avatar-1.jpg" />
+          <Link to="/profile">
+            <Avatar size="sm" src="avatar-1.jpg" />
           </Link>
           <Flex
             flexDir="column"
@@ -138,7 +146,7 @@ export default function Sidebar() {
             </Heading>
             <Text color="gray">User</Text>
           </Flex>
-          
+
         </Flex>
       </Flex>
     </Flex>

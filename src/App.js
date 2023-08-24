@@ -50,7 +50,6 @@ function App() {
             <Route exact path='/loginAdmin' element={<LoginAdmin/>}/>
             <Route exact path = '/forgotPasswordAdmin' element={<ForgotPasswordAdmin/>}/>
             <Route exact path = '/forgotUsernameAdmin' element={<ForgotUsernameAdmin/>}/>
-
           </Routes>
         </BrowserRouter>
     </ChakraProvider>

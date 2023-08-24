@@ -4,11 +4,18 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useEffect } from 'react';
 import bg1 from "../asset/bg1.jpg";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const errorToastMessage = (msg) => {
+    toast.error(msg, {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
 
 function Login() {
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
-    const [alertMessage, setAlertMessage] = useState("");
     const navigate = useNavigate();
     const { state } = useLocation();
     const baseURL = "http://localhost:8080/checkLogin";
@@ -21,11 +28,11 @@ function Login() {
             const res = response.data;
             if (res.login) {
                 localStorage.setItem('userId', userId);
-                if (state && state.from) { navigate(state.from, { state: { message: res.message, type: "success" } }); }
-                else { navigate('/dashboard', { state: { message: res.message, type: "success" } }); }
+                if (state && state.from) { navigate(state.from); }
+                else { navigate('/dashboard'); }
             }
             else {
-                setAlertMessage(res.message)
+                errorToastMessage(res.message);
             }
         }).catch(error => {
             alert("error = " + error);
@@ -34,7 +41,7 @@ function Login() {
     useEffect(() => {
         const token = localStorage.getItem('userId');
         if (token) {
-            navigate("/dashboard", { state: { message: "You're already Login.", type: "warning" } });
+            navigate("/dashboard");
         }
     }, [navigate])
     return (
@@ -42,7 +49,6 @@ function Login() {
             <Helmet>
                 <title>Login User</title>
             </Helmet>
-            {alertMessage && <div class="alert alert-danger text-center" role="alert">{alertMessage}</div>}
             <div className="container-fluid vh-100" >
                 <div class="row h-100">
                     <div className="col-5 d-flex justify-content-center align-items-center" style={{ backgroundColor: "#F5F5F5" }}>
@@ -62,7 +68,7 @@ function Login() {
                                 <div class="row mb-4">
                                     <div class="col d-flex justify-content-center">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" required/>
+                                            <input class="form-check-input" type="checkbox" value=""/>
                                             <label class="form-check-label"> Remember me </label>
                                         </div>
                                     </div>
@@ -89,6 +95,7 @@ function Login() {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     );
 }
