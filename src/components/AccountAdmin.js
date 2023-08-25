@@ -77,7 +77,9 @@ function AccountAdmin() {
                 <Box w={"80%"} p={"2.5%"} align={"center"}>
                     <Heading>Account Details</Heading>
                     <InputGroup w={"50%"} align={"center"}>
-                                <Input placeholder='Search Accounts' />
+                                <Input placeholder='Search Accounts' 
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}/>
                                 <InputRightElement>
                                     <FiSearch />
                                 </InputRightElement>
@@ -93,7 +95,7 @@ function AccountAdmin() {
                             <Th>Enable/Disable</Th>
                         </Tr>
                         <Tbody>
-                            {accounts.map(details => {
+                            {accounts.filter(account=>account.accNo.includes(searchQuery)).map(details => {
                                 return (
                                     <Tr>
                                         <Td>{details.userId}</Td>

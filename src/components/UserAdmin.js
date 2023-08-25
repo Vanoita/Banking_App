@@ -20,6 +20,7 @@ import SidebarAdmin from "./SidebarAdmin";
 
 function UserAdmin() {
     const [users, setUsers] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate();
     const fetchURL = "http://localhost:8080/fetchAllUsers";
     const userId = '12345678';//localStorage.get('username');
@@ -49,7 +50,10 @@ function UserAdmin() {
                 <Box w={"80%"} p={"2.5%"} align={"center"}>
                     <Heading>User Details</Heading>
                     <InputGroup w={"50%"} align={"center"}>
-                                <Input placeholder='Search Accounts' />
+                                <Input placeholder='Search UserId'
+                                 value={searchQuery}
+                                 onChange={(e) => setSearchQuery(e.target.value)}
+                                />
                                 <InputRightElement>
                                     <FiSearch />
                                 </InputRightElement>
@@ -64,7 +68,7 @@ function UserAdmin() {
                                 <Th>Email</Th>
                             </Tr>
                             <Tbody>
-                                {users.map(details => {
+                                {users.filter(user=>user.userId.includes(searchQuery)).map(details => {
                                     return (
                                         <Tr>
                                             <Td>{details.userId}</Td>
