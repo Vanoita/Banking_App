@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, SimpleGrid } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,12 +29,9 @@ function Transaction() {
     const [wAmount, setWAmount] = useState("");
     const [tAmount, setTAmount] = useState("");
     const [rAcc, setRAcc] = useState("");
-    const navigate = useNavigate();
-    const baseURL = "http://localhost:8080/fetchAccNo";
     const basePOST = "http://localhost:8080/transaction";
     const userId = localStorage.getItem('userId');
-
-
+    const [benef, setBenef] = useState([]);
 
     const successToastMessage = () => {
         toast.success('Transaction Successful !', {
@@ -48,9 +44,10 @@ function Transaction() {
             position: toast.POSITION.TOP_RIGHT
         });
     };
-    const fetchAccNo = () => {
+    
+    const fetchAccNo = (baseURLAccNo) => {
         axios
-            .get(baseURL + "/" + userId)
+            .get(baseURLAccNo)
             .then((response) => {
                 setAccNo(response.data);
             })
@@ -59,8 +56,24 @@ function Transaction() {
             });
     };
 
+    const fetchBeneficiary = (baseURLBenef) => {
+        axios
+            .post(baseURLBenef)
+            .then((response) => {
+                setBenef(response.data);
+            })
+            .catch((error) => {
+                alert("error occured while loading data" + error);
+            });
+    };
+
     useEffect(() => {
-        fetchAccNo();
+        const userId = localStorage.getItem('userId');
+        const baseURLAccNo = "http://localhost:8080/fetchAccNo/"+userId;
+        const baseURLBenef = "http://localhost:8080/getBeneficiary/" + userId;
+    
+        fetchAccNo(baseURLAccNo);
+        fetchBeneficiary(baseURLBenef);
     }, []);
 
     const clearFormT = () => {
@@ -157,12 +170,6 @@ function Transaction() {
                                         <Text mb="18px" align="left">
                                             UserId
                                         </Text>
-                                        {/* <Input
-                  value={accNo}
-                  placeholder=""
-                  size="lg"
-                  onChange={(e) => setAccNo(e.target.value)}
-                /> */}
                                         <Select placeholder='Select Account Number' value={wAccNo} onChange={e => setWAccNo(e.target.value)}>
                                             {accNo.map(accNumber => (
                                                 <option>{accNumber}</option>
@@ -218,12 +225,6 @@ function Transaction() {
                                         <Text mb="18px" align="left">
                                             UserId
                                         </Text>
-                                        {/* <Input
-                  value={accNo}
-                  placeholder=""
-                  size="lg"
-                  onChange={(e) => setAccNo(e.target.value)}
-                /> */}
                                         <Select placeholder='Select Account Number' value={tAccNo} onChange={e => setTAccNo(e.target.value)}>
                                             {accNo.map(accNumber => (
                                                 <option>{accNumber}</option>
@@ -232,8 +233,23 @@ function Transaction() {
                                         <Text mb="18px" align="left">
                                             User Account Number
                                         </Text>
-
-
+                                        <Select placeholder='Select Beneficiary' onChange={(e)=>{
+                                            if(e.target.value===""){
+                                                setRName("");
+                                                setRAcc("");
+                                            }
+                                            else{
+                                                setRName(benef[e.target.value].firstName + " " + benef[e.target.value].lastName);
+                                                setRAcc(benef[e.target.value].accNo);
+                                            }
+                                        }}>
+                                            {benef && benef.map((ben,index) => (
+                                                <option value={index}>{ben.firstName} {ben.lastName}</option>
+                                            ))}
+                                        </Select>
+                                        <Text mb="18px" align="left">
+                                            Beneficiary Name
+                                        </Text>
                                         <Input
                                             value={rName}
                                             placeholder=""

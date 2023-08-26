@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import '../register.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Helmet } from "react-helmet";
 import { customAlphabet } from "nanoid";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { Flex, SimpleGrid } from "@chakra-ui/layout";
 import Sidebar from "./Sidebar";
 
 function CreateAccount() {
     const nanoid = customAlphabet('1234567890', 12);
-    const [userId, setUserId] = useState("");
+    const userId = localStorage.getItem('userId');
     const baseURLAccount = "http://localhost:8080/createAccount/"+userId;
     const [fatherName, setFatherName] = useState("");
     const [aadhar, setAadhar] = useState("");
@@ -25,8 +25,6 @@ function CreateAccount() {
     const [mobNo, setMobNo] = useState("");
 
     const navigate = useNavigate();
-    const {state} = useLocation();
-    const location = useLocation();
 
     const submitActionHandler = (event) => {
         event.preventDefault();
@@ -41,22 +39,15 @@ function CreateAccount() {
             address: address,
             state: stateName,
             city: city,
-            pincode: "pincode"
+            pincode: pincode
         }).then((response) => {
             if(response.data) {
-                navigate("/dashboard");
+                navigate("/dashboard",  { state: { message: "Account Created!", type: "success" } });
             }
         }).catch(error => {
             alert("error = " + error);
         });
     };
-
-    useEffect(() => {
-        const token = localStorage.getItem('userId');
-        if(token) {
-            setUserId(token);
-        }
-    },[])
 
     return (
         <div>
@@ -82,37 +73,37 @@ function CreateAccount() {
 
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <input type="text" value={fatherName} onChange={e => setFatherName(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" required value={fatherName} onChange={e => setFatherName(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Father's Name</label>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
-                                                            <input type="date" value={dob} onChange={e => setDob(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="date" required value={dob} onChange={e => setDob(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Date of Birth</label>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
-                                                            <input type="text" value={aadhar} onChange={e => setAadhar(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" required value={aadhar} onChange={e => setAadhar(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Aadhar Card Number</label>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <input type="text" value={occType} onChange={e => setOccType(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" required value={occType} onChange={e => setOccType(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Occupation Type</label>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <input type="text" value={sourceOfIncome} onChange={e => setSourceOfIncome(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" required value={sourceOfIncome} onChange={e => setSourceOfIncome(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Source of Income</label>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <input type="number" value={annualGrossIncome} onChange={e => setAnnualGrossIncome(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="number" required value={annualGrossIncome} onChange={e => setAnnualGrossIncome(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Gross Annual Income</label>
                                                         </div>
                                                     </div>
@@ -124,21 +115,21 @@ function CreateAccount() {
 
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
-                                                            <input type="text" value={address} onChange={e => setAddress(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" required value={address} onChange={e => setAddress(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Address</label>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-5 mb-4 pb-2">
                                                             <div class="form-outline form-white">
-                                                                <input type="text" value={pincode} onChange={e => setPincode(e.target.value)} class="form-control form-control-lg" />
+                                                                <input type="text" required value={pincode} onChange={e => setPincode(e.target.value)} class="form-control form-control-lg" />
                                                                 <label class="form-label">PIN Code</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-7 mb-4 pb-2">
 
                                                             <div class="form-outline form-white">
-                                                                <input type="text" value={city} onChange={e => setCity(e.target.value)} class="form-control form-control-lg" />
+                                                                <input type="text" required value={city} onChange={e => setCity(e.target.value)} class="form-control form-control-lg" />
                                                                 <label class="form-label">City</label>
                                                             </div>
 
@@ -147,19 +138,19 @@ function CreateAccount() {
 
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
-                                                            <input type="text" value={stateName} onChange={e => setStateName(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" required value={stateName} onChange={e => setStateName(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">State</label>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
-                                                            <input type="text" value={mobNo} onChange={e => setMobNo(e.target.value)} class="form-control form-control-lg" />
+                                                            <input type="text" required maxLength="10" minLength="10" value={mobNo} onChange={e => setMobNo(e.target.value)} class="form-control form-control-lg" />
                                                             <label class="form-label">Mobile Number</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-check d-flex justify-content-start mb-4 pb-3">
-                                                        <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" />
+                                                        <input class="form-check-input me-3" type="checkbox" required value="" id="form2Example3c" />
                                                         <label class="form-check-label text-white" for="form2Example3">
                                                             I do accept the <a href="#!" class="text-white"><u>Terms and Conditions</u></a> of your
                                                             site.

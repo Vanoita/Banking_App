@@ -26,7 +26,7 @@ function Register() {
             const res = response.data;
             if (res.userId) {
                 localStorage.setItem('userId', res.userId);
-                navigate("/dashboard");
+                navigate("/dashboard", { state: { message: "Registered Successfully!", type: "success" } });
             }
 
         }).catch(error => {
@@ -36,7 +36,7 @@ function Register() {
     useEffect(() => {
         const token = localStorage.getItem('userId');
         if (token) {
-            navigate("/dashboard");
+            navigate("/dashboard", { state: { message: "Login Already!", type: "error" } });
         }
     }, [navigate])
     return (

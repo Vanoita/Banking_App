@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    Flex,Box,
-    TableContainer, Input, Select, Heading
+    Flex, Input, Heading
 } from "@chakra-ui/react";
 import axios from "axios";
 import Sidebar from "./Sidebar";

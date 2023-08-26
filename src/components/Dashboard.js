@@ -1,39 +1,24 @@
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
 import { useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import { Flex, SimpleGrid, VStack, Text, Card,Box,Table,
+import {
+  Flex, SimpleGrid, Text, Card, Box, Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
-  Td, } from "@chakra-ui/react";
+  Td,
+} from "@chakra-ui/react";
 function Dashboard() {
   const [accounts, setAccounts] = useState([]);
-  const [user, setUser] = useState({});
-  const navigate = useNavigate();
-  const { state } = useLocation();
-  const location = useLocation();
   const [tDetails, setTDetails] = useState([]);
-  const getURL = "http://localhost:8080/getTransactions";
-  const userId = localStorage.getItem('userId');
-  const [totalBalance, setTotalBalance] = useState(0);
-
-  const successToastMessage = () => {
-    toast.success('Login Successful !', {
-        position: toast.POSITION.TOP_RIGHT
-    });
-};
 
   //Function to fetch details for transaction details
-  const getDetails = () => {
+  const getDetails = (getURL) => {
     axios
-      .get(getURL + "/" + userId)
+      .get(getURL)
       .then((response) => {
         setTDetails(response.data);
       })
@@ -47,10 +32,6 @@ function Dashboard() {
     axios
       .get(baseURLAccount)
       .then((response) => {
-        const accountData = response.data.accounts;
-        setTotalBalance(
-          accounts.reduce((total, account) => total + account.balance, 0)
-        );
         setAccounts(response.data);
       })
       .catch((error) => {
@@ -58,34 +39,15 @@ function Dashboard() {
       });
   };
 
-  //Function to User info
-  const fetchUser = (baseURLUser) => {
-    axios
-      .get(baseURLUser)
-      .then((response) => {
-        setUser(response.data);
-        //alert(JSON.stringify(response))
-      })
-      .catch((error) => {
-        alert("error occured while loading data" + error);
-      });
-  };
+ 
 
   useEffect(() => {
-    successToastMessage();
     const token = localStorage.getItem("userId");
     const baseURLAccount = "http://localhost:8080/fetchAllAccount/" + token;
-    const baseURLUser = "http://localhost:8080/fetchUser/" + token;
+    const getURL = "http://localhost:8080/getTransactions/"+token;
     fetchAllAccount(baseURLAccount);
-    getDetails();
-    fetchUser(baseURLUser);
-    //}
-  }, [
-    location.pathname,
-    location.search,
-    state,
-    navigate,
-  ]);
+    getDetails(getURL);
+  });
 
   return (
     <>
@@ -94,59 +56,58 @@ function Dashboard() {
       </Helmet>
       <div>
         <Flex>
-          <Flex w={"20%"}flexDir={"column"}>
+          <Flex w={"20%"} flexDir={"column"}>
             <Sidebar />
           </Flex>
           <SimpleGrid row={2} w={"75%"} pt={"5%"} pb={"2%"}>
             <Box>
-                <Card h={"80%"} p={"2.5%"} overflow={"scroll"}>
-                  <Text>Account Information</Text>
-                  <Table variant='simple'>
-                    <Thead>
+              <Card h={"80%"} p={"2.5%"} overflow={"scroll"}>
+                <Text>Account Information</Text>
+                <Table variant='simple'>
+                  <Thead>
+                    <Tr>
+                      <Th>Account Number</Th>
+                      <Th>Balance</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {accounts.map((account) => (
                       <Tr>
-                        <Th>Account Number</Th>
-                        <Th>Balance</Th>
+                        <Td>{account.accNo}</Td>
+                        <Td>{account.balance}</Td>
                       </Tr>
-                    </Thead>
-                    <Tbody>
-                      {accounts.map((account) => (
-                        <Tr>
-                          <Td>{account.accNo}</Td>
-                          <Td>{account.balance}</Td>
-                        </Tr>
-                      ))}
-                    </Tbody>
-                  </Table>
-                  </Card>
-        </Box>
+                    ))}
+                  </Tbody>
+                </Table>
+              </Card>
+            </Box>
             <Box>
-            <Card h="80%" p={"2%"} overflow={"scroll"}>
-                  <Text >Recent Transaction History</Text>
-                  <Table variant='simple' >
-                    <Thead>
+              <Card h="80%" p={"2%"} overflow={"scroll"}>
+                <Text >Recent Transaction History</Text>
+                <Table variant='simple' >
+                  <Thead>
+                    <Tr>
+                      <Th>Transaction ID</Th>
+                      <Th>Date</Th>
+                      <Th>Amount</Th>
+                      <Th>Remarks</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {tDetails.map((transaction) => (
                       <Tr>
-                        <Th>Transaction ID</Th>
-                        <Th>Date</Th>
-                        <Th>Amount</Th>
-                        <Th>Remarks</Th>
+                        <Td>{transaction.refId}</Td>
+                        <Td>{transaction.date}</Td>
+                        <Td>{transaction.amount}</Td>
+                        <Td>{transaction.remark}</Td>
                       </Tr>
-                    </Thead>
-                    <Tbody>
-                      {tDetails.map((transaction) => (
-                        <Tr>
-                          <Td>{transaction.refId}</Td>
-                          <Td>{transaction.date}</Td>
-                          <Td>{transaction.amount}</Td>
-                          <Td>{transaction.remarks}</Td>
-                        </Tr>
-                      ))}
-                    </Tbody>
-                  </Table>
+                    ))}
+                  </Tbody>
+                </Table>
               </Card>
             </Box>
           </SimpleGrid>
-          <ToastContainer />
-          </Flex>
+        </Flex>
       </div>
     </>
   );

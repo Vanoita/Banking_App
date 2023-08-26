@@ -19,7 +19,6 @@ import LoginAdmin from './components/admin/LoginAdmin';
 import AccountAdmin from './components/admin/AccountAdmin';
 import TransactionAdmin from './components/admin/TransactionAdmin'
 import Profile from './components/Profile';
-import LoginFormat from './components/LoginFormat';
 import ForgotPasswordAdmin from './components/admin/ForgotPasswordAdmin';
 import ForgotUsernameAdmin from './components/admin/ForgotUsernameAdmin';
 import NotFound from './components/NotFound';
@@ -47,7 +46,6 @@ function App() {
             <Route exact path="/transactionAll" element={<TransactionAdmin/>}/>
             <Route exact path="/dashboard" element={<Dashboard/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
-            <Route exact path='/loginFormat' element={<LoginFormat/>}/>
             <Route exact path='/addBeneficiary' element={<AddBeneficiary/>}/>
             <Route exact path='/loginAdmin' element={<LoginAdmin/>}/>
             <Route exact path = '/forgotPasswordAdmin' element={<ForgotPasswordAdmin/>}/>
