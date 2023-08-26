@@ -31,18 +31,19 @@ function AccountAdmin() {
         console.log("button clicked");
         axios.get("http://localhost:8080/toggleDisable/"+accNo)
         .then((response) => {
-        alert("Account is disabled successfully");
-        if(e.target.value === "Enable")
-        e.target.value = "Disable";
-        else e.target.value = "Enable";
+        //alert("Account is disabled successfully");
+        if(e.target.innerHTML === "Enable")
+        e.target.innerHTML = "Disable";
+        else e.target.innerHTML = "Enable";
     })
     }
-    
+
 
     const fetchAccounts = () => {
         axios
             .get(fetchURL)
             .then((response) => {
+                //alert(JSON.stringify(response.data))
                 setAccounts(response.data);
             })
             .catch((error) => {
@@ -102,7 +103,7 @@ function AccountAdmin() {
                                         <Td>{details.accNo}</Td>
                                         <Td>{details.accType}</Td>
                                         <Td>{details.balance}</Td>
-                                        <Td><Button onClick={(e)=>toggleHandler(e,details.accNo)}>{details.isDisabled ? "Enable" : "Disable" }</Button></Td>
+                                        <Td><Button onClick={(e)=>toggleHandler(e,details.accNo)}>{details.disabled ? "Enable" : "Disable" }</Button></Td>
                                     </Tr>
                                 )
                             })}

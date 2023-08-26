@@ -22,6 +22,8 @@ import Profile from './components/Profile';
 import LoginFormat from './components/LoginFormat';
 import ForgotPasswordAdmin from './components/ForgotPasswordAdmin';
 import ForgotUsernameAdmin from './components/ForgotUsernameAdmin';
+import NotFound from './components/NotFound';
+import CreateUser from './components/CreateUser';
 
 
 function App() {
@@ -49,7 +51,9 @@ function App() {
             <Route exact path='/addBeneficiary' element={<AddBeneficiary/>}/>
             <Route exact path='/loginAdmin' element={<LoginAdmin/>}/>
             <Route exact path = '/forgotPasswordAdmin' element={<ForgotPasswordAdmin/>}/>
+            <Route exact path = '/createUser' element={<CreateUser/>}/>
             <Route exact path = '/forgotUsernameAdmin' element={<ForgotUsernameAdmin/>}/>
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
         </BrowserRouter>
     </ChakraProvider>

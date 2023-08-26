@@ -23,7 +23,7 @@ import {
   FiLogOut
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import {   MdAccountBalanceWallet} from "react-icons/md";
+import {   MdAccountBalanceWallet, MdAddCard} from "react-icons/md";
 import NavItem from "../components/NavItem";
 
 export default function SidebarAdmin() {
@@ -97,6 +97,7 @@ export default function SidebarAdmin() {
           to="/accountAll"
         />
         <NavItem navSize={navSize} icon={FiRepeat} title="Transactions" to="/transactionAll" />
+        <NavItem navSize={navSize} icon={MdAddCard} title="Create User" to="/createUser" />
         <Flex
             mt={30}
             flexDir="column"
