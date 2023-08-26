@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useEffect } from 'react';
-import bg1 from "../asset/bg1.jpg";
+import bg1 from "../../asset/bg1.jpg";
 
 function LoginAdmin() {
     const [userId, setUserId] = useState("");

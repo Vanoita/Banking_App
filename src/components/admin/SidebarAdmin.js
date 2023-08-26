@@ -24,7 +24,7 @@ import {
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import {   MdAccountBalanceWallet, MdAddCard} from "react-icons/md";
-import NavItem from "../components/NavItem";
+import NavItem from "../NavItem";
 
 export default function SidebarAdmin() {
   const [navSize, changeNavSize] = useState("large");

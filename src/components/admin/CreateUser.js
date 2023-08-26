@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { customAlphabet } from 'nanoid';
 import { useEffect } from 'react';
-import bg1 from "../asset/bg1.jpg";
+import bg1 from "../../asset/bg1.jpg";
 
 function CreateUser() {
     const nanoid = customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 8);

@@ -12,18 +12,18 @@ import Dashboard from './components/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
 import CreateNewPassword from './components/CreateNewPassword';
 import ForgotUsername from './components/ForgotUsername';
-import UserAdmin from './components/UserAdmin';
-import AdminDashboard from './components/AdminDashboard';
+import UserAdmin from './components/admin/UserAdmin';
+import AdminDashboard from './components/admin/AdminDashboard';
 import AddBeneficiary from './components/AddBeneficiary';
-import LoginAdmin from './components/LoginAdmin';
-import AccountAdmin from './components/AccountAdmin';
-import TransactionAdmin from './components/TransactionAdmin'
+import LoginAdmin from './components/admin/LoginAdmin';
+import AccountAdmin from './components/admin/AccountAdmin';
+import TransactionAdmin from './components/admin/TransactionAdmin'
 import Profile from './components/Profile';
 import LoginFormat from './components/LoginFormat';
-import ForgotPasswordAdmin from './components/ForgotPasswordAdmin';
-import ForgotUsernameAdmin from './components/ForgotUsernameAdmin';
+import ForgotPasswordAdmin from './components/admin/ForgotPasswordAdmin';
+import ForgotUsernameAdmin from './components/admin/ForgotUsernameAdmin';
 import NotFound from './components/NotFound';
-import CreateUser from './components/CreateUser';
+import CreateUser from './components/admin/CreateUser';
 
 
 function App() {
