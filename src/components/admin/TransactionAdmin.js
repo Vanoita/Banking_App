@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import {
     Table,
-    Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
@@ -14,7 +11,6 @@ import {
     Box,
     TableContainer,
     Input,
-    Select,
     Heading,
     InputGroup,
     InputRightElement
@@ -25,11 +21,8 @@ import SidebarAdmin from "./SidebarAdmin";
 
 function AccountAdmin() {
     const [tDetails, setTDetails] = useState([]);
-    const [accounts, setAccounts] = useState([]);
-    const [searchQuery, setSearchQuery] = useState(""); // State for search query
-    const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState("");
     const fetchURL = "http://localhost:8080/getAllTransactions";
-    const userId = "12345678"; //localStorage.get('username');
 
     const fetchTransactions = () => {
         axios
@@ -41,20 +34,9 @@ function AccountAdmin() {
                 alert("error occurred while loading data" + error);
             });
     };
-    const fetchAccounts = () => {
-        axios
-            .get(fetchURL)
-            .then((response) => {
-                setAccounts(response.data);
-            })
-            .catch((error) => {
-                alert("error occurred while loading data" + error);
-            });
-    };
 
     useEffect(() => {
         fetchTransactions();
-        fetchAccounts();
     }, []);
 
     return (
@@ -89,7 +71,7 @@ function AccountAdmin() {
                                 <Th>Mode</Th>
                             </Tr>
                             <Tbody>
-                                {tDetails.filter(details=>details.accNo.includes(searchQuery)).map((details) => {
+                                {tDetails.filter(details => details.accNo.includes(searchQuery)).map((details) => {
                                     let amount = details.amount;
                                     if (details.mode === "withdraw")
                                         amount = -details.amount;

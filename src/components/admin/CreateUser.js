@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { customAlphabet } from 'nanoid';
-import { useEffect } from 'react';
 import bg1 from "../../asset/bg1.jpg";
 
 function CreateUser() {
@@ -25,20 +24,12 @@ function CreateUser() {
         }).then((response) => {
             const res = response.data;
             if (res.userId) {
-               // localStorage.setItem('userId', res.userId);
-                navigate("/adminDashboard");
+                navigate("/admin/userAll", { state: { message: "User Created!", type: "success" } });
             }
-
         }).catch(error => {
             alert("error = " + error);
         });
     };
-    useEffect(() => {
-        const token = localStorage.getItem('userId');
-        // if (token) {
-        //     navigate("/adminDashboard");
-        // }
-    }, [navigate])
     return (
         <>
             <Helmet>
@@ -79,8 +70,8 @@ function CreateUser() {
                                 <div className='d-flex justify-content-center'>
                                     <button type="submit" class="btn btn-primary btn-block mb-4" style={{ width: "50%" }}>Create User</button>
                                 </div>
-    
-                              
+
+
                             </form>
                         </div>
                     </div>

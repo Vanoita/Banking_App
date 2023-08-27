@@ -45,7 +45,7 @@ export default function Sidebar() {
 
   const logout = () => {
     localStorage.removeItem('userId');
-    window.location.href = "/";
+    navigate("/");
   };
   const fetchUser = (baseURLUser) => {
     axios

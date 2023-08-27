@@ -48,7 +48,7 @@ function Home() {
                 p={"5"}
                 mb={"10"}
               >
-                <Link to="/loginAdmin">Admin Login</Link>
+                <Link to="/admin/login">Admin Login</Link>
               </Button>
             </Box>
           </SimpleGrid>

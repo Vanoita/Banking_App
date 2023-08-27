@@ -37,20 +37,19 @@ function App() {
             <Route exact path = "/transaction" element={<Transaction/>}/>
             <Route exact path= "/transactionhistory" element={<TransactionHistory/>}/>
             <Route exact path= "/dashboard" element={<Dashboard/>}/>
+            <Route exact path="/profile" element={<Profile/>}/>
+            <Route exact path='/addBeneficiary' element={<AddBeneficiary/>}/>
             <Route exact path="/forgotPassword" element={<ForgotPassword/>} />
             <Route exact path="/forgotUsername" element={<ForgotUsername/>} />
             <Route exact path="/createNewPassword/:refId" element={<CreateNewPassword/>} />
-            <Route exact path="/adminDashboard" element={<AdminDashboard/>}/>
-            <Route exact path="/userAll" element={<UserAdmin/>}/>
-            <Route exact path="/accountAll" element={<AccountAdmin/>}/>
-            <Route exact path="/transactionAll" element={<TransactionAdmin/>}/>
-            <Route exact path="/dashboard" element={<Dashboard/>}/>
-            <Route exact path="/profile" element={<Profile/>}/>
-            <Route exact path='/addBeneficiary' element={<AddBeneficiary/>}/>
-            <Route exact path='/loginAdmin' element={<LoginAdmin/>}/>
-            <Route exact path = '/forgotPasswordAdmin' element={<ForgotPasswordAdmin/>}/>
-            <Route exact path = '/createUser' element={<CreateUser/>}/>
-            <Route exact path = '/forgotUsernameAdmin' element={<ForgotUsernameAdmin/>}/>
+            <Route exact path="/admin/dashboard" element={<AdminDashboard/>}/>
+            <Route exact path="/admin/userAll" element={<UserAdmin/>}/>
+            <Route exact path="/admin/accountAll" element={<AccountAdmin/>}/>
+            <Route exact path="/admin/transactionAll" element={<TransactionAdmin/>}/>
+            <Route exact path='/admin/login' element={<LoginAdmin/>}/>
+            <Route exact path = '/admin/forgotPassword' element={<ForgotPasswordAdmin/>}/>
+            <Route exact path = '/admin/createUser' element={<CreateUser/>}/>
+            <Route exact path = '/admin/forgotUsername' element={<ForgotUsernameAdmin/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Routes>
         </BrowserRouter>

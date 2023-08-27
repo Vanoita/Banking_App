@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import {
     Table,
-    Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
     Flex, Box,
-    TableContainer, Input, Select, Heading, InputGroup, InputRightElement
+    TableContainer, Input, Heading, InputGroup, InputRightElement
 } from "@chakra-ui/react";
 import {FiSearch} from "react-icons/fi";
 
@@ -21,9 +18,7 @@ import SidebarAdmin from "./SidebarAdmin";
 function UserAdmin() {
     const [users, setUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const navigate = useNavigate();
     const fetchURL = "http://localhost:8080/fetchAllUsers";
-    const userId = '12345678';//localStorage.get('username');
 
 
     const fetchUsers = () => {
