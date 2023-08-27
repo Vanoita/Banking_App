@@ -112,6 +112,10 @@ public String validateAdminUser(LoginModel u) {
 		return userRepo.fetchUser(userId);
 	}
 	
+	public AdminUser fetchAdminUser(String userId){
+		return adminUserRepo.fetchAdminUser(userId);
+	}
+	
 	public List<User> fetchAllUsers() {
 		return userRepo.fetchAllUsers();
 	}

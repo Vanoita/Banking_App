@@ -1,11 +1,7 @@
 package com.banking.BankingApp.model;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

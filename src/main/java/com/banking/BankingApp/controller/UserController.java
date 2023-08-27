@@ -67,6 +67,12 @@ public class UserController {
 		return obj;	
 	}
 	
+	@GetMapping("/fetchAdminUser/{userId}")
+	public AdminUser fetchAdminUser(@PathVariable String userId){
+		AdminUser obj = userService.fetchAdminUser(userId);
+		return obj;	
+	}
+	
 	@GetMapping("/getTotalUsers")
 	public int getTotalUsers() {
 		int res = userService.getTotalUsers();

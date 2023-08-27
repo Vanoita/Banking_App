@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.banking.BankingApp.model.Account;
-import com.banking.BankingApp.model.Transaction;
-
 public interface AccountRepository extends JpaRepository<Account, String>{
 	@Modifying 
 	@Query("update Account account set account.balance=account.balance-?1 where account.accNo=?2")
