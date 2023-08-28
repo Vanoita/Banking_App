@@ -8,10 +8,13 @@ import {
     Th,
     Td,
     Flex, Box,
-    TableContainer, Input, Select, Heading
+    TableContainer, Input, Select, Heading, FormControl, FormLabel
 } from "@chakra-ui/react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TransactionHistory() {
     const [tDetails, setTDetails] = useState([]);
@@ -20,6 +23,12 @@ function TransactionHistory() {
     const [selectAccNo, setSelectAccNo] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+
+    const unsuccessfulToastMessageTransactions= () => {
+        toast.error("Couldn't fetch Transaction details, Please select all the required fields !", {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
 
     const getTransactions = (e) => {
         axios.post(getURL,
@@ -32,7 +41,7 @@ function TransactionHistory() {
                 setTDetails(response.data);
             })
             .catch((error) => {
-                alert("error occured while loading data:" + error);
+                unsuccessfulToastMessageTransactions();
             });
     }
 
@@ -59,39 +68,52 @@ function TransactionHistory() {
                 <title> Transaction History</title>
             </Helmet>
             <Flex>
-                <Flex w={"20%"}><Sidebar /></Flex>
-                <Box w={"80%"} p={"2.5%"} align={"center"}>
+                <Flex overflow={'hidden'}><Sidebar /></Flex>
+                <Box  p={"2.5%"} align={"center"}>
                     <Heading>Transaction History</Heading>
                     <Table align="center" maxWidth={'75%'}>
                         <Tbody>
                             <Tr>
                                 <Th>
-                                    <Input
-                                        placeholder="Select Start Date"
-                                        size="md"
-                                        type="date"
-                                        value={startDate}
-                                        onChange={e => setStartDate(e.target.value)}
-                                    />
-                                    Start Date
+                                    <FormControl isRequired>
+                                        <Input
+                                            placeholder="Select Start Date"
+                                            size="md"
+                                            type="date"
+                                            value={startDate}
+                                            onChange={e => setStartDate(e.target.value)}
+                                        />
+                                        <FormLabel fontWeight={'normal'} textTransform={'none'}>Start Date</FormLabel>
+                                    </FormControl>
                                 </Th>
 
                                 <Th>
-                                    <Input
-                                        placeholder="Select End Date"
-                                        size="md"
-                                        type="date"
-                                        value={endDate}
-                                        onChange={e => setEndDate(e.target.value)}
-                                    />
-                                    End Date
+                                    <FormControl isRequired>
+
+                                        <Input
+                                            placeholder="Select End Date"
+                                            size="md"
+                                            type="date"
+                                            value={endDate}
+                                            onChange={e => setEndDate(e.target.value)}
+                                        />
+                                        <FormLabel fontWeight={'normal'} textTransform={'none'}>
+                                            End Date
+                                        </FormLabel>
+                                    </FormControl>
                                 </Th>
                                 <Th>
-                                    <Select placeholder='Select Account Number' value={selectAccNo} onChange={e => setSelectAccNo(e.target.value)}>
-                                        {accNo.map(accNumber => (
-                                            <option>{accNumber}</option>
-                                        ))}
-                                    </Select>
+                                    <FormControl isRequired>
+                                        
+                                        <Select placeholder='Select Account Number' value={selectAccNo} onChange={e => setSelectAccNo(e.target.value)}>
+                                            {accNo.map(accNumber => (
+                                                <option>{accNumber}</option>
+                                            ))}
+                                        </Select>
+                                        <FormLabel fontWeight={'normal'} textTransform={'none'}>
+                                            Acc.No
+                                        </FormLabel>
+                                    </FormControl>
                                 </Th>
                                 <Th>
                                     <button type="button" class="btn btn-primary" onClick={getTransactions}>Search</button>

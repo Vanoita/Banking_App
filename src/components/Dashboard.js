@@ -56,10 +56,10 @@ function Dashboard() {
       </Helmet>
       <div>
         <Flex>
-          <Flex w={"20%"} flexDir={"column"}>
+          <Flex w={{base:'20%', sm:'10%', md: '18%'}} flexDir={'column'}>
             <Sidebar />
           </Flex>
-          <SimpleGrid row={2} w={"75%"} pt={"5%"} pb={"2%"}>
+          <SimpleGrid row={2} w={{base:'80%',sm:'50%',md:'80%'}} pt={{base:'5%',md:'2%'}} pb={"2%"}>
             <Box>
               <Card h={"80%"} p={"2.5%"} overflow={"scroll"}>
                 <Text>Account Information</Text>

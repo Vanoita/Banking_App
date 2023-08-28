@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Helmet } from "react-helmet";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, FormControl, FormLabel } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,6 @@ import {
     CardBody,
     CardFooter,
     Heading,
-    Text,
     Button, Box,
     Input, Flex
 } from "@chakra-ui/react";
@@ -50,7 +49,7 @@ function Transaction() {
             position: toast.POSITION.TOP_RIGHT
         });
     };
-    
+
     const fetchAccNo = (baseURLAccNo) => {
         axios
             .get(baseURLAccNo)
@@ -75,9 +74,9 @@ function Transaction() {
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');
-        const baseURLAccNo = "http://localhost:8080/fetchAccNo/"+userId;
+        const baseURLAccNo = "http://localhost:8080/fetchAccNo/" + userId;
         const baseURLBenef = "http://localhost:8080/getBeneficiary/" + userId;
-    
+
         fetchAccNo(baseURLAccNo);
         fetchBeneficiary(baseURLBenef);
     }, []);
@@ -111,10 +110,11 @@ function Transaction() {
                 remark: tRemark
 
             }).then((response) => {
-                
-                if(response.data==="Insufficient funds"){
+
+                if (response.data === "Insufficient funds") {
                     insufficientBalanceToastMessage();
-                } else successToastMessage();
+                } else successToastMessage(); clearFormT();
+
             }).catch(error => {
                 errorToastMessage();
 
@@ -137,7 +137,7 @@ function Transaction() {
                 remark: wRemark
 
             }).then((response) => {
-                if(response.data==="Insufficient funds"){
+                if (response.data === "Insufficient funds") {
                     insufficientBalanceToastMessage();
                 } else successToastMessage();
                 clearFormW();
@@ -170,43 +170,52 @@ function Transaction() {
                                         <Heading size="lg"> Withdrawal</Heading>
                                     </CardHeader>
                                     <CardBody>
-                                        <Input
-                                            value={userId}
-                                            placeholder=""
-                                            size="lg"
-                                            disabled="true"
-                                        />
-                                        <Text mb="18px" align="left">
-                                            UserId
-                                        </Text>
-                                        <Select placeholder='Select Account Number' value={wAccNo} onChange={e => setWAccNo(e.target.value)}>
-                                            {accNo.map(accNumber => (
-                                                <option>{accNumber}</option>
-                                            ))}
-                                        </Select>
-                                        <Text mb="18px" align="left">
-                                            Account Number
-                                        </Text>
-                                        <Input
-                                            value={wAmount}
-                                            placeholder=""
-                                            size="lg"
-                                            onChange={(e) => setWAmount(e.target.value)}
-                                        />
-                                        <Text mb="18px" align="left">
-                                            Amount
-                                        </Text>
+                                        <FormControl>
+                                            <Input
+                                                value={userId}
+                                                placeholder=""
+                                                size="lg"
+                                                disabled="true"
+                                            />
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'} >
+                                                UserId
+                                            </FormLabel>
+                                        </FormControl>
 
+                                        <FormControl isRequired isInvalid={wAccNo === ''}>
+                                            <Select placeholder='Select Account Number' value={wAccNo} onChange={e => setWAccNo(e.target.value)}>
+                                                {accNo.map(accNumber => (
+                                                    <option>{accNumber}</option>
+                                                ))}
+                                            </Select>
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                Account Number
+                                            </FormLabel>
+                                        </FormControl>
 
-                                        <Input
-                                            value={wRemark}
-                                            placeholder=""
-                                            size="lg"
-                                            onChange={(e) => setWRemark(e.target.value)}
-                                        />
-                                        <Text mb="18px" align="left">
-                                            Remarks
-                                        </Text>
+                                        <FormControl isRequired isInvalid={wAmount === ''}>
+                                            <Input
+                                                value={wAmount}
+                                                placeholder=""
+                                                size="lg"
+                                                onChange={(e) => setWAmount(e.target.value)}
+                                            />
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                Amount
+                                            </FormLabel>
+                                        </FormControl>
+
+                                        <FormControl>
+                                            <Input
+                                                value={wRemark}
+                                                placeholder=""
+                                                size="lg"
+                                                onChange={(e) => setWRemark(e.target.value)}
+                                            />
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                Remarks
+                                            </FormLabel>
+                                        </FormControl>
 
                                     </CardBody>
                                     <CardFooter>
@@ -225,79 +234,97 @@ function Transaction() {
                                         <Heading size="lg">Fund Transfer</Heading>
                                     </CardHeader>
                                     <CardBody>
-                                        <Input
-                                            value={userId}
-                                            placeholder=""
-                                            size="lg"
-                                            disabled="true"
-                                        />
-                                        <Text mb="18px" align="left">
-                                            UserId
-                                        </Text>
-                                        <Select placeholder='Select Account Number' value={tAccNo} onChange={e => setTAccNo(e.target.value)}>
-                                            {accNo.map(accNumber => (
-                                                <option>{accNumber}</option>
-                                            ))}
-                                        </Select>
-                                        <Text mb="18px" align="left">
-                                            User Account Number
-                                        </Text>
-                                        <Select placeholder='Select Beneficiary' onChange={(e)=>{
-                                            if(e.target.value===""){
-                                                setRName("");
-                                                setRAcc("");
-                                            }
-                                            else{
-                                                setRName(benef[e.target.value].firstName + " " + benef[e.target.value].lastName);
-                                                setRAcc(benef[e.target.value].accNo);
-                                            }
-                                        }}>
-                                            {benef && benef.map((ben,index) => (
-                                                <option value={index}>{ben.firstName} {ben.lastName}</option>
-                                            ))}
-                                        </Select>
-                                        <Text mb="18px" align="left">
-                                            Beneficiary Name
-                                        </Text>
-                                        <Input
-                                            value={rName}
-                                            placeholder=""
-                                            size="lg"
-                                            onChange={(e) => setRName(e.target.value)}
-                                        />
-                                        <Text mb="18px" align="left">
-                                            Receiver Name
-                                        </Text>
 
-                                        <Input
-                                            value={rAcc}
-                                            placeholder=""
-                                            size="lg"
-                                            onChange={(e) => setRAcc(e.target.value)}
-                                        />
-                                        <Text mb="18px" align="left">
-                                            Receiver Account Number
-                                        </Text>
+                                        <FormControl>
+                                            <Input
+                                                value={userId}
+                                                placeholder=""
+                                                size="lg"
+                                                disabled="true"
+                                            />
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                UserId
+                                            </FormLabel>
+                                        </FormControl>
 
-                                        <Input
-                                            value={tAmount}
-                                            placeholder=""
-                                            size="lg"
-                                            onChange={(e) => setTAmount(e.target.value)}
-                                        />
-                                        <Text mb="18px" align="left">
-                                            Amount
-                                        </Text>
+                                        <FormControl isRequired isInvalid={tAccNo === ''}>
+                                            <Select placeholder='Select Account Number' value={tAccNo} onChange={e => setTAccNo(e.target.value)}>
+                                                {accNo.map(accNumber => (
+                                                    <option>{accNumber}</option>
+                                                ))}
+                                            </Select>
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                User Account Number
+                                            </FormLabel>
+                                        </FormControl>
 
-                                        <Input
-                                            value={tRemark}
-                                            placeholder=""
-                                            size="lg"
-                                            onChange={(e) => setTRemark(e.target.value)}
-                                        />
-                                        <Text mb="18px" align="left">
-                                            Remarks
-                                        </Text>
+                                        <FormControl>
+                                            <Select placeholder='Select Beneficiary' onChange={(e) => {
+                                                if (e.target.value === "") {
+                                                    setRName("");
+                                                    setRAcc("");
+                                                }
+                                                else {
+                                                    setRName(benef[e.target.value].firstName + " " + benef[e.target.value].lastName);
+                                                    setRAcc(benef[e.target.value].accNo);
+                                                }
+                                            }}>
+                                                {benef && benef.map((ben, index) => (
+                                                    <option value={index}>{ben.firstName} {ben.lastName}</option>
+                                                ))}
+                                            </Select>
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                Beneficiary Name
+                                            </FormLabel>
+                                        </FormControl>
+
+                                        <FormControl isRequired isInvalid={rName === ''}>
+                                            <Input
+                                                value={rName}
+                                                placeholder=""
+                                                size="lg"
+                                                onChange={(e) => setRName(e.target.value)}
+                                            />
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                Receiver Name
+                                            </FormLabel>
+                                        </FormControl>
+
+                                        <FormControl isRequired isInvalid={rAcc === ''}>
+                                            <Input
+                                                value={rAcc}
+                                                placeholder=""
+                                                size="lg"
+                                                onChange={(e) => setRAcc(e.target.value)}
+                                            />
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                Receiver Account Number
+                                            </FormLabel>
+                                        </FormControl>
+
+                                        <FormControl isRequired isInvalid={tAmount === ''}>
+                                            <Input
+                                                value={tAmount}
+                                                placeholder=""
+                                                size="lg"
+                                                onChange={(e) => setTAmount(e.target.value)}
+                                            />
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                Amount
+                                            </FormLabel>
+                                        </FormControl>
+
+                                        <FormControl>
+                                            <Input
+                                                value={tRemark}
+                                                placeholder=""
+                                                size="lg"
+                                                onChange={(e) => setTRemark(e.target.value)}
+                                            />
+                                            <FormLabel mb="18px" align="left" fontWeight={'normal'} textTransform={'none'}>
+                                                Remarks
+                                            </FormLabel>
+                                        </FormControl>
                                     </CardBody>
                                     <CardFooter>
                                         <Button

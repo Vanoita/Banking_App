@@ -55,16 +55,22 @@ function LoginAdmin() {
                 <div class="row h-100">
                     <div className="col-5 d-flex justify-content-center align-items-center" style={{ backgroundColor: "#F5F5F5" }}>
                         <div className='my-2' style={{ maxWidth: "400px", width: "100%" }}>
-                            <form className="p-2" onSubmit={submitActionHandler}>
+                            <form className="p-2 was-validated" onSubmit={submitActionHandler}>
                                 <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "20px" }}><span style={{ color: "orange" }}>Online &nbsp;</span><span style={{ color: "#6096B4" }}>Banking System</span></h3>
                                 <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "20px" }}>Admin Login</h3>
                                 <div class="form-outline mb-4">
-                                    <input type="text" required class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
+                                    <input type="text" required class="form-control" minLength="8" value={userId} onChange={e => setUserId(e.target.value)} />
                                     <label class="form-label">UserId</label>
+                                    <div id="feedbackin" class="invalid-feedback">
+                                        Enter Valid UserId
+                                    </div>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" required class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
+                                    <input type="password" required id="validationPassword" minlength="8" class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
                                     <label class="form-label">Password</label>
+                                    <div id="feedbackin" class="invalid-feedback">
+                                        Atleast 8 characters, Number, special character, Capital letter and small letter
+                                    </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col d-flex justify-content-center">
@@ -82,7 +88,7 @@ function LoginAdmin() {
                         </div>
                     </div>
                     <div className="col-7 overflow-hidden p-0">
-                        <img src={bg1} alt="BG" className="h-100 w-100"/>
+                        <img src={bg1} alt="BG" className="h-100 w-100" />
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ function LoginForm() {
             const res = response.data;
             if (res.login) {
                 localStorage.setItem('userId', userId);
-                if (state && state.from) { navigate(state.from, { state: { message: res.message, type: "success" }}); }
+                if (state && state.from) { navigate(state.from, { state: { message: res.message, type: "success" } }); }
                 else { navigate('/dashboard', { state: { message: res.message, type: "success" } }); }
             }
             else {
@@ -46,17 +46,23 @@ function LoginForm() {
     return (
         <>
             <div className='my-2' style={{ maxWidth: "400px", width: "100%" }}>
-                <form className="p-2" onSubmit={submitActionHandler}>
+                <form className="p-2 was-validated" onSubmit={submitActionHandler}>
                     <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "20px" }}><span style={{ color: "orange" }}>Online &nbsp;</span><span style={{ color: "#6096B4" }}>Banking System</span></h3>
                     <h3 className="my-4 text-center fw-bold" style={{ paddingBottom: "20px" }}>Login</h3>
                     <div class="form-outline mb-4">
                         <input type="text" id='validationCustom01'
-                            aria-describedby="inputGroupPrepend" required class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
+                            aria-describedby="inputGroupPrepend" required minLength="8" class="form-control" value={userId} onChange={e => setUserId(e.target.value)} />
                         <label class="form-label">UserId</label>
+                        <div id="feedbackin" class="invalid-feedback">
+                            Enter Valid UserId
+                        </div>
                     </div>
                     <div class="form-outline mb-4">
-                        <input type="password" required class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
+                        <input type="password" required class="form-control" id="validationPassword" minlength="8" value={password} onChange={e => setPassword(e.target.value)} />
                         <label class="form-label">Password</label>
+                        <div id="feedbackin" class="invalid-feedback">
+                            Atleast 8 characters, Number, special character, Capital letter and small letter
+                        </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col d-flex justify-content-center">
