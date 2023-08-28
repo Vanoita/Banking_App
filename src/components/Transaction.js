@@ -39,6 +39,12 @@ function Transaction() {
         });
     };
 
+    const insufficientBalanceToastMessage = () => {
+        toast.error('Insufficient Balance !', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
     const errorToastMessage = () => {
         toast.error('Transaction Not Successful !', {
             position: toast.POSITION.TOP_RIGHT
@@ -105,8 +111,10 @@ function Transaction() {
                 remark: tRemark
 
             }).then((response) => {
-
-                successToastMessage();
+                
+                if(response.data==="Insufficient funds"){
+                    insufficientBalanceToastMessage();
+                } else successToastMessage();
             }).catch(error => {
                 errorToastMessage();
 
@@ -129,8 +137,9 @@ function Transaction() {
                 remark: wRemark
 
             }).then((response) => {
-                successToastMessage();
-
+                if(response.data==="Insufficient funds"){
+                    insufficientBalanceToastMessage();
+                } else successToastMessage();
                 clearFormW();
             }).catch(error => {
                 errorToastMessage();
