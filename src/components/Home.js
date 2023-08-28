@@ -6,11 +6,13 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
+import { Helmet } from 'react-helmet';
 import { Link } from "react-router-dom";
 import homeimg from "../asset/homeimg.jpg";
 function Home() {
   return (
     <>
+    <Helmet><title>Welcome</title></Helmet>
       <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
         <Flex p={8} flex={1} align={"center"} justify={"center"} bg={"#f5f5f5"}>
           <Stack spacing={6} w={"full"} maxW={"lg"}>

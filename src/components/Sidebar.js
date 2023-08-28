@@ -167,7 +167,7 @@ export default function Sidebar() {
               <Heading as="h3" size="sm">
                 {user.firstName} {user.lastName}
               </Heading>
-              <Text color="gray">User</Text>
+              <Text color="gray">{user.userId}</Text>
             </Flex>
 
           </Flex>

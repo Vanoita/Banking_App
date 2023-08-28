@@ -164,7 +164,7 @@ export default function SidebarAdmin() {
               <Heading as="h3" size="sm">
                 {user.firstName} {user.lastName}
               </Heading>
-              <Text color="gray">Admin</Text>
+              <Text color="gray">{user.userId}</Text>
             </Flex>
           </Flex>
         </Flex>
