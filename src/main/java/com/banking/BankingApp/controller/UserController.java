@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.banking.BankingApp.exception.ResourceNotFoundException;
 import com.banking.BankingApp.model.AdminUser;
 import com.banking.BankingApp.model.LoginModel;
 import com.banking.BankingApp.model.User;
@@ -38,7 +39,7 @@ public class UserController {
 		return userService.registerUser(cust);
 	}
 	
-	@PostMapping("/register	AdminUser")
+	@PostMapping("/registerAdminUser")
 	public AdminUser registerAdminUser(@RequestBody @Valid AdminUser cust) {
 		return userService.registerAdminUser(cust);
 	}
@@ -50,7 +51,7 @@ public class UserController {
 
 
 	@PostMapping("/checkUserId/{userId}")
-	public boolean checkUserID(@PathVariable String userId) {
+	public boolean checkUserID(@PathVariable String userId) throws ResourceNotFoundException {
 		return userService.checkUserId(userId);
 	}
 	

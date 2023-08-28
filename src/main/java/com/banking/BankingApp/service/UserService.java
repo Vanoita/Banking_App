@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.banking.BankingApp.dao.AccountRepository;
 import com.banking.BankingApp.dao.AdminUserRepository;
 import com.banking.BankingApp.dao.UserRepository;
+import com.banking.BankingApp.exception.ResourceNotFoundException;
 import com.banking.BankingApp.model.Account;
 import com.banking.BankingApp.model.AdminUser;
 import com.banking.BankingApp.model.LoginModel;
@@ -79,11 +80,15 @@ public String validateAdminUser(LoginModel u) {
 	
 
 
-	public boolean checkUserId(String userId) {
-		boolean result = false;
-		Optional<User> u = userRepo.findById(userId);
-		if(u.isPresent())
-			result = true;
+	public boolean checkUserId(String userId) throws ResourceNotFoundException{
+		boolean result = true;
+		User u = userRepo.findById(userId).orElse(null);
+		if(u==null) {
+			result  = false;
+			throw new ResourceNotFoundException("User Not Found");
+		}
+			
+		
 		return result;
 	}
 	
