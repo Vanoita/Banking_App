@@ -73,6 +73,7 @@ function Profile() {
                                                 alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
                                             <MDBTypography tag="h5" style={{ 'fontFamily': 'Arial' }}>{user && `${user.firstName} ${user.lastName}`}</MDBTypography>
                                             <MDBCardText>Program Associate</MDBCardText>
+                                            <MDBCardText>userID: {user.userId}</MDBCardText>
                                             <MDBIcon far icon="edit mb-5" />
                                         </MDBCol>
                                         <MDBCol md="8">
