@@ -43,8 +43,10 @@ public class AccountService {
 		Account account = accRepo.findById(acc).get();
 		double balance = account.getBalance();
 		double withdrawAmount = transaction.getAmount();
-				if(balance-withdrawAmount<1000)
+		System.out.println((balance-withdrawAmount)<1000);
+		if(balance-withdrawAmount<1000) {
 			result = "Insufficient funds";
+		}
 		else {
 			int rowsAffected = accRepo.updateBalance(withdrawAmount,acc);
 			if(rowsAffected>0)
