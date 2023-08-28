@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -78,18 +78,11 @@ function LoginAdmin() {
                                 <div className='d-flex justify-content-center'>
                                     <button type="submit" class="btn btn-primary btn-block mb-4" style={{ width: "50%" }}>Sign in</button>
                                 </div>
-
-                                <div class="text-center mb-4">
-                                    <Link to="/admin/forgotPassword">Forgot Password?</Link>
-                                </div>
-                                <div class="text-center mb-4">
-                                    <Link to="/admin/forgotUsername">Forgot Username?</Link>
-                                </div>
                             </form>
                         </div>
                     </div>
                     <div className="col-7 overflow-hidden p-0">
-                        <img src={bg1} alt="BG" className="h-100 w-100" style={{ transform: "scaleX(-1)" }} />
+                        <img src={bg1} alt="BG" className="h-100 w-100"/>
                     </div>
                 </div>
             </div>
