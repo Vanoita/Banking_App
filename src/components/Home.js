@@ -1,65 +1,59 @@
 import {
-  Box,
   Button,
+  Flex,
+  Stack,
+  Image,
+  Heading,
   Text,
-  SimpleGrid
 } from "@chakra-ui/react";
-import { Link } from 'react-router-dom';
-import LoginForm from './LoginForm.js';
+import { Link } from "react-router-dom";
+import homeimg from "../asset/homeimg.jpg";
 function Home() {
   return (
     <>
-      <SimpleGrid columns={2} align={"center"} >
-        <Box mr={"6"} px={"16"} py={"20"} mt={"25"}
-        >
-
-          <Text
-            fontSize={"4xl"}
-            fontWeight="bold"
-            mb="4"
-          >
-            {" "}
-            Welcome to Wells Fargo
-          </Text>
-
-          <Text mb="6" fontSize={"base"} opacity={0.7}>
-            Building better every day
-          </Text>
-          <SimpleGrid rows={2}>
-            <Box>
-              <Button
-                w="200px"
-                colorScheme="blue"
-                variant="solid"
-                h="50px"
-                size={"md"}
-                mb={"10"}
-              >
-                <Link to="/createAccount">Create Account</Link>
-              </Button>
-            </Box>
-            <Box>
-              <Button
-                w="200px"
-                colorScheme="blue"
-                variant="solid"
-                h="50px"
-                size={"md"}
-                p={"5"}
-                mb={"10"}
-              >
-                <Link to="/admin/login">Admin Login</Link>
-              </Button>
-            </Box>
-          </SimpleGrid>
-
-
-
-        </Box>
-        <Box bg="#F5F5F5">
-          <LoginForm />
-        </Box>
-      </SimpleGrid >
+      <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
+        <Flex p={8} flex={1} align={"center"} justify={"center"} bg={"#f5f5f5"}>
+          <Stack spacing={6} w={"full"} maxW={"lg"}>
+            <Heading fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}>
+              <Text color={"blue.400"} as={"span"}>
+                Welcome to Wells Fargo
+              </Text>
+            </Heading>
+            <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
+              Building better every day.
+            </Text>
+            <Stack direction={{ base: "column", md: "row" }} spacing={4}>
+              <Link to="/login">
+                <Button
+                  rounded={"full"}
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  User Login
+                </Button>
+              </Link>
+              <Link to="/admin/login">
+                <Button
+                  rounded={"full"}
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  Admin Login
+                </Button>
+              </Link>
+            </Stack>
+          </Stack>
+        </Flex>
+        <Flex flex={1} bg={"#f5f5f5"}>
+          <Image alt={"Login Image"} src={homeimg} />
+        </Flex>
+      </Stack>
     </>
   );
 }
