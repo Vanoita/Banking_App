@@ -63,7 +63,7 @@ function UserAdmin() {
                                 <Th>Email</Th>
                             </Tr>
                             <Tbody>
-                                {users.filter(user=>user.userId.includes(searchQuery)).map(details => {
+                                {users.filter(user=>user.userId.includes(searchQuery) || user.firstName.includes(searchQuery)||user.lastName.includes(searchQuery)).map(details => {
                                     return (
                                         <Tr>
                                             <Td>{details.userId}</Td>

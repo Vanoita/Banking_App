@@ -71,7 +71,7 @@ function AccountAdmin() {
                                 <Th>Mode</Th>
                             </Tr>
                             <Tbody>
-                                {tDetails.filter(details => details.accNo.includes(searchQuery)).map((details) => {
+                                {tDetails.filter(details => details.accNo.includes(searchQuery) && details.status==="Successful").map((details) => {
                                     let amount = details.amount;
                                     if (details.mode === "withdraw")
                                         amount = -details.amount;

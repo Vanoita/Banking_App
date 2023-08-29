@@ -94,7 +94,7 @@ function Dashboard() {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {tDetails.map((transaction) => (
+                    {tDetails.filter(details=> details.status==="Successful").map((transaction) => (
                       <Tr>
                         <Td>{transaction.refId}</Td>
                         <Td>{transaction.date}</Td>

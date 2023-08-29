@@ -38,6 +38,12 @@ function Transaction() {
         });
     };
 
+    const accountIsDisabledToastMessage = () => {
+        toast.error('Account is Disabled !', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
     const insufficientBalanceToastMessage = () => {
         toast.error('Insufficient Balance !', {
             position: toast.POSITION.TOP_RIGHT
@@ -139,7 +145,9 @@ function Transaction() {
             }).then((response) => {
                 if (response.data === "Insufficient funds") {
                     insufficientBalanceToastMessage();
-                } else successToastMessage();
+                } else if(response.data==="Account is Disabled")
+                accountIsDisabledToastMessage(); 
+                else successToastMessage();
                 clearFormW();
             }).catch(error => {
                 errorToastMessage();

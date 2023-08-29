@@ -135,7 +135,8 @@ function TransactionHistory() {
                                 <Th>Receiver's Account Number</Th>
                                 <Th>Transaction Type</Th>
                                 <Th isNumeric>Amount</Th>
-                                <Th>Remarks</Th>
+                                <Th>Status</Th>
+                                
                             </Tr>
                             <Tbody>
                                 {tDetails.map(details => {
@@ -150,7 +151,8 @@ function TransactionHistory() {
                                             <Td>{details.receiverAccNo}</Td>
                                             <Td>{details.mode}</Td>
                                             <Td>{amount}</Td>
-                                            <Td>{details.remark}</Td>
+                                            <Td>{details.status}</Td>
+                                            
                                         </Tr>
                                     )
                                 })}
