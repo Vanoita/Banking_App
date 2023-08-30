@@ -64,8 +64,11 @@ function CreateUser() {
                                     <label class="form-label">Email</label>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" required class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
+                                <input type="password" required class="form-control" id="validationPassword" minlength="8" value={password} onChange={e => setPassword(e.target.value)} />
                                     <label class="form-label">Password</label>
+                                    <div id="feedbackin" class="invalid-feedback">
+                                        Atleast 8 characters, Number, special character, Capital letter and small letter
+                                    </div>
                                 </div>
                                 <div className='d-flex justify-content-center'>
                                     <button type="submit" class="btn btn-primary btn-block mb-4" style={{ width: "50%" }}>Create User</button>
